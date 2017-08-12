@@ -14,6 +14,7 @@ class Home extends CI_Controller {
 
 	public function signUpDoctor()
 	{
+		$this->load->view('layout/header');
 		$this->load->view('doctor/signup');
 	}
 }
