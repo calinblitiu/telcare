@@ -88,7 +88,7 @@
 
             </div>
             <div class="form-actions">
-              <button type="button" class="btn default">Cancel</button>
+              <button type="reset" class="btn default">Cancel</button>
               <button type="submit" class="btn red">Submit</button>
             </div>
           </form>
