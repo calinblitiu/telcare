@@ -32,6 +32,7 @@ result :
              {
                 "success" : 1,
                 "data" :
+
                 {
                     "fname" : "rubby",
                     "lname":"star",
@@ -42,7 +43,7 @@ result :
                     "lang":"0",
                     "dea":"aa",
                     "npi":"23",
-                    "img":"http:\/\/127.0.0.1\/assets\/uploads\/doctor\/150264736415625990944442f93jpg"
+                    "img":"http://your-domain/assets/uploads/doctor/150264736415625990944442f93jpg"
                 }
              }
 
