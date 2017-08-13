@@ -7,6 +7,11 @@ class Home extends CI_Controller {
 	/////  Front End ///////////////
 	////////////////////////////////
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -17,4 +22,11 @@ class Home extends CI_Controller {
 		$this->load->view('layout/header');
 		$this->load->view('doctor/signup');
 	}
+
+	public function loginDoctor()
+    {
+        $this->load->view('layout/header');
+
+
+    }
 }

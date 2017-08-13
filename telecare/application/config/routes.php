@@ -58,7 +58,12 @@ $route['translate_uri_dashes'] = FALSE;
 ////////////////////     FRONT END /////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
+
+/*
+ * Doctor
+ */
 $route['f-signup-doctor'] = "home/signUpDoctor";
+$route['f-login-doctor'] = "home/loginDoctor";
 
 
 
