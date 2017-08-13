@@ -15,7 +15,7 @@
 
             </div>
             <div class="portlet-body form">
-                <form role="form" action="<?=base_url()?>login_doctor" method="post">
+                <form role="form" action="<?=base_url()?>login_doctor" method="post" id="doctor-login-form">
                     <div class="form-body">
 
                         <div class="form-group has-success">
@@ -31,10 +31,12 @@
                     </div>
                     <div class="form-actions">
                         <button type="reset" class="btn default">Reset</button>
-                        <button type="Submit" class="btn red">Login</button>
+                        <button type="button" class="btn red doctor-login-btn">Login</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script src="<?=base_url()?>assets/myjs/loginDoctor.js" type="text/javascript"></script>

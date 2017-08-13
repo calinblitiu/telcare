@@ -1,7 +1,7 @@
 <!-- Head BEGIN -->
 <head>
   <meta charset="utf-8">
-  <title>Metronic Frontend</title>
+  <title>Health care website</title>
  
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -45,9 +45,15 @@
 
 
   <!-- Core plugins BEGIN (For ALL pages) -->
-  <script src="<?=base_url()?>assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
-  <script src="<?=base_url()?>assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+  <script src="<?=base_url()?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+  <script src="<?=base_url()?>assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
   <script src="<?=base_url()?>assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<?=base_url()?>assets/global/plugins/jquery-form.js" type="text/javascript"></script>
+
+    <script>
+        var baseURL = "<?=base_url()?>";
+    </script>
+
   <!-- Core plugins END (For ALL pages) -->
 </head>
 <!-- Head END -->
