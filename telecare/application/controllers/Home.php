@@ -26,7 +26,6 @@ class Home extends CI_Controller {
 	public function loginDoctor()
     {
         $this->load->view('layout/header');
-
-
+        $this->load->view('doctor/login');
     }
 }

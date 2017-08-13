@@ -77,3 +77,4 @@ $route['f-login-doctor'] = "home/loginDoctor";
 */
 
 $route['signup_doctor'] = "backend/doctor/doctor/signUp";
+$route['login_doctor'] = "backend/doctor/doctor/logIn";

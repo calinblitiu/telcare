@@ -9,4 +9,16 @@ class Doctor_model extends CI_Model
 		return $this->db->insert($this->table_name, $data);
 	}
 
+	public function getDoctorEmail($email)
+    {
+        $this->db->where('email',$email);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array($query);
+        if(count($result) == 0)
+        {
+            return false;
+        }
+        return $result[0];
+    }
+
 }

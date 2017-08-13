@@ -20,14 +20,14 @@ class Doctor extends CI_Controller
     	 $data['lang']		= $this->input->get_post('lang');
     	 $data['dea']		= $this->input->get_post('dea');
     	 $data['npi']		= $this->input->get_post('npi');
-    	 $data['password']	= $this->input->get_post('pwd');
+    	 $data['password']	= md5($this->input->get_post('pwd'));
 
         $uploaddir = './assets/uploads/doctor/';
         $path = $_FILES['img']['name'];
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $uname = time().uniqid(rand());
         $uploadfile = $uploaddir .$uname.'.'.$ext;
-        $file_name = $uname.$ext;
+        $file_name = $uname.".".$ext;
         if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
             //$this->sample_item_model->editItemField($item_no,$field,$file_name);
             $data['img'] = $file_name;
@@ -57,6 +57,59 @@ class Doctor extends CI_Controller
     	 }
     }
 
+    public function logIn()
+    {
+        $email = $this->input->post('email');
+        $pwd = $this->input->post('pwd');
 
+        $doctor = $this->doctor_model->getDoctorEmail($email);
+
+        if(!$doctor)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = 'There is not user';
+            echo json_encode($return_data);
+            exit();
+        }
+        else
+        {
+            $hash_pwd = md5($pwd);
+            if($hash_pwd == $doctor['password'])
+            {
+                $token = md5(uniqid(rand(), true));
+                $sess_data = array(
+                    'user_type'         => USER_TYPE_DOCTOR,
+                    'email'             => $token,
+                    'doctor_id'         => $doctor['did']
+                );
+                $this->session->set_userdata($sess_data);
+
+                $return_data['success'] = 1;
+                $temp = array();
+                $temp['fname'] = $doctor['fname'];
+                $temp['lname'] = $doctor['lname'];
+                $temp['spec']  = $doctor['spec'];
+                $temp['type']  = $doctor['type'];
+                $temp['email'] = $doctor['email'];
+                $temp['state'] = $doctor['state'];
+                $temp['lang']  = $doctor['lang'];
+                $temp['dea']  = $doctor['dea'];
+                $temp['npi']  = $doctor['npi'];
+                $temp['img']  = base_url()."assets/uploads/doctor/".$doctor['img'];
+                $return_data['data'] = $temp;
+
+                echo json_encode($return_data);
+                exit();
+
+            }
+            else
+            {
+                $return_data['success'] = 0;
+                $return_data['error'] = 'Password is invalid.';
+                echo json_encode($return_data);
+                exit();
+            }
+        }
+    }
 
 }

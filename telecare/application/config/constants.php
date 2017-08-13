@@ -85,6 +85,14 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 ///////////////////////////////////////
+//////////   Global ///////////////////
+///////////////////////////////////////
+
+defined('USER_TYPE_DOCTOR')     			 	    OR define('USER_TYPE_DOCTOR', 0);
+defined('USER_TYPE_PATIENT')     			 	    OR define('USER_TYPE_PATIENT', 1);
+
+
+///////////////////////////////////////
 //////////   Doctor ///////////////////
 ///////////////////////////////////////
 
