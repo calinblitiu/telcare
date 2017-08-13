@@ -31,7 +31,8 @@ result :
         - success:
              {
                 "success" : 1,
-                "data" : {
+                "data" :
+                {
                     "fname" : "rubby",
                     "lname":"star",
                     "spec":"0",
