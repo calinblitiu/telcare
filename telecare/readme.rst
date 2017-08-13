@@ -46,7 +46,7 @@ result :
                 }
              }
 
-        -error
+        - error
             {
                 "success" : 0,
                 "error" : "There is not user"    //"Password is invalid."
