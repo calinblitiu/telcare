@@ -42,5 +42,12 @@
   <link href="<?=base_url()?>assets/frontend/layout/css/style-responsive.css" rel="stylesheet">
   <link href="<?=base_url()?>assets/frontend/layout/css/custom.css" rel="stylesheet">
   <!-- Theme styles END -->
+
+
+  <!-- Core plugins BEGIN (For ALL pages) -->
+  <script src="<?=base_url()?>assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+  <script src="<?=base_url()?>assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+  <script src="<?=base_url()?>assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <!-- Core plugins END (For ALL pages) -->
 </head>
 <!-- Head END -->
