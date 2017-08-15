@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="portlet-body form">
-          <form role="form" action="<?=base_url()?>signup_doctor" method="post" enctype='multipart/form-data'>
+          <form role="form" action="<?=base_url()?>signup_doctor" method="post" enctype='multipart/form-data' id="doctor-signup-form">
             <div class="form-body">
               <div class="form-group has-success">
                 <label class="control-label">Doctor Type</label>
@@ -98,11 +98,13 @@
 
             </div>
             <div class="form-actions">
-              <button type="reset" class="btn default">Cancel</button>
-              <button type="Submit" class="btn red">Submit</button>
+              <button type="reset" class="btn default">Reset</button>
+              <button type="button" class="btn red signup-doctor-btn">SignUp</button>
             </div>
           </form>
         </div>
       </div>
     </div>
 </div>
+
+<script src="<?=base_url()?>assets/myjs/signUpDoctor.js" type="text/javascript"></script>

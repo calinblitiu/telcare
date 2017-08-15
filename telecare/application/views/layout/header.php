@@ -43,12 +43,18 @@
   <link href="<?=base_url()?>assets/frontend/layout/css/custom.css" rel="stylesheet">
   <!-- Theme styles END -->
 
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/global/plugins/bootstrap-datepicker/css/datepicker3.css"/>
 
-  <!-- Core plugins BEGIN (For ALL pages) -->
+
+
+    <!-- Core plugins BEGIN (For ALL pages) -->
   <script src="<?=base_url()?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
   <script src="<?=base_url()?>assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
   <script src="<?=base_url()?>assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="<?=base_url()?>assets/global/plugins/jquery-form.js" type="text/javascript"></script>
+  <script src="<?=base_url()?>assets/global/plugins/jquery-form.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="<?=base_url()?>assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
 
     <script>
         var baseURL = "<?=base_url()?>";

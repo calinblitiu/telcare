@@ -91,6 +91,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 defined('USER_TYPE_DOCTOR')     			 	    OR define('USER_TYPE_DOCTOR', 0);
 defined('USER_TYPE_PATIENT')     			 	    OR define('USER_TYPE_PATIENT', 1);
 
+defined('GENDER_MALE')     			 	            OR define('GENDER_MALE', 0);
+defined('GENDER_FEMALE')     			 	        OR define('GENDER_FEMALE', 1);
 
 ///////////////////////////////////////
 //////////   Doctor ///////////////////

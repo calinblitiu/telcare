@@ -6,6 +6,4 @@ class Doctor extends CI_Controller
         parent::__construct();   
     }
 
-    
-
 }

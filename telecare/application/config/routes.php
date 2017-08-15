@@ -65,7 +65,10 @@ $route['translate_uri_dashes'] = FALSE;
 $route['f-signup-doctor'] = "home/signUpDoctor";
 $route['f-login-doctor'] = "home/loginDoctor";
 
-
+/*
+ * Patient
+ */
+$route['f-signup-patient'] = "home/signUpPatient";
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -78,3 +81,9 @@ $route['f-login-doctor'] = "home/loginDoctor";
 
 $route['signup_doctor'] = "backend/doctor/doctor/signUp";
 $route['login_doctor'] = "backend/doctor/doctor/logIn";
+
+/*
+ * Patient
+ */
+
+$route['signup_patient'] = 'backend/patient/patient/signUp';
