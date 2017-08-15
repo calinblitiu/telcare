@@ -12,12 +12,15 @@ post : type,fname,lname,spec,email,state,lang,dea,npi,pwd,img
 result :
         - success:
             {
-                "success" : 1
+                "success" : 1,
+                "error" : "signup successed",
+                "data" : "signup successed"
             }
         - error
             {
                 "success" : 0,
-                "error" : "signup is error"
+                "error" : "signup is error",
+                "data" : "signup is error"
             }
 
 ************
@@ -32,8 +35,8 @@ result :
              {
                 "success" : 1,
                 "data" :
-
                 {
+                    "token" : "23124554643345674532452"
                     "fname" : "rubby",
                     "lname":"star",
                     "spec":"0",
@@ -53,3 +56,47 @@ result :
                 "error" : "There is not user"    //"Password is invalid."
             }
 
+# Patient Backend
+
+### signup_patient
+
+post : fname, lname, dod, ssn, addr, email, pwd, gender, img
+
+result :
+        - success :
+            {
+                "success" : 1
+            }
+        - error :
+            {
+                "success" : 0,
+                "error" : "signup is error"
+            }
+
+### login_patient
+
+post : email, pwd
+
+result :
+        - success :
+        {
+            "success" : 1,
+            "data" :
+                {
+                    "token" : "23124554643345674532452"
+                    "fname" : "rubby",
+                    "lname":"star",
+                    "gender":"1",
+                    "email":"rubby.star@hotmail.com",
+                    "dod":"22/4/1992",
+                    "ssn":"01111",
+                    "addr":"adfadf",
+                    "img":"http://your-domain/assets/uploads/patient/150264736415625990944442f93jpg"
+                }
+        }
+
+        - error
+        {
+            "success" : 0,
+            "error" : "There is not user"    //"Password is invalid."
+        }
