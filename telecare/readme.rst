@@ -56,9 +56,14 @@ result :
                 "error" : "There is not user"    //"Password is invalid."
             }
 
-# Patient Backend
+##############
+Patient Backend
+###############
 
-### signup_patient
+**************
+signup_patient
+**************
+url : http://your-domain/singup_patient
 
 post : fname, lname, dod, ssn, addr, email, pwd, gender, img
 
@@ -73,7 +78,10 @@ result :
                 "error" : "signup is error"
             }
 
-### login_patient
+*************
+login_patient
+*************
+url : http://your-domain/login_patient
 
 post : email, pwd
 
