@@ -31,7 +31,7 @@
 
                         <div class="form-group has-success">
                             <label class="control-label">Date of Birthday</label>
-                            <input type="text" class="form-control" id="patient_signup_dob" name="dod" placeholder="Date of Birthday">
+                            <input type="text" class="form-control" id="patient_signup_dob" name="dob" placeholder="Date of Birthday">
                         </div>
 
                         <div class="form-group has-success">

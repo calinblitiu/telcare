@@ -21,7 +21,7 @@ class Patient extends CI_Controller
     {
         $data['fname'] 	    = $this->input->get_post('fname');
         $data['lname']		= $this->input->get_post('lname');
-        $data['dod']		= $this->input->get_post('dod');
+        $data['dob']		= $this->input->get_post('dob');
         $data['email']		= $this->input->get_post('email');
         $data['ssn']		= $this->input->get_post('ssn');
         $data['gender']		= $this->input->get_post('gender');
@@ -99,11 +99,11 @@ class Patient extends CI_Controller
                 $temp['fname'] = $patient['fname'];
                 $temp['lname'] = $patient['lname'];
                 $temp['email'] = $patient['email'];
-                $temp['dod'] = $patient['dod'];
-                $temp['ssn']  = $patient['ssn'];
+                $temp['dob']   = $patient['dob'];
+                $temp['ssn']   = $patient['ssn'];
                 $temp['addr']  = $patient['addr'];
                 $temp['gender']  = $patient['gender'];
-                $temp['img']  = base_url()."assets/uploads/patient/".$patient['img'];
+                $temp['img']   = base_url()."assets/uploads/patient/".$patient['img'];
                 $return_data['data'] = $temp;
 
                 echo json_encode($return_data);

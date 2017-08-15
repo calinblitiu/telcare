@@ -26,6 +26,7 @@ $('.signup-patient-btn').click(function(){
 
 $('#patient_signup_dob').datepicker({
     //rtl: Metronic.isRTL(),
+    dateFormat: 'dd-mm-yy',
     orientation: "left",
     autoclose: true
 });
