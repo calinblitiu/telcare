@@ -69,9 +69,9 @@ class Patient extends CI_Controller
         $email = $this->input->post('email');
         $pwd = $this->input->post('pwd');
 
-        $doctor = $this->doctor_model->getDoctorEmail($email);
+        $patient = $this->patient_model->getPatientEmail($email);
 
-        if(!$doctor)
+        if(!$patient)
         {
             $return_data['success'] = 0;
             $return_data['error'] = 'There is not user';
@@ -81,28 +81,27 @@ class Patient extends CI_Controller
         else
         {
             $hash_pwd = md5($pwd);
-            if($hash_pwd == $doctor['password'])
+            if($hash_pwd == $patient['pwd'])
             {
                 $token = md5(uniqid(rand(), true));
                 $sess_data = array(
-                    'user_type'         => USER_TYPE_DOCTOR,
-                    'email'             => $token,
-                    'doctor_id'         => $doctor['did']
+                    'user_type'         => USER_TYPE_PATIENT,
+                    'patient_id'        => $patient['pid'],
+                    'token'             => $token
                 );
                 $this->session->set_userdata($sess_data);
 
                 $return_data['success'] = 1;
                 $temp = array();
-                $temp['fname'] = $doctor['fname'];
-                $temp['lname'] = $doctor['lname'];
-                $temp['spec']  = $doctor['spec'];
-                $temp['type']  = $doctor['type'];
-                $temp['email'] = $doctor['email'];
-                $temp['state'] = $doctor['state'];
-                $temp['lang']  = $doctor['lang'];
-                $temp['dea']  = $doctor['dea'];
-                $temp['npi']  = $doctor['npi'];
-                $temp['img']  = base_url()."assets/uploads/doctor/".$doctor['img'];
+                $temp['token'] = $token;
+                $temp['fname'] = $patient['fname'];
+                $temp['lname'] = $patient['lname'];
+                $temp['email'] = $patient['email'];
+                $temp['dod'] = $patient['dod'];
+                $temp['ssn']  = $patient['ssn'];
+                $temp['addr']  = $patient['addr'];
+                $temp['gender']  = $patient['gender'];
+                $temp['img']  = base_url()."assets/uploads/patient/".$patient['img'];
                 $return_data['data'] = $temp;
 
                 echo json_encode($return_data);

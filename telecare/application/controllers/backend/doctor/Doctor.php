@@ -86,13 +86,14 @@ class Doctor extends CI_Controller
                 $token = md5(uniqid(rand(), true));
                 $sess_data = array(
                     'user_type'         => USER_TYPE_DOCTOR,
-                    'email'             => $token,
+                    'token'             => $token,
                     'doctor_id'         => $doctor['did']
                 );
                 $this->session->set_userdata($sess_data);
 
                 $return_data['success'] = 1;
                 $temp = array();
+                $temp['token'] = $token;
                 $temp['fname'] = $doctor['fname'];
                 $temp['lname'] = $doctor['lname'];
                 $temp['spec']  = $doctor['spec'];

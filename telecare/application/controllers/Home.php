@@ -34,4 +34,10 @@ class Home extends CI_Controller {
         $this->load->view('layout/header');
         $this->load->view('patient/signup');
     }
+
+    public function loginPatient()
+    {
+        $this->load->view('layout/header');
+        $this->load->view('patient/login');
+    }
 }
