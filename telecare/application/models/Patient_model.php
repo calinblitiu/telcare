@@ -28,4 +28,10 @@ class Patient_model extends CI_Model
         return $result[0];
     }
 
+    public function setToken($pid,$token)
+    {
+        $this->db->where('pid', $pid);
+        $this->db->set('token',$token);
+        $this->db->update($this->table_name);
+    }
 }

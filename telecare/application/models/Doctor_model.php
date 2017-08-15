@@ -21,4 +21,11 @@ class Doctor_model extends CI_Model
         return $result[0];
     }
 
+    public function setToken($did,$token)
+    {
+        $this->db->where('did', $did);
+        $this->db->set('token',$token);
+        $this->db->update($this->table_name);
+    }
+
 }

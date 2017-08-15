@@ -91,6 +91,8 @@ class Patient extends CI_Controller
                 );
                 $this->session->set_userdata($sess_data);
 
+                $this->patient_model->setToken($this->session->userdata('patient_id'),$token);
+
                 $return_data['success'] = 1;
                 $temp = array();
                 $temp['token'] = $token;
@@ -116,6 +118,13 @@ class Patient extends CI_Controller
                 exit();
             }
         }
+    }
+
+    public function logOut()
+    {
+        $this->patient_model->setToken($this->session->userdata('patient_id'),"");
+        $array_items = array('user_type', 'token','patient_id');
+        $this->session->unset_userdata($array_items);
     }
 
 }

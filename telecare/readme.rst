@@ -63,7 +63,7 @@ Patient Backend
 **************
 signup_patient
 **************
-url : http://your-domain/singup_patient
+url : http://your-domain/signup_patient
 
 post : fname, lname, dod, ssn, addr, email, pwd, gender, img
 

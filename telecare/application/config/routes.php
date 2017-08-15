@@ -82,6 +82,7 @@ $route['f-login-patient'] = "home/loginPatient";
 
 $route['signup_doctor'] = "backend/doctor/doctor/signUp";
 $route['login_doctor'] = "backend/doctor/doctor/logIn";
+$route['logout_doctor'] = "backend/doctor/doctor/logOut";
 
 /*
  * Patient
@@ -89,3 +90,4 @@ $route['login_doctor'] = "backend/doctor/doctor/logIn";
 
 $route['signup_patient'] = 'backend/patient/patient/signUp';
 $route['login_patient'] = "backend/patient/patient/logIn";
+$route['logout_patient'] = "backend/patient/patient/logOut";
