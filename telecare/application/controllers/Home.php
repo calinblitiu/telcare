@@ -133,7 +133,7 @@ class Home extends CI_Controller {
 
         if($user_type == USER_TYPE_DOCTOR)
         {
-            $receiver = $this->patient_model->getDoctorForgetToken($forget_token);
+            $receiver = $this->doctor_model->getDoctorForgetToken($forget_token);
         }
         else if($user_type == USER_TYPE_PATIENT)
         {
