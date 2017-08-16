@@ -91,3 +91,10 @@ $route['logout_doctor'] = "backend/doctor/doctor/logOut";
 $route['signup_patient'] = 'backend/patient/patient/signUp';
 $route['login_patient'] = "backend/patient/patient/logIn";
 $route['logout_patient'] = "backend/patient/patient/logOut";
+
+/*
+ * common
+ */
+$route['f_forget_password'] = "";
+$route['f_reset_passsword'] = "";
+$route['forget_password'] = "home/forgetPassword";
