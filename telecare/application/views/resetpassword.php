@@ -8,14 +8,14 @@
 
 <!-- BEGIN CONTENT -->
 <div class="col-md-12 col-sm-12">
-    <h1>Reset Password</h1>
+
     <div class="content-form-page">
         <div class="row">
             <div class="col-md-offset-2 col-md-7 col-sm-7">
                 <form class="form-horizontal" role="form">
 
                     <fieldset>
-                        <legend>Your password</legend>
+                        <legend>Reset Password</legend>
                         <div class="form-group">
                             <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
                             <div class="col-lg-8">
