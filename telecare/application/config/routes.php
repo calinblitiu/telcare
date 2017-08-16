@@ -96,5 +96,5 @@ $route['logout_patient'] = "backend/patient/patient/logOut";
  * common
  */
 $route['f_forget_password'] = "";
-$route['f_reset_passsword'] = "";
+$route['f_reset_passsword/(:num)/(:any)'] = "home/f_resetPassword/$1/$2";
 $route['forget_password'] = "home/forgetPassword";

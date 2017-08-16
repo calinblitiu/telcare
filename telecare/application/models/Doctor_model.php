@@ -28,4 +28,23 @@ class Doctor_model extends CI_Model
         $this->db->update($this->table_name);
     }
 
+    public function setForgetToken($email,$forget_token)
+    {
+	    $this->db->where('email',$email);
+	    $this->db->set('forget_token',$forget_token);
+        $this->db->update($this->table_name);
+    }
+
+    public function getDoctorForgetToken($forget_token)
+    {
+        $this->db->where('forget_token',$forget_token);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array($query);
+        if(count($result) == 0)
+        {
+            return false;
+        }
+        return $result[0];
+    }
+
 }
