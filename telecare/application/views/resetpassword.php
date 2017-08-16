@@ -7,11 +7,11 @@
  */?>
 
 <!-- BEGIN CONTENT -->
-<div class="col-md-9 col-sm-9">
-    <h1>Create an account</h1>
+<div class="col-md-12 col-sm-12">
+    <h1>Reset Password</h1>
     <div class="content-form-page">
         <div class="row">
-            <div class="col-md-7 col-sm-7">
+            <div class="col-md-offset-2 col-md-7 col-sm-7">
                 <form class="form-horizontal" role="form">
 
                     <fieldset>
