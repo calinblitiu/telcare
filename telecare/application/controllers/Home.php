@@ -142,12 +142,14 @@ class Home extends CI_Controller {
         else
         {
             $this->load->view('errorpage');
-            exit();
+            //exit();
+            return;
         }
 
         if (!$receiver || $forget_token == ""){
             $this->load->view('errorpage');
-            exit();
+            //exit();
+            return;
         }
 
         $data['user_type'] = $user_type;
