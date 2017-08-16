@@ -50,8 +50,8 @@ class Home extends CI_Controller {
 
     public function forgetPassword()
     {
-        $email = "rubby.star@hotmail.com";//$this->inpput->post('email');
-        $user_type = 0;//$this->input->post('user_type');
+        $email = $this->inpput->post('email');
+        $user_type = $this->input->post('user_type');
 
         $receiver = null;
 
