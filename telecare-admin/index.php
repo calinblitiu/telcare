@@ -18,6 +18,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+    require_once 'passwordLib.php';
+
 	define('ENVIRONMENT', 'development');
 /*
  *---------------------------------------------------------------
