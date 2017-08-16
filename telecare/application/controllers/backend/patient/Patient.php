@@ -28,6 +28,19 @@ class Patient extends CI_Controller
         $data['addr']		= $this->input->get_post('addr');
         $data['pwd']    	= md5($this->input->get_post('pwd'));
 
+        $patient = $this->patient_model->getPatientEmail($data['email']);
+        if(count($patient) > 0)
+        {
+            $returndata = array(
+                "success" => 0,
+                "error" => "User is aleady exist",
+                "data" => "signup error"
+
+            );
+            echo json_encode($returndata);
+            exit();
+        }
+
         $uploaddir = './assets/uploads/patient/';
         $path = $_FILES['img']['name'];
         $ext = pathinfo($path, PATHINFO_EXTENSION);

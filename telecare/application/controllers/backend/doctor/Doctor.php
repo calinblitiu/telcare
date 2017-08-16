@@ -22,8 +22,18 @@ class Doctor extends CI_Controller
     	 $data['npi']		= $this->input->get_post('npi');
     	 $data['password']	= md5($this->input->get_post('pwd'));
 
-         // echo json_encode($data);
-         //    exit();
+         $doctor = $this->doctor_model->getDoctorEmail($data['email']);
+         if(count($doctor) > 0)
+         {
+             $returndata = array(
+                 "success" => 0,
+                 "error" => "User is aleady exist",
+                 "data" => "signup error"
+
+             );
+             echo json_encode($returndata);
+             exit();
+         }
 
         $uploaddir = './assets/uploads/doctor/';
         $path = $_FILES['img']['name'];

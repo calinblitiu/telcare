@@ -47,4 +47,16 @@ class Doctor_model extends CI_Model
         return $result[0];
     }
 
+    public function getOnCallDoctor()
+    {
+        $this->db->where('is_on_call_doctor',"1");
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array($query);
+        if(count($result) == 0)
+        {
+            return false;
+        }
+        return $result[0];
+    }
+
 }
