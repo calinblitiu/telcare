@@ -98,13 +98,13 @@ class Home extends CI_Controller {
             'mailtype'  => 'html',
             'charset'   => 'iso-8859-1'
         );
-        $message = 'you can reset password in this url http://'.base_url()."f_reset_passsword/".$user_type."/".$forget_token;
+        $message = "hello";//'you can reset password in this url http://'.base_url()."f_reset_passsword/".$user_type."/".$forget_token;
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('gaedongshoe@gmail.com'); // change it to yours
         //$this->email->to($email);// change it to yours
         $this->email->to('rubby.star@hotmail.com');
-        $this->email->subject('reset password for '.$email);
+        $this->email->subject('reset password for');
         $this->email->message($message);
         if($this->email->send())
         {
