@@ -11,8 +11,12 @@ class DoctorAfterLogin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-            if($this->session->userdata('token')){
-            redirect('/');
+
+        if($this->session->userdata('token')==null){
+            $return_data['success'] = 0;
+            $return_data['error'] = 'session is destroied';
+            echo json_encode($return_data);
+            exit();
         }
 
         $this->load->model('patient_model');

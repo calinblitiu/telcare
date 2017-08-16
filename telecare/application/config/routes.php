@@ -84,6 +84,8 @@ $route['signup_doctor'] = "backend/doctor/doctor/signUp";
 $route['login_doctor'] = "backend/doctor/doctor/logIn";
 $route['logout_doctor'] = "backend/doctor/doctor/logOut";
 
+$route['get_on_call_doctor'] = "backend/doctor/doctorafterlogin/getOnCallDoctor";
+
 /*
  * Patient
  */
@@ -91,6 +93,7 @@ $route['logout_doctor'] = "backend/doctor/doctor/logOut";
 $route['signup_patient'] = 'backend/patient/patient/signUp';
 $route['login_patient'] = "backend/patient/patient/logIn";
 $route['logout_patient'] = "backend/patient/patient/logOut";
+$route['set_schedule'] = "backend/patient/patientafterlogin/setSchedule";
 
 /*
  * common
@@ -99,4 +102,3 @@ $route['f_forget_password'] = "";
 $route['f_reset_passsword/(:num)/(:any)'] = "home/f_resetPassword/$1/$2";
 
 $route['forget_password'] = "home/forgetPassword";
-$route['get_on_call_doctor'] = "backend/doctor/doctorafterlogin/getOnCallDoctor";

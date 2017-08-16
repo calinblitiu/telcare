@@ -13,11 +13,20 @@ class PatientAfterLogin extends CI_Controller
         parent::__construct();
 
         if($this->session->userdata('token')){
-            redirect('/');
+            $return_data['success'] = 0;
+            $return_data['error'] = 'session is destroied';
+            echo json_encode($return_data);
+            exit();
         }
 
         $this->load->model('patient_model');
         $this->load->model('doctor_model');
+    }
+
+    public function setSchedule()
+    {
+        $token = $this->input->post('token');
+        $this
     }
 
 }
