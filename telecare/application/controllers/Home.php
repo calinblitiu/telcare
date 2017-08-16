@@ -10,6 +10,8 @@ class Home extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('doctor_model');
+        $this->load->model('patient_model');
     }
 
 	public function index()
