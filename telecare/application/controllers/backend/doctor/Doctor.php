@@ -23,7 +23,7 @@ class Doctor extends CI_Controller
     	 $data['password']	= md5($this->input->get_post('pwd'));
 
          $doctor = $this->doctor_model->getDoctorEmail($data['email']);
-         if(count($doctor) > 0)
+         if($doctor)
          {
              $returndata = array(
                  "success" => 0,
@@ -137,7 +137,7 @@ class Doctor extends CI_Controller
     public function logOut()
     {
         $token = $this->input->post('token');
-        $doctor = $this->doctor_model->getDoctorToken("a0c2a415438631832333206e6fc343d2");
+        $doctor = $this->doctor_model->getDoctorToken($token);
         if($doctor)
         {
             $this->doctor_model->setToken($doctor['did'],"");
