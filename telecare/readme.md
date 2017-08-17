@@ -143,7 +143,10 @@
         - success
         {
             "success":1,
-            "img":"http:\/\/localhost\/assets\/uploads\/doctor\/150264736415625990944442f93.jpg"    // "http:\/\/localhost\/assets\/uploads\/doctor\/no-img.png"
+            "data" : 
+            {
+                "img":"http:\/\/localhost\/assets\/uploads\/doctor\/150264736415625990944442f93.jpg"    // "http:\/\/localhost\/assets\/uploads\/doctor\/no-img.png"
+             }
         }
         
         - error
@@ -152,7 +155,50 @@
             "error"   : "There is not on call doctor"
         }
 
+## Upload History Attach
 
+### url : http://your-domain/upload_history_attach
+
+### post : token, attach
+
+### result
+
+        - success
+        {
+            "success" : 1;
+            "data" :
+            {
+                "img" : "150264736415625990944442f93.jpg"
+            }
+        }
+        
+        - error : 
+        {
+            "success" : 0,
+            "error" : "Upload faile"
+        }
+
+## Set Schedule
+
+### url : http://your-domain/set_schedule
+
+### post : token, date, note, history
+
+### result :
+
+        - success
+        {
+            "success" : 1,
+            "error" : "Add new schedule success",
+            "data" : "Add new schedule success"
+        }
+        
+        - error
+        {
+            "success" : 1,
+            "error" : "Add new schedule error",
+            "data" : "Add new schedule error"
+        }
 
 # Common Backend
 

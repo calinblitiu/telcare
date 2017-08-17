@@ -1,14 +1,14 @@
 /**
- * Created by rubby on 8/15/2017.
+ * Created by rubby on 8/18/2017.
  */
-$('.signup-patient-btn').click(function(){
-    $("#patient-signup-form").ajaxSubmit({
-        url: baseURL + "signup_patient",
+$('.patient-schedule-btn').click(function(){
+    $("#patient-setschedule-form").ajaxSubmit({
+        url: baseURL + "set_schedule",
         type: 'post',
         dataType: "json",
         success: function (data) {
             if (data.success == 1) {
-                alert("sign up success");
+                alert(data.error);
             }
             else if (data.success == 0) {
                 alert(data.error);
@@ -20,7 +20,7 @@ $('.signup-patient-btn').click(function(){
     });
 });
 
-$('#patient_signup_dob').datepicker({
+$('#patient_schedule_date').datepicker({
     format: "yyyy-mm-dd",
     autoclose: true
 });

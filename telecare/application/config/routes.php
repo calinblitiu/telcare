@@ -70,6 +70,7 @@ $route['f-login-doctor'] = "home/loginDoctor";
  */
 $route['f-signup-patient'] = "home/signUpPatient";
 $route['f-login-patient'] = "home/loginPatient";
+$route['f-set-schedule'] = "frontend/patient/patient/setSchedule";
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -84,7 +85,7 @@ $route['signup_doctor'] = "backend/doctor/doctor/signUp";
 $route['login_doctor'] = "backend/doctor/doctor/logIn";
 $route['logout_doctor'] = "backend/doctor/doctor/logOut";
 
-$route['get_on_call_doctor'] = "backend/doctor/doctorafterlogin/getOnCallDoctor";
+$route['get_on_call_doctor'] = "backend/doctor/doctor/getOnCallDoctor";
 
 /*
  * Patient
@@ -94,6 +95,7 @@ $route['signup_patient'] = 'backend/patient/patient/signUp';
 $route['login_patient'] = "backend/patient/patient/logIn";
 $route['logout_patient'] = "backend/patient/patient/logOut";
 $route['set_schedule'] = "backend/patient/patientafterlogin/setSchedule";
+$route['upload_history_attach'] = "backend/patient/patientafterlogin/uploadHistoryAttach";
 
 /*
  * common

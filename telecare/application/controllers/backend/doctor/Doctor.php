@@ -146,4 +146,30 @@ class Doctor extends CI_Controller
         $this->session->unset_userdata($array_items);
     }
 
+    public function getOnCallDoctor()
+    {
+        $doctor = $this->doctor_model->getOnCallDoctor();
+
+        if(!$doctor){
+            $return_data['success'] = 0;
+            $return_data['error'] = 'There is not on call doctor';
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $return_data['success'] = 1;
+        $temp['img'] = base_url()."assets/uploads/doctor/".$doctor['img'];;
+        $return_data['data'] = $temp;
+
+        if($doctor['img'] == "" || $doctor['img'] == null)
+        {
+            $temp['img'] = base_url()."assets/uploads/doctor/no-img.png";
+            $return_data['data'] = $temp;
+        }
+
+        echo json_encode($return_data);
+        exit();
+
+    }
+
 }
