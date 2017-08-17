@@ -175,7 +175,7 @@
         - error : 
         {
             "success" : 0,
-            "error" : "Upload faile"
+            "error" : "Upload failed"
         }
 
 ## Set Schedule
@@ -195,7 +195,7 @@
         
         - error
         {
-            "success" : 1,
+            "success" : 0,
             "error" : "Add new schedule error",
             "data" : "Add new schedule error"
         }

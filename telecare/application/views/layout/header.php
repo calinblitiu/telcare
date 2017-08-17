@@ -52,6 +52,7 @@
     <link href="<?=base_url()?>assets/frontend/layout/css/custom.css" rel="stylesheet">
     <!-- Theme styles END -->
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/global/plugins/bootstrap-datepicker/css/datepicker3.css"/>
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
 
     <link href="<?=base_url()?>assets/mycss/style.css" rel="stylesheet">
 
@@ -62,6 +63,7 @@
     <script src="<?=base_url()?>assets/global/plugins/jquery-form.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="<?=base_url()?>assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 
     <script>
         var baseURL = "<?=base_url()?>";
