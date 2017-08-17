@@ -59,4 +59,16 @@ class Doctor_model extends CI_Model
         return $result[0];
     }
 
+    public function getDoctorToken($token)
+    {
+        $this->db->where('token',$token);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array($query);
+        if(count($result)>0)
+        {
+            return $result[0];
+        }
+        return false;
+    }
+
 }

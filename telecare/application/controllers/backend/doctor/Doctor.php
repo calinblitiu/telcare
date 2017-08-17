@@ -85,6 +85,7 @@ class Doctor extends CI_Controller
         {
             $return_data['success'] = 0;
             $return_data['error'] = 'There is not user';
+            $return_data['data'] = 'Login Error';
             echo json_encode($return_data);
             exit();
         }
@@ -117,7 +118,7 @@ class Doctor extends CI_Controller
                 $temp['npi']  = $doctor['npi'];
                 $temp['img']  = base_url()."assets/uploads/doctor/".$doctor['img'];
                 $return_data['data'] = $temp;
-
+                $return_data['error'] = 'Login success';
                 echo json_encode($return_data);
                 exit();
 
@@ -126,6 +127,7 @@ class Doctor extends CI_Controller
             {
                 $return_data['success'] = 0;
                 $return_data['error'] = 'Password is invalid.';
+                $return_data['data'] = 'Password is invaild';
                 echo json_encode($return_data);
                 exit();
             }
@@ -134,7 +136,12 @@ class Doctor extends CI_Controller
 
     public function logOut()
     {
-        $this->doctor_model->setToken($this->session->userdata('doctor_id'),"");
+        $token = $this->input->post('token');
+        $doctor = $this->doctor_model->getDoctorToken("a0c2a415438631832333206e6fc343d2");
+        if($doctor)
+        {
+            $this->doctor_model->setToken($doctor['did'],"");
+        }
         $array_items = array('user_type', 'token','doctor_id');
         $this->session->unset_userdata($array_items);
     }

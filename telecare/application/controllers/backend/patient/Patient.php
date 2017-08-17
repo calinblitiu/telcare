@@ -29,13 +29,12 @@ class Patient extends CI_Controller
         $data['pwd']    	= md5($this->input->get_post('pwd'));
 
         $patient = $this->patient_model->getPatientEmail($data['email']);
-        if(count($patient) > 0)
+        if($patient)
         {
             $returndata = array(
                 "success" => 0,
                 "error" => "User is aleady exist",
                 "data" => "signup error"
-
             );
             echo json_encode($returndata);
             exit();
@@ -88,6 +87,7 @@ class Patient extends CI_Controller
         {
             $return_data['success'] = 0;
             $return_data['error'] = 'There is not user';
+            $return_data['data'] = "There is not user";
             echo json_encode($return_data);
             exit();
         }
@@ -118,7 +118,7 @@ class Patient extends CI_Controller
                 $temp['gender']  = $patient['gender'];
                 $temp['img']   = base_url()."assets/uploads/patient/".$patient['img'];
                 $return_data['data'] = $temp;
-
+                $return_data["error"] = "login sucsess";
                 echo json_encode($return_data);
                 exit();
 
@@ -127,6 +127,7 @@ class Patient extends CI_Controller
             {
                 $return_data['success'] = 0;
                 $return_data['error'] = 'Password is invalid.';
+                $return_data['data'] = "Password is invalid";
                 echo json_encode($return_data);
                 exit();
             }
@@ -135,7 +136,12 @@ class Patient extends CI_Controller
 
     public function logOut()
     {
-        $this->patient_model->setToken($this->session->userdata('patient_id'),"");
+        $token = $this->input->post('token');
+        $patient = $this->patient_model->getPatientToken($token);
+        if($patient)
+        {
+            $this->patient_model->setToken($patient['pid']);
+        }
         $array_items = array('user_type', 'token','patient_id');
         $this->session->unset_userdata($array_items);
     }

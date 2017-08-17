@@ -1,15 +1,14 @@
-##############
-Doctor Backend
-##############
 
-*************
-signup_doctor
-*************
-url : http://your-domail/signup_doctor
+# Doctor Backend
 
-post : type,fname,lname,spec,email,state,lang,dea,npi,pwd,img
+## signup_doctor
 
-result :
+### url : http://your-domail/signup_doctor
+
+### post : type,fname,lname,spec,email,state,lang,dea,npi,pwd,img
+
+### result :
+
         - success:
             {
                 "success" : 1,
@@ -23,17 +22,19 @@ result :
                 "data" : "signup is error"
             }
 
-************
-login_doctor
-************
-url : http://your-domail/login_doctor
 
-post : email , pwd
+## login_doctor
 
-result :
+### url : http://your-domail/login_doctor
+
+### post : email , pwd
+
+### result :
+
         - success:
              {
                 "success" : 1,
+                "error" : "...",
                 "data" :
                 {
                     "token" : "23124554643345674532452"
@@ -54,41 +55,55 @@ result :
             {
                 "success" : 0,
                 "error" : "There is not user"    //"Password is invalid."
+                "data" : "...."
             }
+            
+## Log out Doctor
 
-###############
-Patient Backend
-###############
+### url : http://your-domain/logout_doctor
 
-**************
-signup_patient
-**************
-url : http://your-domain/signup_patient
+### post : token
 
-post : fname, lname, dod, ssn, addr, email, pwd, gender, img
 
-result :
+# Patient Backend
+
+
+## signup_patient
+
+### url : http://your-domain/signup_patient
+
+### post : fname, lname, dod, ssn, addr, email, pwd, gender, img
+
+### result :
+        
         - success :
             {
-                "success" : 1
+                "success" : 1,
+                "error" => "Signup succesed!",
+                "data" => "signup successed"
+
             }
         - error :
             {
                 "success" : 0,
                 "error" : "signup is error"
+                "data" => "signup is error"
             }
 
-*************
-login_patient
-*************
-url : http://your-domain/login_patient
 
-post : email, pwd
+## login_patient
 
-result :
-        - success :
+### url : http://your-domain/login_patient
+
+### post : email, pwd
+
+### result :
+        
+        - success:
+        
         {
             "success" : 1,
+            "error" : "login success",
             "data" :
                 {
                     "token" : "23124554643345674532452"
@@ -106,5 +121,12 @@ result :
         - error
         {
             "success" : 0,
-            "error" : "There is not user"    //"Password is invalid."
+            "error" : "There is not user",    //"Password is invalid."
+            "data" : "There is not user"      //"Password is invalid"
         }
+        
+## Log out patient
+
+### url : http://your-domain/logout_patient
+
+### post : token
