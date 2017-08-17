@@ -134,6 +134,25 @@
 
 ### post : token
 
+## Get On Call Doctor
+
+### url : http://your-domain/get_on_call_doctor
+
+### result 
+
+        - success
+        {
+            "success":1,
+            "img":"http:\/\/localhost\/assets\/uploads\/doctor\/150264736415625990944442f93.jpg"    // "http:\/\/localhost\/assets\/uploads\/doctor\/no-img.png"
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error"   : "There is not on call doctor"
+        }
+
+
 
 # Common Backend
 

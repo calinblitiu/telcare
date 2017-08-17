@@ -29,13 +29,18 @@ class DoctorAfterLogin extends CI_Controller
 
         if(!$doctor){
             $return_data['success'] = 0;
-            $return_data['error'] = 'there is not on call doctor';
+            $return_data['error'] = 'There is not on call doctor';
             echo json_encode($return_data);
             exit();
         }
 
         $return_data['success'] = 1;
-        $return_data['img'] = $doctor['img'];
+        $return_data['img'] = base_url()."assets/uploads/doctor/".$doctor['img'];
+
+        if($doctor['img'] == "" || $doctor['img'] == null)
+        {
+            $return_data['img'] = base_url()."assets/uploads/doctor/no-img.png";
+        }
 
         echo json_encode($return_data);
         exit();
