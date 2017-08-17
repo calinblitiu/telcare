@@ -54,12 +54,17 @@ class Patient extends CI_Controller
 
         if($this->patient_model->addNewPatient($data))
         {
-            $returndata = array(
-                "success" => 1,
-                "error" => "Signup succesed!",
-                "data" => "signup successed"
+//            $returndata = array(
+//                "success" => 1,
+//                "error" => "Signup succesed!",
+//                "data" => "signup successed"
+//
+//            );
+            $returndata['success'] = 1;
+            $returndata['error'] = "Login Success";
+            $temp['token'] = md5(uniqid(rand(), true));
+            $returndata['data'] = $temp;
 
-            );
             echo json_encode($returndata);
             exit();
         }

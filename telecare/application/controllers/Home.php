@@ -66,7 +66,7 @@ class Home extends CI_Controller {
         else
         {
             $return_data['success'] = 0;
-            $return_data['message'] = "there is not user type like that";
+            $return_data['message'] = "There is not user type like that";
             echo json_encode($return_data);
             exit();
         }
@@ -74,7 +74,7 @@ class Home extends CI_Controller {
         if(!$receiver)
         {
             $return_data['success'] = 0;
-            $return_data['message'] = "there is not register email";
+            $return_data['message'] = "There is not register email";
             echo json_encode($return_data);
             exit();
         }
@@ -110,7 +110,7 @@ class Home extends CI_Controller {
         {
             //echo 'Email sent.';
             $return_data['success'] = '1';
-            $return_data['message'] = 'mail send success';
+            $return_data['message'] = 'Mail sent success, Please check your email';
             echo json_encode($return_data);
             exit();
         }

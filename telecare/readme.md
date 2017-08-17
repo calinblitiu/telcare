@@ -79,8 +79,11 @@
         - success :
             {
                 "success" : 1,
-                "error" => "Signup succesed!",
-                "data" => "signup successed"
+                "error" : "Signup succesed!",
+                "data" :
+                 {
+                    "token" : "3434r5234524352452"
+                 }
 
             }
         - error :
@@ -130,3 +133,26 @@
 ### url : http://your-domain/logout_patient
 
 ### post : token
+
+
+# Common Backend
+
+## Forget Password
+
+### url : http://you-domain/forget_password
+
+### post : email, user_type
+
+### result : 
+        
+        - success
+        {
+            "success" : 1,
+            "message" : "mail sent success, please check your email"
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "message" : "There is not register email"
+        }
