@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
@@ -7,11 +8,15 @@ class Home extends CI_Controller {
 	/////  Front End ///////////////
 	////////////////////////////////
 
+    private $opentok_apikey = "45927742";
+    private $opentok_secret = "0de4539fd865233ee03c7c9d7ff2b6bb19b3c9fc";
+
     public function __construct()
     {
         parent::__construct();
         $this->load->model('doctor_model');
         $this->load->model('patient_model');
+
     }
 
 	public function index()
@@ -189,5 +194,6 @@ class Home extends CI_Controller {
         exit();
 
     }
+
 
 }

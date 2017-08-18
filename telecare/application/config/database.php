@@ -76,12 +76,13 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-//	'username' => 'root',
-//	'password' => '',
-//	'database' => 'telecare',
-    'username' => 'skr164_floridaid',
-    'password' => 'Hashtag@123',
-    'database' => 'skr164_telecare',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'telecare',
+
+//    'username' => 'skr164_floridaid',
+//    'password' => 'Hashtag@123',
+//    'database' => 'skr164_telecare',
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

@@ -103,6 +103,48 @@ class PatientAfterLogin extends CI_Controller
        exit();
     }
 
+    public function reqCall()
+    {
+        if($this->patient['did'] == "" || $this->patient['did'] == null)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "You are not alloced to any Doctor";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $current_schedule = $this->schedule_model->getScheduleCurrent($this->patient['pid']);
+        if(!$current_schedule){
+            $return_data['success'] = 0;
+            $return_data['error'] = "You have not schedule,please add new schedule";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $this->load->helper('opentok');
+        $opentok = createNewOpentokSession();
+        if(!$opentok)
+        {
+            $data["success"] = 0;
+            $data["error"] = "Opentok Session creation is failed!";
+            echo json_encode($data);
+            exit();
+        }
+
+        if(!$this->schedule_model->updateSchedule($current_schedule['id'],$opentok))
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "Opentok session is not added to database";
+            echo json_encode($return_data);
+            exit();
+        }
+        $return_data['success'] = 1;
+        $return_data['data'] = $opentok;
+        echo json_encode($return_data);
+        exit();
+
+    }
+
     private function checkTokenSession(){
         if($this->session->userdata('token')){
             $return_data['success'] = 0;

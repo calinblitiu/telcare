@@ -230,6 +230,30 @@
             "error" : "You are not alloced to any Doctor"  // "This doctor is remove in database."
         }
 
+## Request Call 
+
+### url : http://your-domain/req_call
+
+### post : token
+
+### result 
+
+        - success
+        {
+            "success" : 1,
+            "data" :
+            {
+                "opentok_session_id" : "21313421...",
+                "opentok_token" : "asdfhqehou....."
+            }
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "You have not schedule,please add new schedule" // "You are not alloced to any Doctor", "Opentok Session creation is failed!", "Opentok session is not added to database"
+        }
+
 # Common Backend
 
 ## Forget Password

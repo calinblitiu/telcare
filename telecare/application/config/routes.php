@@ -97,6 +97,7 @@ $route['logout_patient'] = "backend/patient/patient/logOut";
 $route['set_schedule'] = "backend/patient/patientafterlogin/setSchedule";
 $route['upload_history_attach'] = "backend/patient/patientafterlogin/uploadHistoryAttach";
 $route['get_id_doctor'] = "backend/patient/patientafterlogin/getIdDoctor";
+$route['req_call'] = "backend/patient/patientafterlogin/reqCall";
 
 /*
  * common
@@ -109,3 +110,4 @@ $route['f_reset_passsword/(:num)/(:any)'] = "home/f_resetPassword/$1/$2";
 //backend
 $route['forget_password'] = "home/forgetPassword";
 $route['get_id_doctors'] = "home/getAllIdDoctors";
+//$route['creat_new_opentok_session'] = "home/createNewOpentokSession1";
