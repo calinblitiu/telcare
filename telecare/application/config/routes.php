@@ -96,6 +96,7 @@ $route['login_patient'] = "backend/patient/patient/logIn";
 $route['logout_patient'] = "backend/patient/patient/logOut";
 $route['set_schedule'] = "backend/patient/patientafterlogin/setSchedule";
 $route['upload_history_attach'] = "backend/patient/patientafterlogin/uploadHistoryAttach";
+$route['get_id_doctor'] = "backend/patient/patientafterlogin/getIdDoctor";
 
 /*
  * common

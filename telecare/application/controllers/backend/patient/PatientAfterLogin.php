@@ -71,6 +71,38 @@ class PatientAfterLogin extends CI_Controller
 
     }
 
+    public function getIdDoctor()
+    {
+       if($this->patient['did'] == "" || $this->patient['did'] == null)
+       {
+           $return_data['success'] = 0;
+           $return_data['error'] = "You are not alloced to any Doctor";
+           echo json_encode($return_data);
+           exit();
+       }
+        $doctor = $this->doctor_model->getDoctorId($this->patient['did']);
+
+       if(!$doctor)
+       {
+           $return_data['success'] = 0;
+           $return_data['error'] = "This doctor is remove in database.";
+           echo json_encode($return_data);
+           exit();
+       }
+
+       $return_data['success'] = 1;
+       if($doctor['img'] == "" || $doctor['img'] == null)
+       {
+           $doctor['img'] = base_url()."assets/uploads/doctor/no-img.png";
+       }
+       else{
+           $doctor['img'] = base_url()."assets/uploads/doctor/".$doctor['img'];
+       }
+       $return_data['data'] = $doctor;
+       echo json_encode($return_data);
+       exit();
+    }
+
     private function checkTokenSession(){
         if($this->session->userdata('token')){
             $return_data['success'] = 0;
@@ -97,7 +129,8 @@ class PatientAfterLogin extends CI_Controller
             echo json_encode($return_data);
             exit();
         }
-
     }
+
+
 
 }

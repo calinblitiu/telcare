@@ -83,4 +83,17 @@ class Doctor_model extends CI_Model
         }
         return $result;
     }
+
+    public function getDoctorId($did)
+    {
+        $this->db->where('did',$did);
+        $this->db->select('fname, lname, spec, email, img, lang, dea, npi');
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array($query);
+        if(count($result)>0)
+        {
+            return $result[0];
+        }
+        return false;
+    }
 }

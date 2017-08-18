@@ -200,6 +200,36 @@
             "data" : "Add new schedule error"
         }
 
+## Get Id Doctor
+
+### url : http://your-domail/get_id_doctor
+
+### post : token
+
+### resut :
+
+        - success 
+        {
+            "success" : 1,
+            "data" :
+            {
+                "fname" : "james",
+                "lname" : "smith",
+                "spec" : "0",
+                "email" : "james.smith.rb@outlook.com",
+                "img" : "http:\/\/localhost\/assets\/uploads\/doctor\/1502989926146835995ce6673430.png",
+                "lang" : "0",
+                "dea" : "aa",
+                "npi" : "123"
+            }
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "You are not alloced to any Doctor"  // "This doctor is remove in database."
+        }
+
 # Common Backend
 
 ## Forget Password
