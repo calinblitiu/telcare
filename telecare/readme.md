@@ -237,7 +237,7 @@
                     "lname" : "smith",
                     "spec" : "0",
                     "email" : "james.smith.rb@outlook.com",
-                    "img" : "15027031911300259916e5745780.jpg",
+                    "img" : "http:\/\/localhost\/assets\/uploads\/doctor\/1502989926146835995ce6673430.png",
                     "lang" : "0",
                     "dea" : "aa",
                     "npi" : "123"
@@ -247,7 +247,7 @@
                     "lname" : "shoe",
                     "spec" : "0",
                     "email" : "gaedongshoe@gmail.com",
-                    "img" : "1502989886205865995ce3ece09a.jpg",
+                    "img" : "http:\/\/localhost\/assets\/uploads\/doctor\/no-img.png",
                     "lang" : "0",
                     "dea" : "aa",
                     "npi" : "11"

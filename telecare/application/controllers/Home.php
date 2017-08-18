@@ -170,6 +170,19 @@ class Home extends CI_Controller {
             exit();
         }
 
+        for($i = 0; $i<count($id_doctors); $i++)
+        {
+            $temp_img = $id_doctors[$i]['img'];
+            if($temp_img == "" || $temp_img == null)
+            {
+                $id_doctors[$i]['img'] = base_url()."assets/uploads/doctor/no-img.png";
+            }
+            else
+            {
+                $id_doctors[$i]['img'] = base_url()."assets/uploads/doctor/".$temp_img;
+            }
+        }
+
         $data["success"] = 1;
         $data['data'] = $id_doctors;
         echo json_encode($data);
