@@ -27,7 +27,7 @@ class Doctor extends CI_Controller
          {
              $returndata = array(
                  "success" => 0,
-                 "error" => "User is aleady exist",
+                 "error" => "User is already exist",
                  "data" => "signup error"
 
              );

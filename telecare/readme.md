@@ -221,3 +221,42 @@
             "success" : 0,
             "message" : "There is not register email"
         }
+
+## Get All Id Doctors
+
+### url : http://your-domain/get_id_doctors
+
+### result :
+
+        - success
+        {
+            "success" : 1,
+            "data" : [
+                {
+                    "fname" : "james",
+                    "lname" : "smith",
+                    "spec" : "0",
+                    "email" : "james.smith.rb@outlook.com",
+                    "img" : "15027031911300259916e5745780.jpg",
+                    "lang" : "0",
+                    "dea" : "aa",
+                    "npi" : "123"
+                 },
+                {
+                    "fname" : "gaedong",
+                    "lname" : "shoe",
+                    "spec" : "0",
+                    "email" : "gaedongshoe@gmail.com",
+                    "img" : "1502989886205865995ce3ece09a.jpg",
+                    "lang" : "0",
+                    "dea" : "aa",
+                    "npi" : "11"
+                }
+            ]
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "There is not any id"
+        }

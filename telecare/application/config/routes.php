@@ -100,7 +100,11 @@ $route['upload_history_attach'] = "backend/patient/patientafterlogin/uploadHisto
 /*
  * common
  */
+//frontend
 $route['f_forget_password'] = "";
 $route['f_reset_passsword/(:num)/(:any)'] = "home/f_resetPassword/$1/$2";
 
+
+//backend
 $route['forget_password'] = "home/forgetPassword";
+$route['get_id_doctors'] = "home/getAllIdDoctors";

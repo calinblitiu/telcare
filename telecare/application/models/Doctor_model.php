@@ -71,4 +71,16 @@ class Doctor_model extends CI_Model
         return false;
     }
 
+    public function getAllIdDoctors()
+    {
+        $this->db->where('type',DOCTOR_TYPE_ID_PYSICIAN);
+        $this->db->select('fname, lname, spec, email, img, lang, dea, npi');
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+        if(count($result) == 0)
+        {
+            return false;
+        }
+        return $result;
+    }
 }

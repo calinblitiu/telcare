@@ -159,4 +159,22 @@ class Home extends CI_Controller {
         $this->load->view('resetpassword',$data);
     }
 
+    public function getAllIdDoctors()
+    {
+        $id_doctors = $this->doctor_model->getAllIdDoctors();
+        if(!$id_doctors)
+        {
+            $data['success'] = 0;
+            $data['error'] = "There is not any ID doctors";
+            echo json_encode($data);
+            exit();
+        }
+
+        $data["success"] = 1;
+        $data['data'] = $id_doctors;
+        echo json_encode($data);
+        exit();
+
+    }
+
 }
