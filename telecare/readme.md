@@ -64,6 +64,48 @@
 
 ### post : token
 
+## Get My Patients
+
+### url : http://your-domain/get_my_patients
+
+### post : token
+
+### result : 
+        
+        - success
+        {
+            "success" : 1,
+            "data" : [
+                {
+                    "fname" : "james",
+                    "lname" : "smith",
+                    "gender" : "0",
+                    "dob" : "2017-08-16",
+                    "ssn" : "234",
+                    "addr" : "aa",
+                    "email" : "james.smith.rb@outlook.com",
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patients\/15027755099989599288d549e85.jpg"
+                },
+                {
+                    "fname" : "pplkhj",
+                    "lname" : "fhjnvff",
+                    "gender" : "0",
+                    "dob" : "1990-01-22",
+                    "ssn" : "22222222",
+                    "addr" : "yyyhh",
+                    "email" : "ff@ff.ff",
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patients\/1502998104281705995ee583f922.png"
+                }
+            ]
+        }
+        
+        -error
+        {
+            "success" : 0,
+            "error": "There is not patients"
+        }
+        
+
 
 # Patient Backend
 

@@ -66,4 +66,16 @@ class Patient_model extends CI_Model
         return false;
     }
 
+    public function getPatients($data){
+        $this->db->where($data);
+        $this->db->select("fname, lname, gender, dob, ssn, addr, email,img");
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array($query);
+        if(count($result) == 0)
+        {
+            return false;
+        }
+        return $result;
+    }
+
 }

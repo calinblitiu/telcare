@@ -143,6 +143,11 @@ class PatientAfterLogin extends CI_Controller
         echo json_encode($return_data);
         exit();
 
+        $return_data['success'] = 1;
+        $return_data['data'] = "aa";
+        echo json_encode($return_data);
+        exit();
+
     }
 
     private function checkTokenSession(){

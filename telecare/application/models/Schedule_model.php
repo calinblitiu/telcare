@@ -41,7 +41,7 @@ class Schedule_model extends CI_Model
     {
         $this->db->where("id",$id);
         $this->db->set($data);
-        $this->db->update();
+        $this->db->update($this->table_name);
         if($this->db->affected_rows() > 0)
         {
             return true;
