@@ -35,6 +35,13 @@ Class MyOpentokApi
 //        var_dump($opentok);
 //        var_dump($session);
 //        var_dump($token);
+        if ($token == null || $sessionId == null)
+        {
+            $data["success"] = 0;
+            $data["error"] = "Opentok session create error";
+            echo json_encode($data);
+            exit();
+        }
         $data['opentok_session_id'] = $sessionId;
         $data['opentok_token'] = $token;
         echo json_encode($data);

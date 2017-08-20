@@ -167,7 +167,7 @@ class Doctor extends CI_Controller
             $return_data['data'] = $temp;
         }
 
-        echo json_encode($return_data);
+        echo json_encode($return_data,JSON_UNESCAPED_SLASHES);
         exit();
 
     }

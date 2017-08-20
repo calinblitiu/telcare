@@ -6,7 +6,7 @@ $('.patient-login-btn').click(function(){
     $("#patient-login-form").ajaxSubmit({
         url: baseURL + "login_patient",
         type: 'post',
-        dataType: "json",
+       dataType: "json",
         success: function (data) {
             if (data.success == 1) {
                 alert("login success");

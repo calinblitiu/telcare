@@ -123,6 +123,7 @@ class PatientAfterLogin extends CI_Controller
 
         $this->load->helper('opentok');
         $opentok = createNewOpentokSession();
+
         if(!$opentok)
         {
             $data["success"] = 0;
@@ -143,10 +144,6 @@ class PatientAfterLogin extends CI_Controller
         echo json_encode($return_data);
         exit();
 
-        $return_data['success'] = 1;
-        $return_data['data'] = "aa";
-        echo json_encode($return_data);
-        exit();
 
     }
 

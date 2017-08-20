@@ -86,7 +86,8 @@ $route['login_doctor'] = "backend/doctor/doctor/logIn";
 $route['logout_doctor'] = "backend/doctor/doctor/logOut";
 
 $route['get_on_call_doctor'] = "backend/doctor/doctor/getOnCallDoctor";
-$route['get_my_patients']= "backend/doctor/doctorafterlogin/getMyPatients";
+$route['get_my_patients'] = "backend/doctor/doctorafterlogin/getMyPatients";
+$route['get_new_patients'] = "backend/doctor/doctorafterlogin/getNewPatients";
 
 /*
  * Patient

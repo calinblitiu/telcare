@@ -43,10 +43,40 @@ class DoctorAfterLogin extends CI_Controller
             $temp_img = $patients[$i]["img"];
             if($temp_img == "" || $temp_img == null)
             {
-                $patients[$i]["img"] = base_url()."assets/uploads/patients/no-img.png";
+                $patients[$i]["img"] = base_url()."assets/uploads/patient/no-img.png";
             }
             else{
-                $patients[$i]["img"] = base_url()."assets/uploads/patients/".$temp_img;
+                $patients[$i]["img"] = base_url()."assets/uploads/patient/".$temp_img;
+            }
+        }
+
+        $return_data["success"] = 1;
+        $return_data["data"] = $patients;
+        echo json_encode($return_data);
+        exit();
+    }
+
+    public function getNewPatients()
+    {
+        $data['did'] = $this->doctor['did'];
+        $data['is_treated'] = "no";
+        $patients = $this->patient_model->getPatients($data);
+        if (!$patients)
+        {
+            $return_data["success"] = 0;
+            $return_data["error"] = "There is no new patients";
+            echo json_encode($return_data);
+            exit();
+        }
+        for ($i = 0; $i<count($patients); $i++)
+        {
+            $temp_img = $patients[$i]["img"];
+            if($temp_img == "" || $temp_img == null)
+            {
+                $patients[$i]["img"] = base_url()."assets/uploads/patient/no-img.png";
+            }
+            else{
+                $patients[$i]["img"] = base_url()."assets/uploads/patient/".$temp_img;
             }
         }
 

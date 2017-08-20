@@ -5,7 +5,6 @@
  * Date: 8/15/2017
  * Time: 11:32 AM
  */?>
-
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 class Patient extends CI_Controller
 {
@@ -54,12 +53,6 @@ class Patient extends CI_Controller
 
         if($this->patient_model->addNewPatient($data))
         {
-//            $returndata = array(
-//                "success" => 1,
-//                "error" => "Signup succesed!",
-//                "data" => "signup successed"
-//
-//            );
             $returndata['success'] = 1;
             $returndata['error'] = "Login Success";
             $temp['token'] = md5(uniqid(rand(), true));
