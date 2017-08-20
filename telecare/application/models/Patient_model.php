@@ -78,4 +78,16 @@ class Patient_model extends CI_Model
         return $result;
     }
 
+    public function setPatientEmailData($email,$data)
+    {
+        $this->db->where("email",$email);
+        $this->db->set($data);
+        $this->db->update($this->table_name);
+        if($this->db->affected_rows() > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

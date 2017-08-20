@@ -86,6 +86,48 @@ class DoctorAfterLogin extends CI_Controller
         exit();
     }
 
+    public function acceptPatient($is_accept)
+    {
+        $patient_email = $this->input->post("email");
+        $patient = $this->patient_model->getPatientEmail($patient_email);
+
+        if (!$patient)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "There is not patient";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $data['is_accepted'] = $is_accept;
+
+        if(!$this->patient_model->setPatientEmailData($patient_email,$data))
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "Patient is already accepted";
+            if($is_accept == "no")
+            {
+                $return_data['error'] = "Patient is already declined";
+            }
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $return_data['success'] = 1;
+        $return_data['error'] = "Patient is accepted";
+        if($is_accept == "no")
+        {
+            $return_data['error'] = "Patient is declined";
+        }
+        echo json_encode($return_data);
+        exit();
+    }
+
+    public function getTodayShchedule()
+    {
+
+    }
+
     private function checkTokenSession(){
         if($this->session->userdata('token')){
             $return_data['success'] = 0;

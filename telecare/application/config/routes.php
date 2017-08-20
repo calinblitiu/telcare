@@ -88,6 +88,9 @@ $route['logout_doctor'] = "backend/doctor/doctor/logOut";
 $route['get_on_call_doctor'] = "backend/doctor/doctor/getOnCallDoctor";
 $route['get_my_patients'] = "backend/doctor/doctorafterlogin/getMyPatients";
 $route['get_new_patients'] = "backend/doctor/doctorafterlogin/getNewPatients";
+$route['accept_patient'] = "backend/doctor/doctorafterlogin/acceptPatient/yes";
+$route['decline_patient'] = "backend/doctor/doctorafterlogin/acceptPatient/no";
+$route['get_today_schedule'] = "backend/doctor/doctorafterlogin/getTodayShchedule";
 
 /*
  * Patient
