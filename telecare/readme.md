@@ -105,7 +105,66 @@
             "error": "There is not patients"
         }
         
+## Get New Patients
 
+### url : http://your-domain/get_new_patients
+
+### post : token
+
+### result :
+
+        - success
+        {
+            "success" : 1,
+            "data" : [
+                {
+                    "fname" : "pplkhj",
+                    "lname" : "fhjnvff",
+                    "gender" : "0",
+                    "dob" : "1990-01-22",
+                    "ssn" : "22222222",
+                    "addr" : "yyyhh",
+                    "email" : "ff@ff.ff",
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patient\/1502998104281705995ee583f922.png"
+                 },
+                 {
+                    "fname" : "z",
+                    "lname" : "we",
+                    "gender" : "0",
+                    "dob" : "0000-00-00",
+                    "ssn" : "45",
+                    "addr" : "dgg",
+                    "email" : "ayg@f.com",
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patient\/1503110077278655997a3bdb0692.jpg"
+                 }
+            ]
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "There is no new patients"
+        }
+        
+## Accept/Decline Patient
+
+### url : http://your-domain/accept_patient, http://your-domain/decline_patient
+
+### post : token , email
+
+### result :
+    
+         - success :
+         {
+            "success" : 1,
+            "error" : "Patient is accepted"  // "Patient is declined"
+         }
+         
+         - error : 
+         {
+            "success" : 0,
+            "error" : "Patient is already accepted"  // "Patient is already declined 
+         }
 
 # Patient Backend
 
