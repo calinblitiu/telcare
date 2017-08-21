@@ -50,12 +50,12 @@ class PatientAfterLogin extends CI_Controller
 
     public function uploadHistoryAttach(){
         $uploaddir = './assets/uploads/schedule/';
-        $path = $_FILES['attach']['name'];
+        $path = $_FILES['img']['name'];
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $uname = time().uniqid(rand());
         $uploadfile = $uploaddir .$uname.'.'.$ext;
         $file_name = $uname.".".$ext;
-        if (move_uploaded_file($_FILES['attach']['tmp_name'], $uploadfile)) {
+        if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
             //$this->sample_item_model->editItemField($item_no,$field,$file_name);
             $temp['img'] = $file_name;
             $data['data'] = $temp;

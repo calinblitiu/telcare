@@ -123,10 +123,10 @@ class DoctorAfterLogin extends CI_Controller
         exit();
     }
 
-    public function getTodayShchedule()
-    {
-
-    }
+//    public function getTodayShchedule()
+//    {
+//        $patients =
+//    }
 
     private function checkTokenSession(){
         if($this->session->userdata('token')){

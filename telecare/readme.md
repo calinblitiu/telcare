@@ -173,7 +173,7 @@
 
 ### url : http://your-domain/signup_patient
 
-### post : fname, lname, dod, ssn, addr, email, pwd, gender, img
+### post : fname, lname, dob, ssn, addr, email, pwd, gender, img
 
 ### result :
         
@@ -215,7 +215,7 @@
                     "lname":"star",
                     "gender":"1",
                     "email":"rubby.star@hotmail.com",
-                    "dod":"22/4/1992",
+                    "dob":"22/4/1992",
                     "ssn":"01111",
                     "addr":"adfadf",
                     "img":"http://your-domain/assets/uploads/patient/150264736415625990944442f93jpg"
@@ -260,7 +260,7 @@
 
 ### url : http://your-domain/upload_history_attach
 
-### post : token, attach
+### post : token, img
 
 ### result
 
