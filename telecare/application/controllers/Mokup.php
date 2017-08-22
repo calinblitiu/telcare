@@ -141,4 +141,26 @@ class Mokup extends CI_Controller {
         $this->load->view('mokup/check_out');
     }
 
+    public function pusherTest()
+    {
+        $this->load->view('mokup/pusher_test');
+    }
+
+    public function sendNotification()
+    {
+        $options = array(
+            'cluster' => 'us2',
+            'encrypted' => true
+        );
+        $pusher = new Pusher\Pusher(
+            '4d19d5b3edbd8e1743b4',
+            'e568f9f7c0b1af9ab21d',
+            '387748',
+            $options
+        );
+
+        $data['message'] = 'hello world';
+        $pusher->trigger('my-channel', 'my-event', $data);
+    }
+
 }

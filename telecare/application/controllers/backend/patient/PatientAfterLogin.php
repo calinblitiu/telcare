@@ -194,6 +194,9 @@ class Patientafterlogin extends CI_Controller
         $return_data['success'] = 1;
         $return_data['data'] = $opentok;
         echo json_encode($return_data);
+
+        $doctor = $this->doctor_model->getDoctorId($this->patient['did']);
+        $this->sendNotification($doctor);
         exit();
 
 
@@ -215,6 +218,7 @@ class Patientafterlogin extends CI_Controller
             ));
         }catch (Exception $e)
         {
+            //var_dump($e);
             $return_data['success'] = 0;
             $return_data['error'] = "Payment happens error";
             echo json_encode($return_data);
@@ -255,6 +259,21 @@ class Patientafterlogin extends CI_Controller
         }
     }
 
+    public function sendNotification($doctor)
+    {
+        $options = array(
+            'cluster' => 'us2',
+            'encrypted' => true
+        );
+        $pusher = new Pusher\Pusher(
+            '4d19d5b3edbd8e1743b4',
+            'e568f9f7c0b1af9ab21d',
+            '387748',
+            $options
+        );
 
-
+        $data['message'] = 'Hello! '.$doctor["fname"]." ".$doctor["lname"]." is requesting call!";
+        $data['doctor'] = $doctor;
+        $pusher->trigger('my-channel', 'my-event', $data);
+    }
 }

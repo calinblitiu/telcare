@@ -99,6 +99,8 @@ $route['patient_dashboard'] = "mokup/patientDashboard";
 $route['privacy_policy'] = "mokup/privacyPolicy";
 $route['terms_and_condition'] = "mokup/termsAndCondition";
 $route['accounts_page'] = "mokup/accountsPage";
+$route['pusher_test'] = "mokup/pusherTest";
+$route['send_nodification'] = "mokup/sendNotification";
 
 
 
