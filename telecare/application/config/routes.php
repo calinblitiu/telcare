@@ -72,6 +72,7 @@ $route['f-login-doctor'] = "home/loginDoctor";
 $route['f-signup-patient'] = "home/signUpPatient";
 $route['f-login-patient'] = "home/loginPatient";
 $route['f-set-schedule'] = "frontend/patient/patient/setSchedule";
+$route['f_check_out'] = "mokup/checkOut";
 
 /*
  * mokup
@@ -99,6 +100,7 @@ $route['patient_dashboard'] = "mokup/patientDashboard";
 $route['privacy_policy'] = "mokup/privacyPolicy";
 $route['terms_and_condition'] = "mokup/termsAndCondition";
 $route['accounts_page'] = "mokup/accountsPage";
+
 
 
 
@@ -133,6 +135,7 @@ $route['set_schedule'] = "backend/patient/patientafterlogin/setSchedule";
 $route['upload_history_attach'] = "backend/patient/patientafterlogin/uploadHistoryAttach";
 $route['get_id_doctor'] = "backend/patient/patientafterlogin/getIdDoctor";
 $route['req_call'] = "backend/patient/patientafterlogin/reqCall";
+$route['b_check_out'] = "backend/patient/patientafterlogin/checkOut";
 
 /*
  * common

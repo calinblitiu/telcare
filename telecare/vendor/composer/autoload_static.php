@@ -10,6 +10,7 @@ class ComposerStaticInit725ce6679731fe58899085a698833d52
         'S' => 
         array (
             'Symfony\\Component\\EventDispatcher\\' => 34,
+            'Stripe\\' => 7,
         ),
         'O' => 
         array (
@@ -29,6 +30,10 @@ class ComposerStaticInit725ce6679731fe58899085a698833d52
         'Symfony\\Component\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'OpenTok\\' => 
         array (

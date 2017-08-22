@@ -1,5 +1,6 @@
 {
 	"require":{
-		"opentok/opentok":"3.0.x"
+		"opentok/opentok":"3.0.x",
+		"stripe/stripe-php": "5.*"
 	}
 }

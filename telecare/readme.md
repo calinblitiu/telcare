@@ -232,6 +232,26 @@
             "success" : 0,
             "error" : "This patient doesn't request call now"
         }
+        
+## Check out
+
+### url : http://your-domain/b_check_out
+
+### post : token, stripeToken, amount
+
+### result :
+        
+        - success : 
+        {
+            "success" : 1,
+            "data" : "payement successed"
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "Payment happens error"
+        }
 
 # Patient Backend
 

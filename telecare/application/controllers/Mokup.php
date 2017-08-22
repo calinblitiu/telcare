@@ -136,4 +136,9 @@ class Mokup extends CI_Controller {
         $this->load->view('mokup/service/services');
     }
 
+    public function checkOut()
+    {
+        $this->load->view('mokup/check_out');
+    }
+
 }
