@@ -6,7 +6,7 @@
  * Time: 4:38 PM
  */?>
 <?php
-class DoctorAfterLogin extends CI_Controller
+class Doctorafterlogin extends CI_Controller
 {
     public $token = "";
     public $doctor;
