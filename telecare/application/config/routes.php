@@ -49,7 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home';
+//$route['default_controller'] = 'home';
+$route['default_controller'] = 'mokup';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -71,6 +72,34 @@ $route['f-login-doctor'] = "home/loginDoctor";
 $route['f-signup-patient'] = "home/signUpPatient";
 $route['f-login-patient'] = "home/loginPatient";
 $route['f-set-schedule'] = "frontend/patient/patient/setSchedule";
+
+/*
+ * mokup
+ */
+$route['patient_portal'] = "mokup/patientPortal";
+$route['provider_portal'] = "mokup/providerPortal";
+$route['provider_infectious'] = "mokup/providerInfectiouse";
+$route['provider_refering'] = "mokup/providerRefering";
+$route['provider_registeration'] = "mokup/providerRegisteration";
+$route['provider_refering_physician_singup'] = "mokup/referingPhysicianSignup";
+$route['hospital'] = "mokup/hospital";
+$route['login'] = "mokup/login";
+$route['signup'] = "mokup/signUp";
+$route['services'] = "mokup/services";
+$route['service_consultorsecondopinion'] = "mokup/consultOrSecondOpinion";
+$route['service_eopat'] = "mokup/eoPAT";
+$route['service_patient_education'] = "mokup/patientEducation";
+$route['service_start_to_finish'] = "mokup/startToFinish";
+$route['contact_us'] = "mokup/contactUS";
+$route['video_audio_messaging'] = "mokup/videoAudioMessaging";
+$route['footer_directory'] = "mokup/directory";
+$route['footer_about'] = "mokup/about";
+$route['dashboard'] = "mokup/dashboard";
+$route['patient_dashboard'] = "mokup/patientDashboard";
+$route['privacy_policy'] = "mokup/privacyPolicy";
+$route['terms_and_condition'] = "mokup/termsAndCondition";
+$route['accounts_page'] = "mokup/accountsPage";
+
 
 
 ////////////////////////////////////////////////////////////////////////////
