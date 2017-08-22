@@ -226,6 +226,12 @@
                 "opentok_token":"T1==cGFydG5lcl9pZD00NTkyNzc0MiZzaWc9MjdlYjU1OTA3NjcwMzg4N2E1MTA4ZGQzYzE1NjcyMjJjMTg2YWM3ODpzZXNzaW9uX2lkPTJfTVg0ME5Ua3lOemMwTW41LU1UVXdNek0xTURJeU5UZzFNbjVSUm1SRlQyVlJiSFIwUzNjNFEyZzFOWFpFTlhGQk5ITi1VSDQmY3JlYXRlX3RpbWU9MTUwMzM1MDIxOSZyb2xlPXB1Ymxpc2hlciZub25jZT0xNTAzMzUwMjE5LjA2MzIxMTMxMDkxMDM="
             }
         }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "This patient doesn't request call now"
+        }
 
 # Patient Backend
 
