@@ -123,10 +123,47 @@ class DoctorAfterLogin extends CI_Controller
         exit();
     }
 
-//    public function getTodayShchedule()
-//    {
-//        $patients =
-//    }
+    public function getTodayShchedule()
+    {
+        $data = array(
+            "did" => $this->doctor['did']
+        );
+        $patients = $this->patient_model->getPatientsData($data);
+
+        if(!$patients)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "There is not patient";
+            echo json_encode($return_data);
+            exit();
+        }
+
+       // var_dump($patients);
+
+        $return_data['success'] = 0;
+        $return_data['error'] = "There is not today Schedule";
+        $temp_schedule_patients = array();
+        $today = date('Y-m-d h:i:s');
+        foreach ($patients as $patient)
+        {
+            $temp_today_schedule = $this->schedule_model->getTodaySchedule($patient['pid']);
+
+            if ($temp_today_schedule)
+            {
+                $schedule_time = date($temp_today_schedule['date']);
+                if($schedule_time >= $today)
+                {
+                    $return_data['success'] = 1;
+                    $return_data['error'] = "There is some schedule";
+                    $temp_schedule_patients[] = $patient;
+                }
+            }
+        }
+        $return_data['data'] = $temp_schedule_patients;
+
+        echo json_encode($return_data);
+        exit();
+    }
 
     private function checkTokenSession(){
         if($this->session->userdata('token')){

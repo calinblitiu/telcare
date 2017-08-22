@@ -20,7 +20,7 @@ class Patient_model extends CI_Model
     {
         $this->db->where('email',$email);
         $query = $this->db->get($this->table_name);
-        $result = $query->result_array($query);
+        $result = $query->result_array();
         if(count($result) == 0)
         {
             return false;
@@ -46,7 +46,7 @@ class Patient_model extends CI_Model
     {
         $this->db->where('forget_token',$forget_token);
         $query = $this->db->get($this->table_name);
-        $result = $query->result_array($query);
+        $result = $query->result_array();
         if(count($result) == 0)
         {
             return false;
@@ -58,7 +58,7 @@ class Patient_model extends CI_Model
     {
         $this->db->where('token',$token);
         $query = $this->db->get($this->table_name);
-        $result = $query->result_array($query);
+        $result = $query->result_array();
         if(count($result)>0)
         {
             return $result[0];
@@ -70,7 +70,7 @@ class Patient_model extends CI_Model
         $this->db->where($data);
         $this->db->select("fname, lname, gender, dob, ssn, addr, email,img");
         $query = $this->db->get($this->table_name);
-        $result = $query->result_array($query);
+        $result = $query->result_array();
         if(count($result) == 0)
         {
             return false;
@@ -86,6 +86,19 @@ class Patient_model extends CI_Model
         if($this->db->affected_rows() > 0)
         {
             return true;
+        }
+        return false;
+    }
+
+    public function getPatientsData($data)
+    {
+        $this->db->where($data);
+        $this->db->select("pid, fname, lname, gender, dob, ssn, addr, email,img");
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+        if (count($result)>0)
+        {
+            return $result;
         }
         return false;
     }

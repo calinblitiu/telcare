@@ -166,6 +166,51 @@
             "error" : "Patient is already accepted"  // "Patient is already declined 
          }
 
+## Get Today Schedule
+
+### url : http://your-domain/get_today_schedule
+
+### post : token
+
+### result :
+        
+        - success :
+        {
+            "success":1,
+            "error":"There is some schedule",
+            "data":[
+                {
+                    "pid":"13",
+                    "img":"1502998104281705995ee583f922.png",
+                    "fname":"pplkhj",
+                    "lname":"fhjnvff",
+                    "gender":"0",
+                    "dob":"1990-01-22",
+                    "ssn":"22222222",
+                    "addr":"yyyhh",
+                    "email":"ff@ff.ff"
+                },
+                {
+                    "pid":"24",
+                    "img":"15031969081915998f6ec26276.jpg",
+                    "fname":"g",
+                    "lname":"gg",
+                    "gender":"0",
+                    "dob":"0000-00-00",
+                    "ssn":"66",
+                    "addr":"sf",
+                    "email":"l@h.com"
+                }
+            ]
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "There is not today Schedule"
+        }
+        
+
 # Patient Backend
 
 
