@@ -118,7 +118,6 @@ class PatientAfterLogin extends CI_Controller
 
         $return_data['success'] = 0;
         $return_data['error'] = "Add new schedule fail";
-        $return_data['data'] = "Add new schedule fail";
         echo json_encode($return_data);
         exit();
 

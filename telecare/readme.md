@@ -388,7 +388,26 @@
             "data" : "Add new schedule error"
         }
         
-## 
+## Set Schedule IOS
+
+### url : http://your-domain/set_schedule_ios
+
+### post : token, date, note, attach_count, img_0, img_2,....img_(attach_count-1)
+
+### result :
+
+        - success
+        {
+            "success" : 1,
+            "error" : "Add new schedule success",
+            "data" : "Add new schedule success"
+        }
+        
+        - error
+        {
+            "success" : 0,
+            "error" : "There is not any attachments, please upload some files"
+        }
 
 ## Get Id Doctor
 
@@ -396,7 +415,7 @@
 
 ### post : token
 
-### resut :
+### result :
 
         - success 
         {
