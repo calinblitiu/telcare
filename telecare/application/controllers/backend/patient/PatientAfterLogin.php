@@ -121,7 +121,6 @@ class PatientAfterLogin extends CI_Controller
         echo json_encode($return_data);
         exit();
 
-
     }
 
     public function getIdDoctor()
