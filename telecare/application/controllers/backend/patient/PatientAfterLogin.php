@@ -7,7 +7,7 @@
  * Time: 4:31 PM
  */
 use \Stripe\Stripe;
-class PatientAfterLogin extends CI_Controller
+class Patientafterlogin extends CI_Controller
 {
     public $token = "";
     public $patient;
