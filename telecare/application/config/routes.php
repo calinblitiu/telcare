@@ -132,6 +132,7 @@ $route['signup_patient'] = 'backend/patient/patient/signUp';
 $route['login_patient'] = "backend/patient/patient/logIn";
 $route['logout_patient'] = "backend/patient/patient/logOut";
 $route['set_schedule'] = "backend/patient/patientafterlogin/setSchedule";
+$route['set_schedule_ios'] = "backend/patient/patientafterlogin/setSchedule"
 $route['upload_history_attach'] = "backend/patient/patientafterlogin/uploadHistoryAttach";
 $route['get_id_doctor'] = "backend/patient/patientafterlogin/getIdDoctor";
 $route['req_call'] = "backend/patient/patientafterlogin/reqCall";

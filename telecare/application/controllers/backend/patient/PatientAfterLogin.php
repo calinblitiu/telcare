@@ -72,6 +72,59 @@ class PatientAfterLogin extends CI_Controller
 
     }
 
+    public function setScheduleIOS(){
+        $data['pid'] = $this->patient['pid'];
+        $data['date'] = $this->input->post('date');
+        $data['note'] = $this->input->post('note');
+
+        $upload_count = $this->input->post('attach_count');
+        if($upload_count <= 0 || !isset($upload_count))
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "There is not any attachments, please upload some files";
+            echo json_encode($return_data);
+            exit();
+        }
+        $data['history'] = "";
+        for ($i = 0;$i<$upload_count;$i++)
+        {
+            $uploaddir = './assets/uploads/schedule/';
+            $path = $_FILES['img_'.$i]['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $uname = time().uniqid(rand());
+            $uploadfile = $uploaddir .$uname.'.'.$ext;
+            $file_name = $uname.".".$ext;
+            if (move_uploaded_file($_FILES['img_'.$i]['tmp_name'], $uploadfile)) {
+                $data['history'] = $data['history'].$file_name.",";
+            }
+        }
+
+        if ($data['history'] == "")
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "file upload happens error";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        if($this->schedule_model->addNewSchedule($data))
+        {
+            $return_data['success'] = 1;
+            $return_data['error'] = "Add new schedule success";
+            $return_data['data'] = "Add new schedule success";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $return_data['success'] = 0;
+        $return_data['error'] = "Add new schedule fail";
+        $return_data['data'] = "Add new schedule fail";
+        echo json_encode($return_data);
+        exit();
+
+
+    }
+
     public function getIdDoctor()
     {
        if($this->patient['did'] == "" || $this->patient['did'] == null)
@@ -173,8 +226,6 @@ class PatientAfterLogin extends CI_Controller
         $return_data['data'] = "payement successed";
         echo json_encode($return_data);
         exit();
-
-
 
     }
 

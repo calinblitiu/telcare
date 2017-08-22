@@ -99,7 +99,7 @@ class Home extends CI_Controller {
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_port' => 587,
             'smtp_user' => 'gaedongshoe@gmail.com',
-            'smtp_pass' => 'Soksunae',
+            'smtp_pass' => '',
             'mailtype'  => 'html',
             'charset'   => 'iso-8859-1'
         );
