@@ -165,6 +165,45 @@ class DoctorAfterLogin extends CI_Controller
         exit();
     }
 
+    public function reqCall()
+    {
+        $patient_email = $this->input->post("email");
+        $patient = $this->patient_model->getPatientEmail($patient_email);
+        if(!$patient)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "There is not patient";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $today_schedule = $this->schedule_model->getTodaySchedule($patient['pid']);
+
+        if(!$today_schedule)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "There is not patient";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        if($today_schedule['opentok_session_id'] !="" && $today_schedule['opentok_token'] != "")
+        {
+            $return_data['success'] = 1;
+            $temp['opentok_session_id'] = $today_schedule['opentok_session_id'];
+            $temp['opentok_token'] = $today_schedule['opentok_token'];
+            $return_data['data'] = $temp;
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $return_data['success'] = 0;
+        $return_data['error'] = "This patient doesn't request call now";
+        echo json_encode($return_data);
+        exit();
+
+    }
+
     private function checkTokenSession(){
         if($this->session->userdata('token')){
             $return_data['success'] = 0;
