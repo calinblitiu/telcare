@@ -49,8 +49,20 @@ class Schedule_model extends CI_Model
             return false;
         }
         return $result[0];
+    }
 
-
+    public function getScheduleData($data)
+    {
+        $this->db->where($data);
+        $this->db->select("note, history");
+        $this->db->order_by("updated", "desc");
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+        if(count($result) == 0)
+        {
+            return false;
+        }
+        return $result[0];
     }
 
     public function updateSchedule($id,$data)

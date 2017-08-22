@@ -48,6 +48,36 @@ class Doctorafterlogin extends CI_Controller
             else{
                 $patients[$i]["img"] = base_url()."assets/uploads/patient/".$temp_img;
             }
+
+            $where_array = array(
+                'pid'   =>  $patients[$i]['pid']
+            );
+
+            $schedule = $this->schedule_model->getScheduleData($where_array);
+            if(!$schedule)
+            {
+                $patients[$i]['note'] = "";
+                $patients[$i]['history'] = "";
+            }
+            else{
+                $patients[$i]['note'] = $schedule['note'];
+                $histories = explode(',',$schedule['history']);
+                if (count($histories) <= 0)
+                {
+                    $patients[$i]['history'] = "";
+                }
+                else
+                {
+                    $temp_histories = array();
+                    foreach ($histories as $history)
+                    {
+                        if($history != "" && $history){
+                            $temp_histories[] = base_url()."assets/uploads/schedule/".$history;
+                        }
+                    }
+                    $patients[$i]['history'] = $temp_histories;
+                }
+            }
         }
 
         $return_data["success"] = 1;
@@ -77,6 +107,36 @@ class Doctorafterlogin extends CI_Controller
             }
             else{
                 $patients[$i]["img"] = base_url()."assets/uploads/patient/".$temp_img;
+            }
+
+            $where_array = array(
+                'pid'   =>  $patients[$i]['pid']
+            );
+
+            $schedule = $this->schedule_model->getScheduleData($where_array);
+            if(!$schedule)
+            {
+                $patients[$i]['note'] = "";
+                $patients[$i]['history'] = "";
+            }
+            else{
+                $patients[$i]['note'] = $schedule['note'];
+                $histories = explode(',',$schedule['history']);
+                if (count($histories) <= 0)
+                {
+                    $patients[$i]['history'] = "";
+                }
+                else
+                {
+                    $temp_histories = array();
+                    foreach ($histories as $history)
+                    {
+                        if($history != "" && $history){
+                            $temp_histories[] = base_url()."assets/uploads/schedule/".$history;
+                        }
+                    }
+                    $patients[$i]['history'] = $temp_histories;
+                }
             }
         }
 

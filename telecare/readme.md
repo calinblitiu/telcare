@@ -84,7 +84,12 @@
                     "ssn" : "234",
                     "addr" : "aa",
                     "email" : "james.smith.rb@outlook.com",
-                    "img" : "http:\/\/localhost\/assets\/uploads\/patients\/15027755099989599288d549e85.jpg"
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patients\/15027755099989599288d549e85.jpg",
+                    "note" : "......",
+                    "history" : [
+                        "http://your-domain/assets/uploads/schedule/aa.jpg",
+                        "http://your-domain/assets/uploads/schedule/aa.jpg"
+                    ]
                 },
                 {
                     "fname" : "pplkhj",
@@ -94,7 +99,12 @@
                     "ssn" : "22222222",
                     "addr" : "yyyhh",
                     "email" : "ff@ff.ff",
-                    "img" : "http:\/\/localhost\/assets\/uploads\/patients\/1502998104281705995ee583f922.png"
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patients\/1502998104281705995ee583f922.png",
+                    "note" : "......",
+                    "history" : [
+                        "http://your-domain/assets/uploads/schedule/aa.jpg",
+                        "http://your-domain/assets/uploads/schedule/aa.jpg"
+                    ]
                 }
             ]
         }
@@ -125,7 +135,12 @@
                     "ssn" : "22222222",
                     "addr" : "yyyhh",
                     "email" : "ff@ff.ff",
-                    "img" : "http:\/\/localhost\/assets\/uploads\/patient\/1502998104281705995ee583f922.png"
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patient\/1502998104281705995ee583f922.png",
+                    "note" : "......",
+                    "history" : [
+                        "http://your-domain/assets/uploads/schedule/aa.jpg",
+                        "http://your-domain/assets/uploads/schedule/aa.jpg"
+                    ]
                  },
                  {
                     "fname" : "z",
@@ -135,7 +150,12 @@
                     "ssn" : "45",
                     "addr" : "dgg",
                     "email" : "ayg@f.com",
-                    "img" : "http:\/\/localhost\/assets\/uploads\/patient\/1503110077278655997a3bdb0692.jpg"
+                    "img" : "http:\/\/localhost\/assets\/uploads\/patient\/1503110077278655997a3bdb0692.jpg",
+                    "note" : "......",
+                    "history" : [
+                        "http://your-domain/assets/uploads/schedule/aa.jpg",
+                        "http://your-domain/assets/uploads/schedule/aa.jpg"
+                    ]
                  }
             ]
         }
