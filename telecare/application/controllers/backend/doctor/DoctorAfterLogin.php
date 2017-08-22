@@ -144,6 +144,10 @@ class DoctorAfterLogin extends CI_Controller
         $return_data['error'] = "There is not today Schedule";
         $temp_schedule_patients = array();
         $today = date('Y-m-d h:i:s');
+        $today_string = date('Y-m-d');//$today->format('Y-m-d');
+        $today_max = date($today_string." 23:59:59");
+       // var_dump($today_max);
+//        var_dump($today);
         foreach ($patients as $patient)
         {
             $temp_today_schedule = $this->schedule_model->getTodaySchedule($patient['pid']);
@@ -151,7 +155,7 @@ class DoctorAfterLogin extends CI_Controller
             if ($temp_today_schedule)
             {
                 $schedule_time = date($temp_today_schedule['date']);
-                if($schedule_time >= $today)
+                if($schedule_time >= $today and $schedule_time<=$today_max)
                 {
                     $return_data['success'] = 1;
                     $return_data['error'] = "There is some schedule";
