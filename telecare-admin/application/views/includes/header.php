@@ -96,7 +96,7 @@
               </a>
             </li>
             <li class="treeview">
-              <a href="#" >
+              <a href="<?=base_url()?>doctorlist" >
                 <i class="fa fa-plane"></i>
                 <span>Doctors</span>
               </a>

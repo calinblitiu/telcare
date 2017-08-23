@@ -60,3 +60,6 @@ define('MAIL_PATH',                             '/usr/sbin/sendmail');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
+
+
+define("FRONTEND_SITE_URL",                     "http://tele-id.floridaidcare.com/");
