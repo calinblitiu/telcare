@@ -81,3 +81,5 @@ $route['patientlist'] = "patient/index";
 $route['newpatients'] = "patient/newPatients";
 $route['newpatient/(:num)'] = "patient/newPatient/$1";
 $route['setdidtopid'] = "patient/setDidToPid";
+$route['schedeulepatientslist'] = "patient/schedulePatientList";
+$route['schedulepatient/(:num)'] = "patient/schedulePatient/$1";

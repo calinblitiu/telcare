@@ -117,6 +117,14 @@
                 <span>New Patients</span>
               </a>
             </li>
+
+            <li class="treeview">
+              <a href="<?=base_url()?>schedulepatientlist" >
+                <i class="fa fa-ticket"></i>
+                <span>Schedule Patients</span>
+              </a>
+            </li>
+
             <?php
             if($role == ROLE_ADMIN)
             {

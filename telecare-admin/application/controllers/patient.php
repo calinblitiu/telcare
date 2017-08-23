@@ -90,4 +90,39 @@ class Patient extends BaseController
         echo json_encode($return_data);
         exit();
     }
+
+    public function schedulePatientList()
+    {
+         $this->global['pageTitle'] = 'Telecare Admin: Schedule Patients';
+        //$this->global['newpatients'] = array();
+         $patients = $this->patient_model->getAllPatients();
+         $temp_patients = array();
+         foreach ($patients as $patient) {
+             $schedule = $this->schedule_model->getSchedule($patient['pid']);
+             if($schedule)
+             {
+               
+                $temp_patients[] = $patient;
+             }
+         }
+
+         $this->global['schedulepatients'] = $temp_patients;
+
+        $this->loadViews("patient/schedulepatientlist", $this->global, NULL , NULL);
+    }
+
+    public function schedulePatient($pid)
+    {
+        $this->global['pageTitle'] = 'Telecare Admin: Schedule Patient';
+        $this->global['patient'] = $this->patient_model->getPatientPid($pid);
+
+        if(!$this->global['patient'])
+        {
+            redirect("404_override");
+        }
+        $this->global['schedule'] = $this->schedule_model->getSchedule($pid);
+        $this->global['doctors'] = $this->doctor_model->getAllDoctors();
+
+        $this->loadViews("patient/schedulepatient", $this->global, NULL , NULL);
+    }
 }
