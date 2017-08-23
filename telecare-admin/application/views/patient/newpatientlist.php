@@ -32,12 +32,12 @@
                                 <th>Dob</th>
                                 <th>Ssn</th>
                                 <th>Address</th>
-                                <th>Did</th>
+                                
                             </tr>
 
-                            <?php if(!$newpatients):?>
+                            <?php if(count($newpatients)<=0):?>
                             <h1>There is not any patients</h1>
-                            <?php elseif($newpatients):?>
+                            <?php elseif(count($newpatients)>0):?>
                                 <?php $i = 0;?>
                                 <?php foreach ($newpatients as $patient):?>
                                     <?php $i++;?>

@@ -18,6 +18,7 @@ class Patient extends BaseController
         $this->load->model('user_model');
         $this->load->model('doctor_model');
         $this->load->model('patient_model');
+        $this->load->model('schedule_model');
         $this->isLoggedIn();
     }
 
@@ -32,7 +33,18 @@ class Patient extends BaseController
     public function newPatients()
     {
         $this->global['pageTitle'] = 'Telecare Admin: New Ptients';
-        $this->global['newpatients'] = $this->patient_model->getNewPatients();
+        //$this->global['newpatients'] = array();
+         $patients = $this->patient_model->getNewPatients();
+         $temp_patients = array();
+         foreach ($patients as $patient) {
+             $schedule = $this->schedule_model->getSchedule($patient['pid']);
+             if($schedule)
+             {
+                $temp_patients[] = $patient;
+             }
+         }
+
+         $this->global['newpatients'] = $temp_patients;
 
         $this->loadViews("patient/newpatientlist", $this->global, NULL , NULL);
     }
