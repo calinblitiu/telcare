@@ -68,7 +68,7 @@ $route['f-login-doctor'] = "home/loginDoctor";
 /*
  * Patient
  */
-$route['f-signup-patient'] = "home/signUpPatient";
+    $route['f-signup-patient'] = "home/signUpPatient";
 $route['f-login-patient'] = "home/loginPatient";
 $route['f-set-schedule'] = "frontend/patient/patient/setSchedule";
 $route['f_check_out'] = "mokup/checkOut";
@@ -122,7 +122,7 @@ $route['get_my_patients'] = "backend/doctor/doctorafterlogin/getMyPatients";
 $route['get_new_patients'] = "backend/doctor/doctorafterlogin/getNewPatients";
 $route['accept_patient'] = "backend/doctor/doctorafterlogin/acceptPatient/yes";
 $route['decline_patient'] = "backend/doctor/doctorafterlogin/acceptPatient/no";
-$route['get_today_schedule'] = "backend/doctor/doctorafterlogin/getTodayShchedule";
+$route['get_today_schedule'] = "backend/doctor/doctorafterlogin/getTodaySchedule";
 $route['req_call_doctor'] = "backend/doctor/doctorafterlogin/reqCall";
 
 /*

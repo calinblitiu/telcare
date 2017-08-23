@@ -43,7 +43,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>CI</b>AS</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>CodeInsect</b>AS</span>
+          <span class="logo-lg"><b>Telecare</b>ADMIN</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -98,13 +98,13 @@
             <li class="treeview">
               <a href="#" >
                 <i class="fa fa-plane"></i>
-                <span>ROOMS</span>
+                <span>Doctors</span>
               </a>
             </li>
             <li class="treeview">
               <a href="#" >
                 <i class="fa fa-ticket"></i>
-                <span>THEME</span>
+                <span>Patients</span>
               </a>
             </li>
             <?php

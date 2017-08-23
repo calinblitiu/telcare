@@ -183,7 +183,7 @@ class Doctorafterlogin extends CI_Controller
         exit();
     }
 
-    public function getTodayShchedule()
+    public function getTodaySchedule()
     {
         $data = array(
             "did" => $this->doctor['did']

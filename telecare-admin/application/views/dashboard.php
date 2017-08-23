@@ -13,8 +13,8 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>ROOMS</h3>
-                  <p>New Tasks</p>
+                  <h3>Doctors</h3>
+                  <p>number of doctor</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -26,8 +26,8 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>THEME<sup style="font-size: 20px"></sup></h3>
-                  <p>Completed Tasks</p>
+                  <h3>Patients<sup style="font-size: 20px"></sup></h3>
+                  <p>number of patients</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
