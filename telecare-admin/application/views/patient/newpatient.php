@@ -52,7 +52,7 @@
         </div>
     </section>
 </div>
-<script type="text/javascript" src="<?=base_url()?>assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
 <script type="text/javascript">
     $("#schedule-input").datetimepicker({
         format: "yyyy-mm-dd hh:ii:ss",
@@ -63,8 +63,15 @@
     $("#save_doctor_btn").click(function(){
         var post_data = {
             did : $("#doctor_select").val(),
-            pid : $("#save_doctor_btn").data("patient-id")
+            pid : $("#save_doctor_btn").data("patient-id"),
+            datetime :  $("#schedule-input").val()
         };
+
+        if(post_data.datetime == "" || post_data.datetime == undefined)
+        {
+            alert("Input Schedule Date and Time correctly");
+            return;
+        }
 
         $.ajax({
             url : baseURL+"setdidtopid",

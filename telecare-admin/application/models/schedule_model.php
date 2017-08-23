@@ -34,4 +34,30 @@ class Schedule_model extends CI_Model
         }
         return $result;
     }
+
+    public function getLastSchedule($pid)
+    {
+        $this->db->where("pid",$pid);
+        $this->db->order_by("updated","desc");
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+        if(count($result)<=0)
+        {
+            return false;
+        }
+        return $result[0];
+    }
+
+    public function setDateTime($id,$datetime)
+    {
+        $this->db->where('id',$id);
+        $this->db->set('date',$datetime);
+        $this->db->update($this->table_name);
+        if($this->db->affected_rows() > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

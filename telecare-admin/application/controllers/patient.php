@@ -68,8 +68,11 @@ class Patient extends BaseController
     {
         $did = $this->input->post('did');
         $pid = $this->input->post('pid');
+        $date = $this->input->post('datetime');
 
-        if($this->patient_model->setDidToPid($pid,$did))
+        $lastschedule = $this->schedule_model->getLastSchedule($pid);
+
+        if($this->patient_model->setDidToPid($pid,$did) && $lastschedule && $this->schedule_model->setDateTime($lastschedule['id'],$date))
         {
             $return_data['success'] = 1;
             $return_data['msg'] = "success";
