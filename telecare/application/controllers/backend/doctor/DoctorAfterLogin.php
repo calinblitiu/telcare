@@ -5,7 +5,7 @@
  * Date: 8/16/2017
  * Time: 4:38 PM
  */
-class Doctorafterlogin extends CI_Controller
+class DoctorAfterLogin extends CI_Controller
 {
     public $token = "";
     public $doctor;
