@@ -17,14 +17,15 @@ class Patient extends BaseController
         parent::__construct();
         $this->load->model('user_model');
         $this->load->model('doctor_model');
+        $this->load->model('patient_model');
         $this->isLoggedIn();
     }
 
     public function index()
     {
-        $this->global['pageTitle'] = 'Telecare Admin: Doctor';
-        $this->global['doctors'] = $this->doctor_model->getAllDoctors();
+        $this->global['pageTitle'] = 'Telecare Admin: Patients';
+        $this->global['patients'] = $this->patient_model->getAllPatients();
 
-        $this->loadViews("doctor/doctorlist", $this->global, NULL , NULL);
+        $this->loadViews("patient/patientlist", $this->global, NULL , NULL);
     }
 }
