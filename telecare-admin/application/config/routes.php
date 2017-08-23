@@ -78,3 +78,4 @@ $route['home'] = "frontend";
 
 $route['doctorlist'] = "doctor/index";
 $route['patientlist'] = "patient/index";
+$route['newpatients'] = "patient/newPatients";

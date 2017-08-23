@@ -22,4 +22,18 @@ class Patient_model extends CI_Model
         }
         return $result;
     }
+
+    public function getNewPatients()
+    {
+        $this->db->where('did',null);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+        if (count($result) <= 0)
+        {
+            return false;
+        }
+
+        return $result;
+
+    }
 }

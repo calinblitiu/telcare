@@ -28,4 +28,12 @@ class Patient extends BaseController
 
         $this->loadViews("patient/patientlist", $this->global, NULL , NULL);
     }
+
+    public function newPatients()
+    {
+        $this->global['pageTitle'] = 'Telecare Admin: New Ptients';
+        $this->global['newpatients'] = $this->patient_model->getNewPatients();
+
+        $this->loadViews("patient/newpatientlist", $this->global, NULL , NULL);
+    }
 }

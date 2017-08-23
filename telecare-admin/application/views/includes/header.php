@@ -107,24 +107,13 @@
                 <span>Patients</span>
               </a>
             </li>
-            <?php
-            if($role == ROLE_ADMIN || $role == ROLE_MANAGER)
-            {
-            ?>
-            <li class="treeview">
-              <a href="#" >
-                <i class="fa fa-thumb-tack"></i>
-                <span>GROUPS</span>
-              </a>
-            </li>
-            <li class="treeview">
-              <a href="#" >
-                <i class="fa fa-upload"></i>
-                <span>SETTINGS</span>
+           <li class="treeview">
+              <a href="<?=base_url()?>newpatients" >
+                <i class="fa fa-ticket"></i>
+                <span>New Patients</span>
               </a>
             </li>
             <?php
-            }
             if($role == ROLE_ADMIN)
             {
             ?>
