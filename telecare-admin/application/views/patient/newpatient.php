@@ -56,7 +56,7 @@
     $("#save_doctor_btn").click(function(){
         var post_data = {
             did : $("#doctor_select").val(),
-            pid : $("#save_doctor_btn").data("pid-patient-id")
+            pid : $("#save_doctor_btn").data("patient-id")
         };
 
         $.ajax({
