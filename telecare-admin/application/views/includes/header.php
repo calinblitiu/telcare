@@ -119,7 +119,7 @@
             </li>
 
             <li class="treeview">
-              <a href="<?=base_url()?>schedulepatientlist" >
+              <a href="<?=base_url()?>schedeulepatientslist" >
                 <i class="fa fa-ticket"></i>
                 <span>Schedule Patients</span>
               </a>

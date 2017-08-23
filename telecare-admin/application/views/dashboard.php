@@ -58,7 +58,7 @@
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="<?=base_url()?>newpatientlists" class="small-box-footer">New Patient Lists <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?=base_url()?>newpatients" class="small-box-footer">New Patient Lists <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
@@ -71,7 +71,7 @@
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="<?=base_url()?>schedulepatientlist" class="small-box-footer">Schedule Patients Lists <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?=base_url()?>schedeulepatientslist" class="small-box-footer">Schedule Patients Lists <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
