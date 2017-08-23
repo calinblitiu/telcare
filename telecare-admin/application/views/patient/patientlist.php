@@ -58,13 +58,12 @@
                                         <th><?=$patient['email']?></th>
                                         <th><?=$patient['fname']?></th>
                                         <th><?=$patient['lname']?></th>
-                                        <th><?=$patient['spec']?></th>
-                                        <th><?=$patient['state']?></th>
-                                        <th><?=$patient['lang']?></th>
-                                        <th><?=$patient['dea']?></th>
-                                        <th><?=$patient['npi']?></th>
-                                        <th><?=$patient['is_on_call_patient']?></th>
-                                        <th><?=$patient['type']?></th>
+                                        <th><?=$patient['gender']?></th>
+                                        <th><?=$patient['dob']?></th>
+                                        <th><?=$patient['ssn']?></th>
+                                        <th><?=$patient['addr']?></th>
+                                        <th><?=$patient['did']?></th>
+                                        
                                     </tr>
                                 <?php endforeach;?>
                             <?php endif;?>
