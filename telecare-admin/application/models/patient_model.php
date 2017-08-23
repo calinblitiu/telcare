@@ -47,4 +47,16 @@ class Patient_model extends CI_Model
         }
         return $result[0];
     }
+
+    public function setDidToPid($pid, $did)
+    {
+        $this->db->where('pid',$pid);
+        $this->db->set('did',$did);
+        $this->db->update($this->table_name);
+        if($this->db->affected_rows() > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }

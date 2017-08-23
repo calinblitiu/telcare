@@ -63,4 +63,20 @@ class Patient extends BaseController
 
         $this->loadViews("patient/newpatient", $this->global, NULL , NULL);
     }
+
+    public function setDidToPid()
+    {
+        $did = $this->input->post('did');
+        $pid = $this->input->post('pid');
+
+        if($this->patient_model->setDidToPid($pid,$did))
+        {
+            $return_data['success'] = 1;
+            echo json_encode($return_data);
+            exit();
+        }
+        $return_data['success'] = 0;
+        echo json_encode($return_data);
+        exit();
+    }
 }

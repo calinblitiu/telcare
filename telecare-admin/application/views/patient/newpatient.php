@@ -39,16 +39,47 @@
                    <div class="well">Address : <?=$patient['addr']?></div>
                    <div class="well">EMAIL : <?=$patient['email']?></div>
                    <div class="well">Doctor : 
-                        <select id="" name="">
+                        <select id="doctor_select" name="">
                             <?php foreach($doctors as $doctor):?>
                                 <option value="<?=$doctor['did']?>"><?php echo $doctor['fname']." ".$doctor['lname'];?></option>
                             <?php endforeach;?>
                         </select>
+                        <button id="save_doctor_btn" data-patient-id="">Save</button>
                    </div>
                 </div><!-- /.box -->
             </div>
         </div>
     </section>
 </div>
+
+<script type="text/javascript">
+    $("#save_doctor_btn").click(function(){
+        var post_data = {
+            did : $("#doctor_select").val(),
+            pid : $("#save_doctor_btn").data("pid-patient-id")
+        };
+
+        $.ajax({
+            url : baseURL+"setdidtopid",
+            data : post_data,
+            dataType : "json",
+            type : "POST",
+            success : function(data)
+            {
+                if(data.success == 1)
+                {
+                    alert("Doctor is set to this patient successfully");
+                }
+                else{
+                    alert("Database transaction error");
+                }
+                location.reload();
+            },
+            fail : function(error){
+                location.reload();
+            }
+        });
+    });
+</script>
 
 
