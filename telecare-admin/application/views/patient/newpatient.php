@@ -19,6 +19,19 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+                   <div class="well">
+                       <?php
+                            $patient_thumb = $patient['img'];
+                            if($patient_thumb == "" || $patient_thumb == null)
+                            {
+                                $patient_thumb = FRONTEND_SITE_URL."assets/uploads/patient/no-img.png";
+                            }
+                            else{
+                                $patient_thumb = FRONTEND_SITE_URL."assets/uploads/patient/".$patient_thumb;
+                            }
+                       ?>
+                       <img src="<?=$patient_thumb?>" style="width: 100px;">
+                   </div>
                    <div class="well">NAME : <?=$patient['fname']?> <?=$patient['lname']?></div>
                    <div class="well">GENDER : <?php if($patient == GENDER_MALE){echo "Male";}else{echo "Femail";}?></div>
                    <div class="well">DOB : <?=$patient['dob']?></div>
