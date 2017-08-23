@@ -59,6 +59,8 @@ class Patient extends BaseController
             redirect("404_override");
         }
 
+        $this->global['doctors'] = $this->doctor_model->getAllDoctors();
+
         $this->loadViews("patient/newpatient", $this->global, NULL , NULL);
     }
 }

@@ -12,7 +12,7 @@ class Doctor_model extends CI_Model
 
     public function getAllDoctors()
     {
-        $this->db->select("img, type, fname, lname, spec, email, state, lang, dea, npi, is_on_call_doctor");
+        //$this->db->select("img, type, fname, lname, spec, email, state, lang, dea, npi, is_on_call_doctor");
         $query = $this->db->get($this->table_name);
         $result = $query->result_array();
 
@@ -22,4 +22,6 @@ class Doctor_model extends CI_Model
         }
         return $result;
     }
+
+
 }
