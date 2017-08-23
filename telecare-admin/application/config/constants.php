@@ -63,3 +63,5 @@ define('MAIL_PATH',                             '/usr/sbin/sendmail');
 
 
 define("FRONTEND_SITE_URL",                     "http://tele-id.floridaidcare.com/");
+defined('GENDER_MALE')     			 	            OR define('GENDER_MALE', 0);
+defined('GENDER_FEMALE')     			 	        OR define('GENDER_FEMALE', 1);

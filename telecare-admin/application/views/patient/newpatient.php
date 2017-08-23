@@ -19,9 +19,16 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <?php
-                        var_dump($patient);
-                    ?>
+                   <div class="well">NAME : <?=$patient['fname']?> <?=$patient['lname']?></div>
+                   <div class="well">GENDER : <?php if($patient == GENDER_MALE){echo "Male";}else{echo "Femail";}?></div>
+                   <div class="well">DOB : <?=$patient['dob']?></div>
+                   <div class="well">SSN : <?=$patient['ssn']?></div>
+                   <div class="well">Address : <?=$patient['addr']?></div>
+                   <div class="well">EMAIL : <?=$patient['email']?></div>
+                   <div class="well">Doctor : 
+                        <select id="" name="">
+                        </select>
+                   </div>
                 </div><!-- /.box -->
             </div>
         </div>
