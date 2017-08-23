@@ -32,7 +32,7 @@ class Schedule_model extends CI_Model
         {
             return false;
         }
-        return $result;
+        return $result[0];
     }
 
     public function getLastSchedule($pid)
