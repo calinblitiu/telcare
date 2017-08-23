@@ -71,6 +71,8 @@ class Patient extends BaseController
         $date = $this->input->post('datetime');
 
         $lastschedule = $this->schedule_model->getLastSchedule($pid);
+        echo json_encode($lastschedule);
+        exit();
 
         if($this->patient_model->setDidToPid($pid,$did) && $lastschedule && $this->schedule_model->setDateTime($lastschedule['id'],$date))
         {
