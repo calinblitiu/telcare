@@ -44,7 +44,7 @@
                                 <option value="<?=$doctor['did']?>"><?php echo $doctor['fname']." ".$doctor['lname'];?></option>
                             <?php endforeach;?>
                         </select>
-                        <button id="save_doctor_btn" data-patient-id="">Save</button>
+                        <button id="save_doctor_btn" data-patient-id="<?=$patient['pid']?>">Save</button>
                    </div>
                 </div><!-- /.box -->
             </div>
