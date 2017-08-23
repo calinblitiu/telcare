@@ -38,7 +38,7 @@
                    <div class="well">SSN : <?=$patient['ssn']?></div>
                    <div class="well">Address : <?=$patient['addr']?></div>
                    <div class="well">EMAIL : <?=$patient['email']?></div>
-                   <div class="well">Doctor : 
+                   <div class="well">Doctor & Schedule: 
                         <select id="doctor_select" name="">
                             <?php foreach($doctors as $doctor):?>
                                 <option value="<?=$doctor['did']?>" <?php if($doctor['did'] == $patient['did']){echo "selected";}?>><?php echo $doctor['fname']." ".$doctor['lname'];?></option>

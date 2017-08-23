@@ -32,7 +32,7 @@
                                 <th>Dob</th>
                                 <th>Ssn</th>
                                 <th>Address</th>
-                                <th>Doctor</th>
+                                <th></th>
                             </tr>
 
                             <?php if(count($newpatients)<=0):?>
