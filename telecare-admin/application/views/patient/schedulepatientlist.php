@@ -37,7 +37,7 @@
 
                             <?php if(count($schedulepatients)<=0):?>
                             <h1>There is not any patients</h1>
-                            <?php elseif(count($newpatients)>0):?>
+                            <?php elseif(count($schedulepatients)>0):?>
                                 <?php $i = 0;?>
                                 <?php foreach ($newpatients as $patient):?>
                                     <?php $i++;?>
