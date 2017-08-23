@@ -119,11 +119,11 @@ $route['logout_doctor'] = "backend/doctor/doctor/logOut";
 
 $route['get_on_call_doctor'] = "backend/doctor/doctor/getOnCallDoctor";
 $route['get_my_patients'] = "backend/doctor/DoctorAfterLogin/getMyPatients";
-$route['get_new_patients'] = "backend/doctor/doctorafterlogin/getNewPatients";
-$route['accept_patient'] = "backend/doctor/doctorafterlogin/acceptPatient/yes";
-$route['decline_patient'] = "backend/doctor/doctorafterlogin/acceptPatient/no";
-$route['get_today_schedule'] = "backend/doctor/doctorafterlogin/getTodaySchedule";
-$route['req_call_doctor'] = "backend/doctor/doctorafterlogin/reqCall";
+$route['get_new_patients'] = "backend/doctor/DoctorAfterLogin/getNewPatients";
+$route['accept_patient'] = "backend/doctor/DoctorAfterLogin/acceptPatient/yes";
+$route['decline_patient'] = "backend/doctor/DoctorAfterLogin/acceptPatient/no";
+$route['get_today_schedule'] = "backend/doctor/DoctorAfterLogin/getTodaySchedule";
+$route['req_call_doctor'] = "backend/doctor/DoctorAfterLogin/reqCall";
 
 /*
  * Patient
