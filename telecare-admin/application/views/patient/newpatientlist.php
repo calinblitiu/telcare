@@ -32,7 +32,7 @@
                                 <th>Dob</th>
                                 <th>Ssn</th>
                                 <th>Address</th>
-                                
+                                <th>Doctor</th>
                             </tr>
 
                             <?php if(count($newpatients)<=0):?>
@@ -61,7 +61,7 @@
                                         <th><?=$patient['dob']?></th>
                                         <th><?=$patient['ssn']?></th>
                                         <th><?=$patient['addr']?></th>
-                                        <th><?=$patient['did']?></th>
+                                        <th> <a class="btn btn-sm btn-info" href="<?=base_url()?>newpatient/<?=$patient['pid']?>"><i class="fa fa-pencil"></i></a></th>
                                         
                                     </tr>
                                 <?php endforeach;?>

@@ -32,8 +32,19 @@ class Patient_model extends CI_Model
         {
             return false;
         }
-
         return $result;
+    }
 
+    public function getPatientPid($pid)
+    {
+        $this->db->where('pid', $pid);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+
+        if(count($result) <= 0)
+        {
+            return false;
+        }
+        return $result[0];
     }
 }

@@ -48,4 +48,17 @@ class Patient extends BaseController
 
         $this->loadViews("patient/newpatientlist", $this->global, NULL , NULL);
     }
+
+    public function newPatient($pid)
+    {
+        $this->global['pageTitle'] = 'Telecare Admin: Patients';
+        $this->global['patient'] = $this->patient_model->getPatientPid($pid);
+
+        if(!$this->global['patient'])
+        {
+            redirect("404_override");
+        }
+
+        $this->loadViews("patient/newpatient", $this->global, NULL , NULL);
+    }
 }
