@@ -72,10 +72,12 @@ class Patient extends BaseController
         if($this->patient_model->setDidToPid($pid,$did))
         {
             $return_data['success'] = 1;
+            $return_data['msg'] = "success";
             echo json_encode($return_data);
             exit();
         }
         $return_data['success'] = 0;
+        $return_data['msg'] = "error";
         echo json_encode($return_data);
         exit();
     }

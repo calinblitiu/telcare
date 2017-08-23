@@ -66,13 +66,7 @@
             type : "POST",
             success : function(data)
             {
-                if(data.success == 1)
-                {
-                    alert("Doctor is set to this patient successfully");
-                }
-                else{
-                    alert("Database transaction error");
-                }
+                alert(data.msg)
                 location.reload();
             },
             fail : function(error){
