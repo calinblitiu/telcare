@@ -74,7 +74,7 @@ class Patient extends BaseController
         // echo json_encode($lastschedule);
         // exit();
 
-        if($this->patient_model->setDidToPid($pid,$did) && $lastschedule && $this->schedule_model->setDateTime($lastschedule['id'],$date))
+        if($lastschedule && ($this->patient_model->setDidToPid($pid,$did) || $this->schedule_model->setDateTime($lastschedule['id'],$date)))
         {
             $return_data['success'] = 1;
             $return_data['msg'] = "success";
