@@ -120,7 +120,7 @@ class Patient extends BaseController
         {
             redirect("404_override");
         }
-        $this->global['schedule'] = $this->schedule_model->getSchedule($pid);
+        $this->global['schedule'] = $this->schedule_model->getLastSchedule($pid);
         //var_dump($this->global['schedule']);
         $this->global['doctors'] = $this->doctor_model->getAllDoctors();
 
