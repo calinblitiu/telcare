@@ -12,7 +12,7 @@ class Patient_model extends CI_Model
 
     public function getAllPatients()
     {
-        $this->db->select("img, fname, lname, gender, dob, email, ssn, addr, did, is_treated, is_accepted");
+       // $this->db->select("img, fname, lname, gender, dob, email, ssn, addr, did, is_treated, is_accepted");
         $query = $this->db->get($this->table_name);
         $result = $query->result_array();
 
