@@ -4,8 +4,7 @@
  * User: rubby
  * Date: 8/16/2017
  * Time: 4:38 PM
- */?>
-<?php
+ */
 class Doctorafterlogin extends CI_Controller
 {
     public $token = "";
