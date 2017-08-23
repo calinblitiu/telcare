@@ -51,8 +51,8 @@ class Schedule_model extends CI_Model
     public function setDateTime($id,$datetime)
     {
         $this->db->where('id',$id);
-        $this->db->set('date',$datetime);
-        $this->db->update($this->table_name);
+       
+        $this->db->update($this->table_name,array("date"=>$datetime));
         if($this->db->affected_rows() > 0)
         {
             return true;
