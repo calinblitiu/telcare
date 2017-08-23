@@ -40,6 +40,9 @@
                    <div class="well">EMAIL : <?=$patient['email']?></div>
                    <div class="well">Doctor : 
                         <select id="" name="">
+                            <?php foreach($doctors as $doctor):?>
+                                <option value="<?=$doctor['did']?>"><?php echo $doctor['fname']." ".$doctor['lname'];?></option>
+                            <?php endforeach;?>
                         </select>
                    </div>
                 </div><!-- /.box -->
