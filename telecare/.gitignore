@@ -27,4 +27,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-workspace
 *.sublime-project
 
-application/config/databse.php
+/assets/uploads/doctor/*
+/assets/uploads/patient/*
+/assets/uploads/schedule/*
+/assets/frontend/pages/img/products/*
+/application/config/*.*
