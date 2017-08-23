@@ -70,7 +70,7 @@ class Patient extends BaseController
         $pid = $this->input->post('pid');
         $date = $this->input->post('datetime');
 
-        // $lastschedule = $this->schedule_model->getLastSchedule($pid);
+        $lastschedule = $this->schedule_model->getLastSchedule($pid);
         // echo json_encode($lastschedule);
         // exit();
 
@@ -84,9 +84,7 @@ class Patient extends BaseController
         }
         $return_data['success'] = 0;
         $return_data['msg'] = "error";
-         $return_data['setdidtopid'] = $this->patient_model->setDidToPid($pid,$did);
-            $return_data['lastschedule'] = $lastschedule;
-            $return_data['setdatetime'] = $this->schedule_model->setDateTime($lastschedule['id'],$date);
+        
         echo json_encode($return_data);
         exit();
     }
