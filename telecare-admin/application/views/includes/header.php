@@ -27,6 +27,10 @@
         var baseURL = "<?php echo base_url(); ?>";
     </script>
     
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css"/>
+    <script type="text/javascript" src="<?=base_url()?>assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

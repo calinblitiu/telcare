@@ -44,15 +44,22 @@
                                 <option value="<?=$doctor['did']?>"><?php echo $doctor['fname']." ".$doctor['lname'];?></option>
                             <?php endforeach;?>
                         </select>
-                        <button id="save_doctor_btn" data-patient-id="<?=$patient['pid']?>">Save</button>
+                        <input type="text" id="schedule-input" name="">
+                        <button class="btn btn-default" id="save_doctor_btn" data-patient-id="<?=$patient['pid']?>">Save</button>
                    </div>
                 </div><!-- /.box -->
             </div>
         </div>
     </section>
 </div>
-
+<script type="text/javascript" src="<?=base_url()?>assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript">
+    $("#schedule-input").datetimepicker({
+        format: "yyyy-mm-dd hh:ii:ss",
+        minDate : new Date(),
+        autoclose: true
+    });
+
     $("#save_doctor_btn").click(function(){
         var post_data = {
             did : $("#doctor_select").val(),
