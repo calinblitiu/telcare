@@ -48,7 +48,7 @@ class Mokup extends CI_Controller {
 
     public function consultOrSecondOpinion()
     {
-        $this->load->view('mokup/service/consultorsecondopinion');
+        $this->load->view('mokup/service/consultOrSecondOpinion');
     }
 
     public function eoPAT()
