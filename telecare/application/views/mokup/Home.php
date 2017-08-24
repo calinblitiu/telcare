@@ -84,14 +84,14 @@
             <h5>OPENING HOURS</h5>
             <h6>Mon - Fri : 9 am- 6 am</h6>
             <span> After hours are  only for urgent issue</span><br>
-            <button class="mokup-border-round">Request an Appointment</button>
+            <a href="<?=base_url()?>contact_us" class="mokup-border-round">Request an Appointment</a>
         </div>
 
     </div>
 
 
     <div class="row" style="margin: 50px 10%; text-align: center; padding: 0 10%;">
-        <span class="mokup-border" style="font-size:20px;font-weight: 700; width: 20%;">CONTACT US</span>
+        <a href="<?=base_url()?>contact_us" class="mokup-border" style="font-size:20px;font-weight: 700; width: 20%;">CONTACT US</a>
         <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png" style="height: 200px;margin-top: 50px;">
         <p style="margin-top: 50px;">
             <input type="text" value="NAME" style="width: 45%;float: left;" class="mokup-border">
