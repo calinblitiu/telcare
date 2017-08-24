@@ -34,7 +34,7 @@ class Mokup extends CI_Controller {
 
     public function hospital()
     {
-        $this->load->view('mokup/hospital');
+        $this->load->view('mokup/Hospital');
     }
 
     public function login()
