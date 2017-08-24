@@ -21,30 +21,22 @@
 <div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;text-align: center;">
     Header
 </div>
-<div class="row" style="height: 300px; margin: 50px 10%;">
-    <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+<div class="row" style="height: 80%; margin: 50px 10%;">
+    <div class="col-md-8 mokup-border" style="height: 100%;text-align: center;">
+        <h3 style="margin-top: 30%">PATIENT EDUCATION</h3>
+
+        A Happier, Healthier You<br><br>
+
+        At Tele-ID, scheduling Patient Education Programs has become simpler than ever before. Our personalized Patient Education Programs provide patients with the resources they need to get their health on track — you’ll leave our tele-clinic well informed and confident that your health is in good hands.
+        <br><br>
+        Blog
+    </div>
+
+    <div class="col-md-4"  style="height: 100%;padding: 0">
+        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+    </div>
 </div>
 
-<div class="row" style=" margin: 50px 10%;text-align: center;">
-    <a href="<?=base_url()?>contact_us" style="padding: 5px;" class="mokup-border-round">Request Demo</a>
-</div>
-
-<div class="row mokup-border" style="height: 300px; margin: 50px 10%; ">
-
-    <p>Start ofering Tele-infectious Disease Consultation</p>
-    <p>We work with hospital systems to implement tele-infectious disease service for inpatient consultation and outpatient followup.</p>
-    <p>Our teams of boar-certified infectious disease consultants are experts in the diagnosis and treatment of a wide variety of infectios. Services offered are</p>
-    <ul>
-        <li>Urgetn same-day consultations for hospitalized patients</li>
-        <li>Guidance for appropriate anti-microbial therapy and duration.</li>
-        <li>Infection control to limit the acquisition and spread of infections in healthcare settings</li>
-        <li>Antibiotic stepwardship to optimize antibiotic therapy, minmize adverse reactions/resistance to decrease cost.</li>
-        <li>Follow and provide recommendation for patient at infusion center, OPAT or wound care centers.</li>
-    </ul>
-
-    <span>We have also organized a team which can provide and follow majority of post discharge OPAT patient via out eOPAT portal coordinating the care with patient family/HHC/PCP or at SNF to reduced bounce back to hospital.  </span>
-
-</div>
 
 <div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
     footer
