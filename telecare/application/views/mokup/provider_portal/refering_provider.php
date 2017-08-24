@@ -35,7 +35,7 @@
         Call/chat with our Coordinator who will assist you in obtaining required consultation service
     </div>
     <br>
-    <a class="mokup-border" style="padding: 10px 50px;" href="<?=base_url()?>provider_registeration">Join Us and refer your patient</a>
+    <a class="mokup-border" style="padding: 10px 50px;" href="<?=base_url()?>provider_refering_physician_singup">Join Us and refer your patient</a>
 
 </div>
 
