@@ -1,0 +1,21 @@
+.mokup-border{
+    border: solid 1px black;
+}
+
+.mokup-border-round{
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
+.mokup-no-imag{
+    border: solid 1px black;
+    width:100%;
+    height: 100%;
+}
+
+.mokup-menu-item{
+    display: inline;
+    padding:5px 20px;
+    font-size: 15px;
+    border:solid 1px black;
+}
