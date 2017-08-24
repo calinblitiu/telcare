@@ -204,7 +204,6 @@ class Patientafterlogin extends CI_Controller
 
     public function checkOut()
     {
-
         $stripe_token = $this->input->post('stripeToken');//$_POST['stripeToken'];
         $amount = $this->input->post('amount');//$_POST['amount'];
         $stripe_charge="";

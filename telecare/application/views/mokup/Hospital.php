@@ -18,7 +18,7 @@
 
 <body>
 
-<div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;text-align: center">
+<div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;text-align: center;">
     Header
 </div>
 <div class="row" style="height: 300px; margin: 50px 10%;">
