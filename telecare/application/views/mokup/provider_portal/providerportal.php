@@ -34,13 +34,13 @@
     </div>
     <div class="col-md-3 col-md-offset-1 mokup-border" style="height: 100%;padding: 0;text-align: center;">
         <div style="position: absolute;top: 50%;text-align: center;width: 100%;">
-            <a href="<?=base_url()?>">Refering provider</a>
+            <a href="<?=base_url()?>provider_refering">Refering provider</a>
         </div>
     </div>
 
     <div class="col-md-3 col-md-offset-1 mokup-border" style="height: 100%;padding: 0;text-align: center;">
         <div style="position: absolute;top: 50%;text-align: center;width: 100%;">
-            <a href="<?=base_url()?>">Hospital</a>
+            <a href="<?=base_url()?>hospital">Hospital</a>
         </div>
     </div>
 

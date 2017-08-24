@@ -42,6 +42,4 @@
 <div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
     footer
 </div>
-
-
 </body>
