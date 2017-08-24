@@ -43,7 +43,7 @@
     <div class="col-md-5 col-md-offset-2 mokup-border" style="height: 100%;padding: 0;text-align: center;vertical-align: middle;">
         <div style="position: absolute;top: 50%;text-align: center;width: 100%;">
         <span>What we treat</span><br><br><br><br><br><br>
-        <button class="mokup-border-round">Sign Up</button>
+        <a href="<?=base_url()?>signup" class="mokup-border-round">Sign Up</a>
         </div>
     </div>
 

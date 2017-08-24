@@ -29,7 +29,7 @@
 
     <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center;">
         <div style="position: absolute;top: 50%;padding: 0 20%;">
-            <a href="<?=base_url()?>">infectious disease consultant</a>
+            <a href="<?=base_url()?>provider_infectious">infectious disease consultant</a>
         </div>
     </div>
     <div class="col-md-3 col-md-offset-1 mokup-border" style="height: 100%;padding: 0;text-align: center;">
