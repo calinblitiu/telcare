@@ -26,7 +26,7 @@
 </div>
 
 <div class="row" style=" margin: 50px 10%;text-align: center;">
-    <a href="<?=base_url()?>" style="padding: 5px;" class="mokup-border-round">Request Demo</a>
+    <a href="<?=base_url()?>contact_us" style="padding: 5px;" class="mokup-border-round">Request Demo</a>
 </div>
 
 <div class="row mokup-border" style="height: 300px; margin: 50px 10%; ">
