@@ -46,14 +46,14 @@
     <div class="row" style="margin: 50px 10%; text-align: center;">
         <div class="col-md-5">
             <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png" style="height: 200px;">
-            <div style="margin-top: 50px; padding: 5px;">
+            <a href="<?=base_url()?>service_consultorsecondopinion" style="margin-top: 50px; padding: 5px;">
                 <h4>INFECTIOUS DISEASE CONSULTATION</h4>
                 <h6>Here For You</h6>
                 <span>
                     Keep yourself and your loved ones healthy! At Tele-ID, our friendly and experienced staff will make sure you always feel comfortable and well-informed.
                     Schedule your Specilialty Care Clinics today for the whole family and see how our team of qualified professionals can get you or your loved ones feeling greate.
                 </span>
-            </div>
+            </a>
         </div>
 
         <div class="col-md-offset-2 col-md-5">
