@@ -39,7 +39,7 @@ class Mokup extends CI_Controller {
 
     public function login()
     {
-        $this->load->view('mokup/login');
+        $this->load->view('mokup/Login');
     }
 
     public function signUp(){
