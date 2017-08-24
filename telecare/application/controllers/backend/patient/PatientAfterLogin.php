@@ -272,8 +272,8 @@ class PatientAfterLogin extends CI_Controller
         );
 
         $data['message'] = 'Hello! '.$doctor["fname"]." ".$doctor["lname"]." is requesting call!";
-        $data['doctor'] = $doctor;
-        $data['patient'] = $this->patient;
+        $data['receiver'] = $doctor;
+        $data['sender'] = $this->patient;
         $pusher->trigger('my-channel', 'my-event', $data);
     }
 }
