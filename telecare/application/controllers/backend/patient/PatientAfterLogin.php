@@ -173,7 +173,7 @@ class PatientAfterLogin extends CI_Controller
             exit();
         }
 
-        $this->load->helper('opentok');
+        $this->load->helper('Opentok');
         $opentok = createNewOpentokSession();
 
         if(!$opentok)
