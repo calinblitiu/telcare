@@ -36,7 +36,7 @@
 
 <div class="row" style="height: 500px; margin: 10px 10%; ">
 
-   <div class="col-md-6 mokup-border" style="height: 100%;text-align: center;">
+   <a href="<?=base_url()?>video_audio_messaging" class="col-md-6 mokup-border" style="height: 100%;text-align: center;">
        <br>
         <span class="mokup-border">Connect with your Infectious Disease Doctor</span><br><br>
         <span class="mokup-border">Personalized Care and Guidance</span>
@@ -56,7 +56,7 @@
            <span class="mokup-border" style="margin-left: 50%;padding-right: 50px;">Messaging</span><br>
 
        </p>
-   </div>
+   </a>
 
     <div class="col-md-6 mokup-border" style="height: 100%;text-align: center;padding: 0 5%;">
         <br>
