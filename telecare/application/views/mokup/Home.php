@@ -72,6 +72,9 @@
     <div class="row" style="margin: 50px 10%; text-align: center;">
         Call and Schedule an appointment with a member of our  medical staff today and see what they can for you!
     </div>
+    <div class="row" style="margin: 50px 10%; text-align: center;">
+        <a href="<?=base_url()?>contact_us" class="mokup-border-round" style="padding: 5px; font-size: 20px;"> REQUEST A CONSULTATION</a>
+    </div>
     <div class="row" style="margin: 50px 10%; text-align: center; height: 200px;">
         <div class="col-md-6" style="margin: 0;padding: 0!important;">
             <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
