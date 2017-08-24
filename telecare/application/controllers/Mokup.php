@@ -20,7 +20,7 @@ class Mokup extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('mokup/home');
+        $this->load->view('mokup/Home');
     }
 
     public function patientPortal()
