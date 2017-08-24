@@ -58,13 +58,13 @@
 
         <div class="col-md-offset-2 col-md-5">
             <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png" style="height: 200px;">
-            <div style="margin-top: 50px; padding: 5px;">
+            <a href="<?=base_url()?>service_eopat" style="margin-top: 50px; padding: 5px;">
                 <h4>eOPAT</h4>
                 <h6>Your Infusion Care</h6>
                 <span>
                     Here at eOPAT, our experienced infusion nurses will follow your treatment and daily progresses, paired with point-of-care technologies that allows clinician access to patient data 24/7 from anywhere.
                 </span>
-            </div>
+            </a>
         </div>
 
     </div>
