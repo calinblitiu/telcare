@@ -25,10 +25,6 @@
     <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
 </div>
 
-<div class="row" style=" margin: 50px 10%;text-align: center;">
-    <a href="<?=base_url()?>" style="padding: 5px;" class="mokup-border-round">Request Demo</a>
-</div>
-
 <div class="row" style="height: 300px; margin: 50px 10%; padding: 0 5%;">
 
     <div class="col-md-6 mokup-border" style="text-align: center; height: 100%;padding: 5%">
