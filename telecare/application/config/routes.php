@@ -132,12 +132,12 @@ $route['req_call_doctor'] = "backend/doctor/DoctorAfterLogin/reqCall";
 $route['signup_patient'] = 'backend/patient/patient/signUp';
 $route['login_patient'] = "backend/patient/patient/logIn";
 $route['logout_patient'] = "backend/patient/patient/logOut";
-$route['set_schedule'] = "backend/patient/patientafterlogin/setSchedule";
-$route['set_schedule_ios'] = "backend/patient/patientafterlogin/setScheduleIOS";
-$route['upload_history_attach'] = "backend/patient/patientafterlogin/uploadHistoryAttach";
-$route['get_id_doctor'] = "backend/patient/patientafterlogin/getIdDoctor";
-$route['req_call'] = "backend/patient/patientafterlogin/reqCall";
-$route['b_check_out'] = "backend/patient/patientafterlogin/checkOut";
+$route['set_schedule'] = "backend/patient/PatientAfterLogin/setSchedule";
+$route['set_schedule_ios'] = "backend/patient/PatientAfterLogin/setScheduleIOS";
+$route['upload_history_attach'] = "backend/patient/PatientAfterLogin/uploadHistoryAttach";
+$route['get_id_doctor'] = "backend/patient/PatientAfterLogin/getIdDoctor";
+$route['req_call'] = "backend/patient/PatientAfterLogin/reqCall";
+$route['b_check_out'] = "backend/patient/PatientAfterLogin/checkOut";
 
 /*
  * common
