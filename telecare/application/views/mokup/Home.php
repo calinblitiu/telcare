@@ -33,7 +33,7 @@
                 WELCOME TO TELE-ID AND eOPAT CONSULTATION
             </h3>
             <h6>Keeping You Healthy & Happy</h6>
-            <button class="mokup-border-round"> Get Started Now </button><br><br>
+            <a href="<?=base_url()?>signup" style="padding: 5px;" class="mokup-border-round"> Get Started Now </a><br><br>
             <i class="glyphicon glyphicon-facetime-video"></i><button class="mokup-border">Watch our video</button>
         </div>
     </div>
