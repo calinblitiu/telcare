@@ -7,7 +7,7 @@
  */?>
 <html>
 <head>
-    <title>Moke Up |  </title>
+    <title>Moke Up |  Directory</title>
     <link rel="stylesheet" href="<?=base_url()?>assets/mokup/mokup.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <script src="<?=base_url()?>assets/global/plugins/jquery.min.js"></script>
