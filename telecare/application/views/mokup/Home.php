@@ -19,16 +19,17 @@
 
 <body>
 
-    <div class="row mokup-border" style="height: 600px; margin: 0 10%;">
+    <div class="row mokup-border" style="height: 600px; margin: 5% 10%; position: relative;text-align: center;">
         <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
-        <div style="position: absolute;top: 0;padding-left: 50%; width: 80%;">
+        <img src="<?=base_url()?>assets/mokup/logo.png" style="position: absolute;top: 10px;left: 10px;" class="mokup-border">
+        <div style="position: absolute;top: 20px;right: 10%; ">
             <div class="mokup-menu-item"><a href="<?=base_url()?>patient_portal">Patient Portal</a></div>
             <div class="mokup-menu-item"><a href="<?=base_url()?>provider_portal">Provider Portal</a></div>
             <div class="mokup-menu-item"><a href="<?=base_url()?>hospital">Hostpital</a></div>
             <div class="mokup-menu-item"><a href="<?=base_url()?>login">Login</a></div>
         </div>
 
-        <div style="position: absolute;top: 30%;padding-left: 30%; width: 50%; text-align: center;">
+        <div style="position: absolute;top: 30%; text-align: center;text-align: center; width: 100%;padding: 5% 30%;background: white;">
             <h3>
                 WELCOME TO TELE-ID AND eOPAT CONSULTATION
             </h3>
