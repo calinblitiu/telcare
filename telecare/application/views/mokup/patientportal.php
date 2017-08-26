@@ -22,9 +22,9 @@
 </div>
 <div class="row" style="height: 300px; margin: 50px 10%;">
 
-    <div class="col-md-10" style="height: 100%;padding: 0;">
+    <div class="col-md-10" style="height: 100%;padding: 0;position: relative;">
         <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
-        <button class="mokup-border-round" style="position: absolute;top: 50%;left: 15%;">Get Started</button>
+        <a class="mokup-border-round" style="position: absolute;top: 50%;left: 15%; padding: 5px 20px;" href="<?=base_url()?>login">Login</a>
     </div>
     <div class="col-md-2" style="height: 100%;padding: 0;">
         <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
@@ -43,7 +43,7 @@
     <div class="col-md-5 col-md-offset-2 mokup-border" style="height: 100%;padding: 0;text-align: center;vertical-align: middle;">
         <div style="position: absolute;top: 50%;text-align: center;width: 100%;">
         <span>What we treat</span><br><br><br><br><br><br>
-        <a href="<?=base_url()?>signup" class="mokup-border-round">Sign Up</a>
+        <a href="<?=base_url()?>signup" class="mokup-border-round" style="padding: 5px 20px;">Sign Up</a>
         </div>
     </div>
 
