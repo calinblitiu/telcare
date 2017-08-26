@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <script src="<?=base_url()?>assets/global/plugins/jquery.min.js"></script>
     <script src="<?=base_url()?>assets/global/plugins/bootstrap/js/bootstrap.js"></script>
+
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">-->
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>-->
+
     <script src="<?=base_url()?>assets/mokup/mokup.js"></script>
 
 </head>
@@ -35,7 +41,7 @@
             </h3>
             <h6>Keeping You Healthy & Happy</h6>
             <a href="<?=base_url()?>signup" style="padding: 5px;" class="mokup-border-round"> Get Started Now </a><br><br>
-            <i class="glyphicon glyphicon-facetime-video"></i><button class="mokup-border">Watch our video</button>
+            <i class="glyphicon glyphicon-facetime-video"></i><button class="mokup-border" style="margin-left: 5%;" id="watch-video">Watch our video</button>
         </div>
     </div>
 
@@ -107,5 +113,41 @@
 
     </div>
 
+    <div class="row mokup-border" style="height: 30%; margin: 0 10% 50px 10%; text-align: center">
+        <span>Footer</span><br><br>
+        <span>About Us</span><span style="margin-left: 10%;">Our Team</span><br><br>
+        <span>Directory</span><span style="margin-left: 10%;">Telemedicine</span><br><br>
+        <span>FAQ</span><span style="margin-left: 10%;">Privacy Policy</span><br><br>
+        <span>request a demo</span><span style="margin-left: 10%;">Terms and Condition</span><br><br>
+
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="youtube-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="width: 80%;height: 90%;">
+            <div class="modal-content">
+                <div class="modal-body" style="padding: 0;">
+
+                    <iframe id="iframeYoutube"  src="" frameborder="0" allowfullscreen style="width: 100%;height: 100%; "></iframe>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    $('#watch-video').click(function (ev) {
+        var video = $('#youtube-modal').modal();
+        var video_frame = $("#iframeYoutube");
+        video_frame[0].src = "https://www.youtube.com/embed/XevNMhLfhR0?rel=0&version=3&enablejsapi=1&autoplay=1";
+        ev.preventDefault();
+        video.on('hidden.bs.modal',function () {
+            video_frame[0].src = "";
+        })
+    });
+
+
+</script>
 </body>
 </html>
