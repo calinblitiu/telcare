@@ -221,6 +221,24 @@ class DoctorAfterLogin extends CI_Controller
                         $patient["img"] = base_url()."assets/uploads/patient/".$temp_img;
                     }
 
+                    $patient['note'] = $temp_today_schedule['note'];
+                    $histories = explode(',',$temp_today_schedule['history']);
+                    if (count($histories) <= 0)
+                    {
+                        $patient['history'] = "";
+                    }
+                    else
+                    {
+                        $temp_histories = array();
+                        foreach ($histories as $history)
+                        {
+                            if($history != "" && $history){
+                                $temp_histories[] = base_url()."assets/uploads/schedule/".$history;
+                            }
+                        }
+                        $patient['history'] = $temp_histories;
+                    }
+
                     $temp_schedule_patients[] = $patient;
                 }
             }
