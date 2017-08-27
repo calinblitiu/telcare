@@ -29,7 +29,7 @@
       <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
   </div>
   <div class="col-md-5 col-md-offset-2 mokup-border" style="height: 100%;">
-      <form role="form" action="<?=base_url()?>login_patient" method="post" id="patient-login-form">
+      <form role="form" action="<?=base_url()?>login_patient" method="post" id="login-form">
         <span class="mokup-border">Log in</span><br>
         <input type="text" class="mokup-border" placeholder="Email" style="margin-top: 50px;width: 100%" id="patient_signup_email" name="email"><br>
         <input type="password" class="mokup-border" placeholder="Password" style="margin-top: 30px;width: 100%" id="patient_signup_pwd" name="pwd"><br>
@@ -57,7 +57,8 @@
             alert("please enter all data");
             return;
         }
-        $("#patient-login-form").ajaxSubmit({
+
+        $("#login-form").ajaxSubmit({
             url: baseURL + "login_patient",
             type: 'post',
             dataType: "json",
@@ -66,7 +67,23 @@
                    location.href = baseURL+"patient_dashboard";
                 }
                 else if (data.success == 0) {
-                    alert(data.error);
+                   // alert(data.error);
+                    $("#login-form").ajaxSubmit({
+                        url: baseURL + "login_doctor",
+                        type: 'post',
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.success == 1) {
+                                location.href = baseURL+"dashboard";
+                            }
+                            else if (data.success == 0) {
+                                alert("There is not user");
+                            }
+                        },
+                        fail: function (err) {
+
+                        }
+                    });
                 }
             },
             fail: function (err) {
