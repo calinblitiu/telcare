@@ -77,11 +77,12 @@ class Patient extends CI_Controller
                 $data['img'] = "";
             }
         }
+        $data['token'] = md5(uniqid(rand(), true));
         if($this->patient_model->addNewPatient($data))
         {
             $returndata['success'] = 1;
             $returndata['error'] = "Login Success";
-            $temp['token'] = md5(uniqid(rand(), true));
+            $temp['token'] = $data['token'];
             $returndata['data'] = $temp;
 
             echo json_encode($returndata);
@@ -124,9 +125,21 @@ class Patient extends CI_Controller
                 $sess_data = array(
                     'user_type'         => USER_TYPE_PATIENT,
                     'patient_id'        => $patient['pid'],
-                    'token'             => $token
+                    'token'             => $token,
+                    'img'               => $patient['img'],
+                    'email'             => $patient['email'],
+                    'fname'             => $patient['fname'],
+                    'lname'             => $patient['lname'],
+                    'gender'            => $patient['gender'],
+                    'dob'               => $patient['dob'],
+                    'ssn'               => $patient['ssn'],
+                    'addr'              => $patient['addr'],
+                    'did'               => $patient['did']
                 );
+
+
                 $this->session->set_userdata($sess_data);
+
 
                 $this->patient_model->setToken($this->session->userdata('patient_id'),$token);
 

@@ -108,12 +108,23 @@ class Mokup extends CI_Controller {
 
     public function dashboard()
     {
+        if(!$this->session->userdata('token'))
+        {
+            redirect();
+        }
         $this->load->view('mokup/dashboard');
     }
 
     public function patientDashBoard()
     {
-        $this->load->view('mokup/patient_dashboard');
+        if(!$this->session->userdata('token'))
+        {
+            redirect();
+        }
+
+        $doctor = $this->doctor_model->getDoctorId($this->session->userdata('did'));
+        $data['doctor'] = $doctor;
+        $this->load->view('mokup/patient_dashboard',$data);
     }
 
     public function privacyPolicy()

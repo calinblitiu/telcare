@@ -8,15 +8,16 @@
 <html>
 <head>
     <title>Moke Up | Dashboard</title>
-    <link rel="stylesheet" href="<?=base_url()?>assets/mokup/mokup.css">
-    <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <script src="<?=base_url()?>assets/global/plugins/jquery.min.js"></script>
-    <script src="<?=base_url()?>assets/global/plugins/bootstrap/js/bootstrap.js"></script>
-    <script src="<?=base_url()?>assets/mokup/mokup.js"></script>
+    <?php $this->load->view('mokup/layout/common')?>
 
 </head>
 
 <body>
+
+<?php
+var_dump($this->session);
+
+?>
 
 <div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
     Header
@@ -24,23 +25,29 @@
 
 <div class="row mokup-border" style="height: 70%; margin: 50px 10%;text-align: center;">
     <div class="col-md-10" style="height: 100%;padding: 0;">
-        <div class="row" style="height: 20%;">
+        <div class="row" style="height: 35%;">
             <div class="col-md-3" style="height:100%;">
                 <div class="mokup-border" style=" margin: 5%;">
-                    Welcome Dr.Raman <br>
-                    Infectious Disease<br>
-                    state:<br>
-                    Phone
+                    <img src="<?=base_url()?>assets/uploads/patient/<?=$this->session->userdata("img")?>" style="width: 50%;float: left;">
+                    <div style=";">
+                    Welcome <?=$this->session->userdata("fname")." ".$this->session->userdata('lname')?> <br>
+                    Email : <?=$this->session->userdata("email")?><br>
+                    SSN : <?=$this->session->userdata("ssn")?><br>
+                    Address : <?=$this->session->userdata("addr")?><br>
+                    </div>
                 </div>
             </div>
             <div class="col-md-9" style="height: 100%">
                 <span class="mokup-border" style="margin:30%;">Session Code</span>
             </div>
         </div>
-        <div class="row" style="height: 80%; margin: 0;">
+        <div class="row" style="height: 65%; margin: 0;">
             <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center">
                 <div class="mokup-border" style="width: 80%; margin: 5%">Dashboard</div>
-                <div class="mokup-border" style="width: 80%; margin: 5%">Waiting Room</div>
+                <div class="mokup-border" style="width: 80%; margin: 5%">Waiting Room<br>
+                    <span>Room1</span><br>
+                    <span>Room1</span>
+                </div>
                 <div class="mokup-border" style="width: 80%; margin: 5%">Upload</div>
                 <div class="mokup-border" style="width: 80%; margin: 5%">Schedule appointment</div>
 
@@ -58,7 +65,7 @@
 
     <div class="col-md-2" style="height: 100%;padding: 0">
         <div class="" style="height: 20%; padding: 0;position: relative;">
-            <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png" style="">
+            <img class="mokup-no-imag" src="<?=base_url()?>assets/uploads/doctor/<?=$doctor['img']?>" style="">
             <span style="position: absolute;top: 50%;left: 20%" class="mokup-border">ID Doctor</span>
         </div>
         <div style="height: 75%; padding: 0; margin-top: 10%; position: relative;" class="mokup-border">

@@ -84,7 +84,7 @@ class Doctor_model extends CI_Model
         return $result;
     }
 
-    public function getDoctorId($did)
+        public function getDoctorId($did)
     {
         $this->db->where('did',$did);
         $this->db->select('fname, lname, spec, email, img, lang, dea, npi');
