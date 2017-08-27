@@ -11,11 +11,26 @@ class Doctor extends CI_Controller
 
     public function signUp()
     {
+        $data['type'] 		= "";
+        $data['fname'] 	    = "";
+        $data['lname']		= "";
+        $data['spec']		= "";
+        $data['email']		= "";
+        $data['phone']      ="";
+        $data['fax']        ="";
+        $data['state']		= "";
+        $data['lang']		= "";
+        $data['dea']		= "";
+        $data['npi']		= "";
+        $data['password']	= "";
+
     	 $data['type'] 		= $this->input->get_post('type');
     	 $data['fname'] 	= $this->input->get_post('fname');
     	 $data['lname']		= $this->input->get_post('lname');
     	 $data['spec']		= $this->input->get_post('spec');
     	 $data['email']		= $this->input->get_post('email');
+         $data['phone']     = $this->input->get_post('phone');
+         $data['fax']       = $this->input->get_post('fax');
     	 $data['state']		= $this->input->get_post('state');
     	 $data['lang']		= $this->input->get_post('lang');
     	 $data['dea']		= $this->input->get_post('dea');
@@ -35,18 +50,39 @@ class Doctor extends CI_Controller
              exit();
          }
 
-        $uploaddir = './assets/uploads/doctor/';
-        $path = $_FILES['img']['name'];
-        $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $uname = time().uniqid(rand());
-        $uploadfile = $uploaddir .$uname.'.'.$ext;
-        $file_name = $uname.".".$ext;
-        if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
-            //$this->sample_item_model->editItemField($item_no,$field,$file_name);
-            $data['img'] = $file_name;
-        } else {
-            $data['img'] = "";
-            // echo "Possible file upload attack!\n";
+         $data['img'] = '';
+
+        if(isset($_FILES['img'])) {
+            $uploaddir = './assets/uploads/doctor/';
+            $path = $_FILES['img']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $uname = time() . uniqid(rand());
+            $uploadfile = $uploaddir . $uname . '.' . $ext;
+            $file_name = $uname . "." . $ext;
+            if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
+                //$this->sample_item_model->editItemField($item_no,$field,$file_name);
+                $data['img'] = $file_name;
+            } else {
+                $data['img'] = "";
+                // echo "Possible file upload attack!\n";
+            }
+        }
+
+        $data['cv'] = "";
+        if(isset($_FILES['cv'])) {
+            $uploaddir = './assets/uploads/cv/';
+            $path = $_FILES['cv']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $uname = time() . uniqid(rand());
+            $uploadfile = $uploaddir . $uname . '.' . $ext;
+            $file_name = $uname . "." . $ext;
+            if (move_uploaded_file($_FILES['cv']['tmp_name'], $uploadfile)) {
+                //$this->sample_item_model->editItemField($item_no,$field,$file_name);
+                $data['cv'] = $file_name;
+            } else {
+                $data['cv'] = "";
+                // echo "Possible file upload attack!\n";
+            }
         }
 
         if($this->doctor_model->addNewDoctor($data))

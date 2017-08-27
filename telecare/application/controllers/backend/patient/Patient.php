@@ -64,7 +64,7 @@ class Patient extends CI_Controller
             exit();
         }
         $data['img'] = "";
-        if (isset($_FILES['img']['name'])) {
+        if (isset($_FILES['img'])) {
             $uploaddir = './assets/uploads/patient/';
             $path = $_FILES['img']['name'];
             $ext = pathinfo($path, PATHINFO_EXTENSION);
