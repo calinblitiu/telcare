@@ -44,6 +44,24 @@
 
 <script>
     $('.send-request-btn').click(function(){
+
+        var post_data = {
+            fname : $("#doctor_signup_first_name").val(),
+            lname : $("#doctor_signup_last_name").val(),
+            email : $("#doctor_signup_email").val(),
+            phone : $("#doctor_signup_phone").val(),
+            fax   : $("#doctor_signup_fax").val(),
+            npi   : $("#doctor_signup_npi").val(),
+            state : $("#doctor_signup_state").val(),
+            dea   : $("#doctor_signup_dea").val()
+        };
+
+        if(post_data.fname == "" || post_data.lname  == "" || post_data.email == "" || post_data.phone == "" || post_data.fax == "" || post_data.npi == "" || post_data.state == "" || post_data.dea=="")
+        {
+            alert("Please Input all data");
+            return;
+        }
+
         $("#doctor-signup-form").ajaxSubmit({
             url: baseURL + "signup_doctor",
             type: 'post',

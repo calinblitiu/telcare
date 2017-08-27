@@ -11,18 +11,20 @@ class Doctor extends CI_Controller
 
     public function signUp()
     {
-        $data['type'] 		= "";
-        $data['fname'] 	    = "";
-        $data['lname']		= "";
-        $data['spec']		= "";
-        $data['email']		= "";
-        $data['phone']      ="";
-        $data['fax']        ="";
-        $data['state']		= "";
-        $data['lang']		= "";
-        $data['dea']		= "";
-        $data['npi']		= "";
-        $data['password']	= "";
+//        $data['type'] 		= "";
+//        $data['fname'] 	    = "";
+//        $data['lname']		= "";
+//        $data['spec']		= "";
+//        $data['email']		= "";
+//        $data['phone']      ="";
+//        $data['fax']        ="";
+//        $data['state']		= "";
+//        $data['lang']		= "";
+//        $data['dea']		= "";
+//        $data['npi']		= "";
+//        $data['password']	= "";
+//        $data['doctor_type'] = "";
+//        $data['message'] = "";
 
     	 $data['type'] 		= $this->input->get_post('type');
     	 $data['fname'] 	= $this->input->get_post('fname');
@@ -36,6 +38,8 @@ class Doctor extends CI_Controller
     	 $data['dea']		= $this->input->get_post('dea');
     	 $data['npi']		= $this->input->get_post('npi');
     	 $data['password']	= md5($this->input->get_post('pwd'));
+    	 $data['doctor_type'] = $this->input->get_post('doctor_type');
+    	 $data['message'] = $this->input->get_post('message');
 
          $doctor = $this->doctor_model->getDoctorEmail($data['email']);
          if($doctor)
@@ -44,7 +48,6 @@ class Doctor extends CI_Controller
                  "success" => 0,
                  "error" => "User is already exist",
                  "data" => "signup error"
-
              );
              echo json_encode($returndata);
              exit();

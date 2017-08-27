@@ -40,7 +40,7 @@ class DoctorAfterLogin extends CI_Controller
         for ($i = 0; $i<count($patients); $i++)
         {
             $temp_img = $patients[$i]["img"];
-           
+
             if($temp_img == "" || $temp_img == null)
             {
                 $patients[$i]["img"] = base_url()."assets/uploads/patient/no-img.png";

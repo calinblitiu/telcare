@@ -8,11 +8,7 @@
 <html>
 <head>
     <title>Moke Up | Provider Portal</title>
-    <link rel="stylesheet" href="<?=base_url()?>assets/mokup/mokup.css">
-    <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <script src="<?=base_url()?>assets/global/plugins/jquery.min.js"></script>
-    <script src="<?=base_url()?>assets/global/plugins/bootstrap/js/bootstrap.js"></script>
-    <script src="<?=base_url()?>assets/mokup/mokup.js"></script>
+    <?php $this->load->view('mokup/layout/common')?>
 
 </head>
 
