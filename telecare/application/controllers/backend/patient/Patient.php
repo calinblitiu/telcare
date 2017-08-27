@@ -18,16 +18,41 @@ class Patient extends CI_Controller
 
     public function signUp()
     {
-        $data['fname'] 	    = $this->input->get_post('fname');
-        $data['lname']		= $this->input->get_post('lname');
-        $data['dob']		= $this->input->get_post('dob');
-        $data['email']		= $this->input->get_post('email');
-        $data['ssn']		= $this->input->get_post('ssn');
-        $data['gender']		= $this->input->get_post('gender');
-        $data['addr']		= $this->input->get_post('addr');
-        $data['pwd']    	= md5($this->input->get_post('pwd'));
+        $data['fname'] 	    = " ";
+        $data['lname']		= " ";
+        $data['dob']		= " ";
+        $data['email']		= " ";
+        $data['ssn']		= " ";
+        $data['gender']		= " ";
+        $data['addr']		= " ";
+        $data['pwd']    	= " ";
+        if($this->input->get_post('fname')) {
+            $data['fname'] = $this->input->get_post('fname');
+        }
+        if($this->input->get_post('fname')) {
+            $data['lname'] = $this->input->get_post('lname');
+        }
+        if($this->input->get_post('fname')) {
+            $data['dob'] = $this->input->get_post('dob');
+        }
+        if($this->input->get_post('fname')) {
+            $data['email'] = $this->input->get_post('email');
+        }
+        if($this->input->get_post('fname')) {
+            $data['ssn'] = $this->input->get_post('ssn');
+        }
+        if($this->input->get_post('fname')) {
+            $data['gender'] = $this->input->get_post('gender');
+        }
+        if($this->input->get_post('fname')) {
+            $data['addr'] = $this->input->get_post('addr');
+        }
+        if($this->input->get_post('fname')) {
+            $data['pwd'] = md5($this->input->get_post('pwd'));
+        }
 
         $patient = $this->patient_model->getPatientEmail($data['email']);
+
         if($patient)
         {
             $returndata = array(
@@ -38,19 +63,20 @@ class Patient extends CI_Controller
             echo json_encode($returndata);
             exit();
         }
-
-        $uploaddir = './assets/uploads/patient/';
-        $path = $_FILES['img']['name'];
-        $ext = pathinfo($path, PATHINFO_EXTENSION);
-        $uname = time().uniqid(rand());
-        $uploadfile = $uploaddir .$uname.'.'.$ext;
-        $file_name = $uname.".".$ext;
-        if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
-            $data['img'] = $file_name;
-        } else {
-            $data['img'] = "";
+        $data['img'] = "";
+        if (isset($_FILES['img']['name'])) {
+            $uploaddir = './assets/uploads/patient/';
+            $path = $_FILES['img']['name'];
+            $ext = pathinfo($path, PATHINFO_EXTENSION);
+            $uname = time() . uniqid(rand());
+            $uploadfile = $uploaddir . $uname . '.' . $ext;
+            $file_name = $uname . "." . $ext;
+            if (move_uploaded_file($_FILES['img']['tmp_name'], $uploadfile)) {
+                $data['img'] = $file_name;
+            } else {
+                $data['img'] = "";
+            }
         }
-
         if($this->patient_model->addNewPatient($data))
         {
             $returndata['success'] = 1;

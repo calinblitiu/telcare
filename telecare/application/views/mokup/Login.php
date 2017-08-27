@@ -35,7 +35,7 @@
         <input type="password" class="mokup-border" placeholder="Password" style="margin-top: 30px;width: 100%" id="patient_signup_pwd" name="pwd"><br>
         <span style="margin-top: 50px;">Forgot Password</span><br>
       <p style="text-align: center;">
-        <span class="mokup-border-round patient-login-btn" style="margin-top: 50px;padding: 5px 20px;">Login</span><br>
+        <span class="mokup-border-round login-btn" style="margin-top: 50px;padding: 5px 20px;">Login</span><br>
       </p>
       <span class="mokup-border" style="margin-top: 50px;position: absolute;bottom: 0;right: 0;">Don't have an account? Sign Up</span>
       </form>
@@ -48,7 +48,7 @@
 
 
 <script>
-    $('.patient-login-btn').click(function(){
+    $('.login-btn').click(function(){
         var email = $("#patient_signup_email").val();
         var pwd = $("#patient_signup_pwd").val();
 
