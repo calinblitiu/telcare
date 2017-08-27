@@ -8,11 +8,7 @@
 <html>
 <head>
     <title>Moke Up | Login</title>
-    <link rel="stylesheet" href="<?=base_url()?>assets/mokup/mokup.css">
-    <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <script src="<?=base_url()?>assets/global/plugins/jquery.min.js"></script>
-    <script src="<?=base_url()?>assets/global/plugins/bootstrap/js/bootstrap.js"></script>
-    <script src="<?=base_url()?>assets/mokup/mokup.js"></script>
+   <?php $this->load->view('mokup/layout/common')?>
 
 </head>
 
@@ -33,20 +29,52 @@
       <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
   </div>
   <div class="col-md-5 col-md-offset-2 mokup-border" style="height: 100%;">
+      <form role="form" action="<?=base_url()?>login_patient" method="post" id="patient-login-form">
         <span class="mokup-border">Log in</span><br>
-        <input type="text" class="mokup-border" placeholder="Email" style="margin-top: 50px;width: 100%"><br>
-        <input type="text" class="mokup-border" placeholder="Email" style="margin-top: 30px;width: 100%"><br>
+        <input type="text" class="mokup-border" placeholder="Email" style="margin-top: 50px;width: 100%" id="patient_signup_email" name="email"><br>
+        <input type="password" class="mokup-border" placeholder="Password" style="margin-top: 30px;width: 100%" id="patient_signup_pwd" name="pwd"><br>
         <span style="margin-top: 50px;">Forgot Password</span><br>
       <p style="text-align: center;">
-        <button class="mokup-border-round" style="margin-top: 50px;padding: 5px 20px;">Login</button><br>
+        <span class="mokup-border-round patient-login-btn" style="margin-top: 50px;padding: 5px 20px;">Login</span><br>
       </p>
       <span class="mokup-border" style="margin-top: 50px;position: absolute;bottom: 0;right: 0;">Don't have an account? Sign Up</span>
+      </form>
   </div>
 </div>
 
 <div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
     footer
 </div>
+
+
+<script>
+    $('.patient-login-btn').click(function(){
+        var email = $("#patient_signup_email").val();
+        var pwd = $("#patient_signup_pwd").val();
+
+        if(email == "" || pwd == "")
+        {
+            alert("please enter all data");
+            return;
+        }
+        $("#patient-login-form").ajaxSubmit({
+            url: baseURL + "login_patient",
+            type: 'post',
+            dataType: "json",
+            success: function (data) {
+                if (data.success == 1) {
+                   location.href = baseURL+"patient_dashboard";
+                }
+                else if (data.success == 0) {
+                    alert(data.error);
+                }
+            },
+            fail: function (err) {
+                alert(err);
+            }
+        });
+    });
+</script>
 
 
 </body>
