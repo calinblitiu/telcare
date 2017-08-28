@@ -84,7 +84,6 @@ class Patient extends CI_Controller
             $returndata['error'] = "Login Success";
             $temp['token'] = $data['token'];
             $returndata['data'] = $temp;
-
             echo json_encode($returndata);
             exit();
         }

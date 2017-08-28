@@ -22,8 +22,8 @@ use OpenTok\ArchiveMode;
 
 Class MyOpentokApi
 {
-    private $opentok_apikey = "45927742";
-    private $opentok_secret = "0de4539fd865233ee03c7c9d7ff2b6bb19b3c9fc";
+    private $opentok_apikey = "45947752";
+    private $opentok_secret = "a6663c33deec1bba20ed0ebc02a29c1460e7f0a1";
     private $opentok;
 
     public function createNewSessionAndToken()

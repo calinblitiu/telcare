@@ -123,7 +123,27 @@ class Mokup extends CI_Controller {
         }
 
         $doctor = $this->doctor_model->getDoctorId($this->session->userdata('did'));
-        $data['doctor'] = $doctor;
+        if($doctor){
+            $data['doctor'] = $doctor;
+        }
+        else{
+            $data['doctor'] = false;
+        }
+
+        if(!$doctor)
+        {
+            $data['waitingroom'] = false;
+        }
+        else{
+            $current_schedule = $this->schedule_model->getScheduleCurrent($this->session->userdata("patient_id"));
+            if($current_schedule)
+            {
+                $data['waitingroom'] = $current_schedule;
+            }
+            else{
+                $data['waitingroom'] = false;
+            }
+        }
         $this->load->view('mokup/patient_dashboard',$data);
     }
 
