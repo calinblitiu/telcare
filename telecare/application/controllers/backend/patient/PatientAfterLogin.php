@@ -180,6 +180,7 @@ class PatientAfterLogin extends CI_Controller
         {
             $data["success"] = 0;
             $data["error"] = "Opentok Session creation is failed!";
+            $data['data'] = $opentok;
             echo json_encode($data);
             exit();
         }
