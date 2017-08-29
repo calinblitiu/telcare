@@ -293,7 +293,6 @@ class DoctorAfterLogin extends CI_Controller
         $return_data['error'] = "This patient doesn't request call now";
         echo json_encode($return_data);
         exit();
-
     }
 
     private function checkTokenSession(){

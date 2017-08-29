@@ -146,8 +146,8 @@
 
         var apiKey = "45947752",
             session,
-            sessionId = ot_session_id,
-            token  = ot_token,
+            sessionId = '1_MX40NTk0Nzc1Mn5-MTUwNDAzMDQ1NTY3Nn5RODJiM0hxcmNudTBScklWSEhtS0JSeW1-UH4';//ot_session_id,
+            token  = "T1==cGFydG5lcl9pZD00NTk0Nzc1MiZzaWc9N2Y1ZDc5NWJkZjFmNzIwNGJmNGFlZGI1ZjM0ZWE5OWRhYTYwOTExMzpzZXNzaW9uX2lkPTFfTVg0ME5UazBOemMxTW41LU1UVXdOREF6TURRMU5UWTNObjVST0RKaU0waHhjbU51ZFRCU2NrbFdTRWh0UzBKU2VXMS1VSDQmY3JlYXRlX3RpbWU9MTUwNDAzMDQ1NSZyb2xlPXB1Ymxpc2hlciZub25jZT0xNTA0MDMwNDU1Ljc4MTk2NTIwOQ==";//ot_token,
             response;
         initializeSession();
         function initializeSession() {
