@@ -173,8 +173,8 @@ class PatientAfterLogin extends CI_Controller
             exit();
         }
 
-        $this->load->helper('opentok');
-        $opentok = createNewOpentokSession();
+        //$this->load->helper('opentok');
+        $opentok = $this->createNewOpentokSession();
 
         if(!$opentok)
         {
@@ -201,6 +201,32 @@ class PatientAfterLogin extends CI_Controller
         exit();
 
 
+    }
+
+   public function createNewOpentokSession()
+    {
+        //$opentok = new MyOpentokApi();
+        //$opentok->index();
+        $url = base_url()."opentok.php";
+        $ch = curl_init();
+        // Disable SSL verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Will return the response, if false it print the response
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Set the url
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // Execute
+        $result=curl_exec($ch);
+        // Closing
+        curl_close($ch);
+
+        // Will dump a beauty json :3
+        $result = json_decode($result, true);
+        if ($result == null)
+        {
+            return false;
+        }
+        return $result;
     }
 
     public function checkOut()
