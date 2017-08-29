@@ -7,10 +7,17 @@
  * Time: 4:31 PM
  */
 use \Stripe\Stripe;
+use OpenTok\OpenTok;
+use OpenTok\MediaMode;
+use OpenTok\ArchiveMode;
+
 class PatientAfterLogin extends CI_Controller
 {
     public $token = "";
     public $patient;
+    private $opentok_apikey = "45947752";
+    private $opentok_secret = "a6663c33deec1bba20ed0ebc02a29c1460e7f0a1";
+    private $opentok;
 
     public function __construct()
     {
@@ -205,28 +212,20 @@ class PatientAfterLogin extends CI_Controller
 
    public function createNewOpentokSession()
     {
-        //$opentok = new MyOpentokApi();
-        //$opentok->index();
-        $url = base_url()."opentok.php";
-        $ch = curl_init();
-        // Disable SSL verification
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        // Will return the response, if false it print the response
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // Set the url
-        curl_setopt($ch, CURLOPT_URL,$url);
-        // Execute
-        $result=curl_exec($ch);
-        // Closing
-        curl_close($ch);
+        $this->opentok = new OpenTok($this->opentok_apikey, $this->opentok_secret);
+        $session = $this->opentok->createSession();
+        $sessionId = $session->getSessionId();
+        $token = $session->generateToken();
 
-        // Will dump a beauty json :3
-        $result = json_decode($result, true);
-//        if ($result == null)
-//        {
-//            return false;
-//        }
-        return $result;
+       if ($token == null || $sessionId == null)
+       {
+           $data["success"] = 0;
+           $data["error"] = "Opentok session create error";
+          return $data;
+       }
+       $data['opentok_session_id'] = $sessionId;
+       $data['opentok_token'] = $token;
+       return $data;
     }
 
     public function checkOut()
