@@ -222,10 +222,10 @@ class PatientAfterLogin extends CI_Controller
 
         // Will dump a beauty json :3
         $result = json_decode($result, true);
-        if ($result == null)
-        {
-            return false;
-        }
+//        if ($result == null)
+//        {
+//            return false;
+//        }
         return $result;
     }
 
