@@ -14,22 +14,17 @@
 
 <body>
 
-<?php
-var_dump($this->session);
-
-?>
-
 <div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
     Header
 </div>
 
 <div class="row mokup-border" style="height: 70%; margin: 50px 10%;text-align: center;">
     <div class="col-md-10" style="height: 100%;padding: 0;">
-        <div class="row" style="height: 35%;">
+        <div class="row" style="height: 25%;">
             <div class="col-md-3" style="height:100%;">
                 <div class="mokup-border" style=" margin: 5%;">
-                    <img src="<?=base_url()?>assets/uploads/patient/<?=$this->session->userdata("img")?>" style="width: 50%;float: left;">
-                    <div style=";">
+                    <img src="<?=base_url()?>assets/uploads/patient/<?=$this->session->userdata("img")?>" style="width: 30%;float: left;"><br>
+                    <div style="">
                     Welcome <?=$this->session->userdata("fname")." ".$this->session->userdata('lname')?> <br>
                     Email : <?=$this->session->userdata("email")?><br>
                     SSN : <?=$this->session->userdata("ssn")?><br>
@@ -41,8 +36,8 @@ var_dump($this->session);
                 <span class="mokup-border" style="margin:30%;">Session Code</span>
             </div>
         </div>
-        <div class="row" style="height: 65%; margin: 0;">
-            <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center">
+        <div class="row" style="height: 75%; margin: 0;">
+            <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center;position: relative;">
                 <div class="mokup-border" style="width: 80%; margin: 5%">Dashboard</div>
                 <div class="mokup-border" style="width: 80%; margin: 5%;text-align: center;">Waiting Room<br>
                     <?php if($waitingroom):?>
@@ -52,12 +47,13 @@ var_dump($this->session);
                 <div class="mokup-border" style="width: 80%; margin: 5%">Upload</div>
                 <div class="mokup-border" style="width: 80%; margin: 5%">Schedule appointment</div>
 
-                <div class="mokup-border" style="width: 80%; margin: 5%; position: absolute; bottom: 5%;">Account Setting</div>
+                <a  href="<?=base_url()?>accounts_page" class="mokup-border" style="width: 80%; left: 5%; position: absolute; bottom: 5%;">Account Setting</a>
             </div>
             <div class="col-md-9" style="height: 100%;">
-                <div class="row " style="height: 100%; padding:5%;">
+                <div class="row " style="height: 100%;position: relative;">
 <!--                    <img class="mokup-no-imag" src="--><?//=base_url()?><!--assets/mokup/noimage.png" style="">-->
-                    <div id="publisher" style="width: 50%;height: 100%;" class="mokup-border"></div>
+                    <div id="publisher" style="width: 30%;height: 30%;position: absolute;bottom: 0;z-index: 1000;" class="mokup-border"></div>
+                    <div id="subscriber" style="width: 100%;height: 100%;position: absolute;" class="mokup-border"></div>
                 </div>
 
             </div>
@@ -66,7 +62,7 @@ var_dump($this->session);
     </div>
 
     <div class="col-md-2" style="height: 100%;padding: 0">
-        <div class="" style="height: 20%; padding: 0;position: relative;">
+        <div class="" style="height: 25%; padding: 0;position: relative;">
             <?php if($doctor):?>
                 <img class="mokup-no-imag" src="<?=base_url()?>assets/uploads/doctor/<?=$doctor['img']?>" style="">
             <?php else:?>
@@ -74,8 +70,10 @@ var_dump($this->session);
             <?php endif;?>
             <span style="position: absolute;top: 50%;left: 20%" class="mokup-border">ID Doctor</span>
         </div>
-        <div style="height: 75%; padding: 0; margin-top: 10%; position: relative;" class="mokup-border">
-            Chat
+        <div style="height: 75%; padding: 0; position: relative;" class="mokup-border">
+            <div style="height: calc(100% - 50px);width: 100%;overflow-y: scroll;padding: 15px;" class="mokup-border" id="chat-history">
+
+            </div>
 
             <input type="text" class="mokup-border" style="width: 100%;position: absolute;bottom: 0;left: 0;height: 50px;" placeholder="Messaging" id="chat-message-input">
 
@@ -106,9 +104,15 @@ var_dump($this->session);
 
 <script>
 
+    var my_id = "<?=$this->session->userdata('patient_id')?>";
+    var my_type  = "patient";
+    var my_token = "<?=$this->session->userdata('token')?>";
+    var msgTxt = $("#chat-message-input");
+    var chat_msg_count = 0;
+
     $(".waitingroom-item").click(function () {
         var post_data = {
-            token : "<?=$this->session->userdata('token')?>",
+            token : my_token
         }
         $.ajax({
             url : baseURL+'req_call',
@@ -186,27 +190,42 @@ var_dump($this->session);
             });
 
             // Receive a message and append it to the history
-            var msgHistory = document.querySelector('#history');
+            var msgHistory = $("#chat-history");
             session.on('signal:msg', function(event) {
-                var msg = document.createElement('p');
-                msg.textContent = event.data;
-                msg.className = event.from.connectionId === session.connection.connectionId ? 'mine' : 'theirs';
-                msgHistory.appendChild(msg);
-                msg.scrollIntoView();
+//                var msg = document.createElement('p');
+//                msg.textContent = event.data;
+//                msg.className = event.from.connectionId === session.connection.connectionId ? 'mine' : 'theirs';
+//                msgHistory.appendChild(msg);
+//                msg.scrollIntoView();
+                var append_msg = "";
+                if(event.data.sender == my_id && event.data.sender_type == my_type){
+                     append_msg = "<p style='text-align: right;'>\
+                        "+event.data.msg+"\
+                        </p>";
+                }
+                else{
+                    append_msg = "<p style='text-align: left;'>\
+                        "+event.data.msg+"\
+                        </p>";
+                }
+                msgHistory.append(append_msg);
+                chat_msg_count++;
+                msgHistory.animate({scrollTop:chat_msg_count*50 },1000);
+                msgTxt.val("");
             });
         }
 
         // Text chat
 
-        var msgTxt = $("#chat-message-input");
 
-        msgTxt.keypress(function (e) {
-            var key = e.which;
+
+        msgTxt.keypress(function (ev) {
+            var key = ev.which;
             if(key == 13)
             {
                 session.signal({
                     type: 'msg',
-                    data: msgTxt.value
+                    data: {msg : msgTxt.val(),sender : my_id,sender_type : my_type}
                 }, function(error) {
                     if (error) {
                         console.log('Error sending signal:', error.name, error.message);

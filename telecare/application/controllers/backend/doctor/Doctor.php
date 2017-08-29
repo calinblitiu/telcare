@@ -137,7 +137,11 @@ class Doctor extends CI_Controller
                 $sess_data = array(
                     'user_type'         => USER_TYPE_DOCTOR,
                     'token'             => $token,
-                    'doctor_id'         => $doctor['did']
+                    'doctor_id'         => $doctor['did'],
+                    'img'               => $doctor['img'],
+                    'email'             => $doctor['email'],
+                    'fname'             => $doctor['fname'],
+                    'lname'             => $doctor['lname'],
                 );
                 $this->session->set_userdata($sess_data);
 
