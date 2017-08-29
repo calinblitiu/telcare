@@ -299,11 +299,7 @@
             // Receive a message and append it to the history
 
             session.on('signal:msg', function(event) {
-//                var msg = document.createElement('p');
-//                msg.textContent = event.data;
-//                msg.className = event.from.connectionId === session.connection.connectionId ? 'mine' : 'theirs';
-//                msgHistory.appendChild(msg);
-//                msg.scrollIntoView();
+
                 var append_msg = "";
                 if(event.data.sender == my_id && event.data.sender_type == my_type){
                     append_msg = "<p style='text-align: right;'>\
@@ -316,6 +312,7 @@
                         </p>";
                 }
                 msgHistory.append(append_msg);
+                chat_msg_count++;
                 msgHistory.animate({scrollTop:chat_msg_count*50 },1000);
                 msgTxt.val("");
 

@@ -138,6 +138,7 @@ $route['upload_history_attach'] = "backend/patient/PatientAfterLogin/uploadHisto
 $route['get_id_doctor'] = "backend/patient/PatientAfterLogin/getIdDoctor";
 $route['req_call'] = "backend/patient/PatientAfterLogin/reqCall";
 $route['b_check_out'] = "backend/patient/PatientAfterLogin/checkOut";
+$route['upload_patient_files'] = 'backend/patient/PatientAfterLogin/uploadFile';
 
 /*
  * common

@@ -76,7 +76,35 @@ class PatientAfterLogin extends CI_Controller
         $data['success'] = 0;
         echo json_encode($data);
         exit();
+    }
 
+    public function uploadFile(){
+        $uploaddir = './assets/uploads/schedule/';
+        $path = $_FILES['file']['name'];
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $uname = time().uniqid(rand());
+        $uploadfile = $uploaddir .$uname.'.'.$ext;
+        $file_name = $uname.".".$ext;
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+            //$this->sample_item_model->editItemField($item_no,$field,$file_name);
+            $setdata['uploadfiles'] = $this->patient['uploadfiles'].$file_name.",";
+            if(!$this->patient_model->setPatientEmailData($this->patient['email'],$setdata)){
+                $data['error'] = "Database Transaction Fail.";
+                $data['success'] = 0;
+                echo json_encode($data);
+                exit();
+            }
+            $temp['img'] = $file_name;
+            $data['data'] = $temp;
+            $data['success'] = 1;
+            echo json_encode($data);
+            exit();
+        }
+
+        $data['error'] = "Upload fail";
+        $data['success'] = 0;
+        echo json_encode($data);
+        exit();
     }
 
     public function setScheduleIOS(){

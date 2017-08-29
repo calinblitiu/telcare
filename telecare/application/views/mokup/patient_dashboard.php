@@ -10,6 +10,8 @@
     <title>Moke Up | Dashboard</title>
     <?php $this->load->view('mokup/layout/common')?>
     <script src="https://static.opentok.com/v2/js/opentok.js"></script>
+    <script src="<?=base_url()?>assets/global/plugins/dropzone/dropzone.js"></script>
+    <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/dropzone/css/dropzone.css">
 </head>
 
 <body>
@@ -89,8 +91,13 @@
     Your Document
 </div>
 
-<div class="row mokup-border" style="width:60%;height: 30%; margin: 5% 20%; text-align: center;">
-    Upload documents drag and drop
+<div class="row mokup-border" style="width:60%; margin: 5% 20%; text-align: center;">
+
+    <form action="<?=base_url()?>upload_patient_files" class="dropzone" id="my-dropzone">
+        <input type="hidden" name="token" value="<?=$this->session->userdata('token')?>">
+
+    </form>
+
 </div>
 
 <div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
@@ -239,7 +246,52 @@
     }
 
 
+    var FormDropzone = function () {
 
+        return {
+            //main function to initiate the module
+            init: function () {
+
+                Dropzone.options.myDropzone = {
+                    init: function() {
+                        this.on("addedfile", function(file) {
+                        });
+
+                        this.on("success", function(file,response, event) {
+
+                            var response = JSON.parse(response);
+
+                            if(response.success == 1) {
+                                var removeButton = Dropzone.createElement("<button class='btn btn-sm btn-block'>Remove file</button>");
+
+                                // Capture the Dropzone instance as closure.
+                                var _this = this;
+
+                                // Listen to the click event
+                                removeButton.addEventListener("click", function (e) {
+                                    // Make sure the button click doesn't submit the form:
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    // Remove the file preview.
+                                    _this.removeFile(file);
+                                    // If you want to the delete the file on the server as well,
+                                    // you can do the AJAX request here.
+                                });
+                                file.previewElement.appendChild(removeButton);
+                            }
+                            else if(response.success == 0){
+                                var removeButton = Dropzone.createElement("<div class='btn btn-sm btn-block'>Upload Faild</div>");
+                                file.previewElement.appendChild(removeButton);
+                            }
+                        });
+                    }
+                }
+            }
+        };
+    }();
+
+    FormDropzone.init();
 
 </script>
 
