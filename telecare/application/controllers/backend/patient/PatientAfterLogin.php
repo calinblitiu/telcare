@@ -107,6 +107,55 @@ class PatientAfterLogin extends CI_Controller
         exit();
     }
 
+    public function getUploads()
+    {
+        $uploads_arr = array();
+        $uploads_str = $this->patient['uploadfiles'];
+        $temp = explode(',',$uploads_str);
+        foreach ($temp as $item){
+            if($item != "") {
+                $temp_url = base_url() . "assets/uploads/schedule/".$item;
+                $uploads_arr[] = $temp_url;
+            }
+        }
+
+        $schedules = $this->schedule_model->getSchedules(array('pid'=>$this->patient['pid']));
+        if($schedules)
+        {
+            foreach ($schedules as $schedule)
+            {
+                if($schedule['history'] != "" && $schedule['history'] != null)
+                {
+                    $temp = explode(',',$schedule['history']);
+                    foreach ($temp as $item){
+                        if($item != "") {
+                            $temp_url = base_url() . "assets/uploads/schedule/".$item;
+                            $uploads_arr[] = $temp_url;
+                        }
+                    }
+                }
+            }
+        }
+
+        echo json_encode($uploads_arr);
+    }
+
+    public function getSchedules()
+    {
+        $data['pid'] = $this->patient['pid'];
+        $schedules = $this->schedule_model->getSchedules($data);
+        $return_data = array();
+        foreach ($schedules as $schedule)
+        {
+            $temp['id'] = $schedule['id'];
+            $temp['start'] = $schedule['date'];
+            $temp['title'] = $schedule['note'];
+
+            $return_data[] = $temp;
+        }
+        echo json_encode($return_data);
+    }
+
     public function setScheduleIOS(){
         $data['pid'] = $this->patient['pid'];
         $data['date'] = $this->input->post('date');
@@ -271,10 +320,11 @@ class PatientAfterLogin extends CI_Controller
             ));
         }catch (Exception $e)
         {
-            //var_dump($e);
-            $return_data['success'] = 0;
-            $return_data['error'] = "Payment happens error";
-            echo json_encode($return_data);
+            //var_dump($e);\
+            echo json_encode($e);
+//            $return_data['success'] = 0;
+//            $return_data['error'] = "Payment happens error";
+//            echo json_encode($return_data);
             exit();
         }
         $return_data['success'] = 1;

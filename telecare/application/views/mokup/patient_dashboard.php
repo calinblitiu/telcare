@@ -12,6 +12,13 @@
     <script src="https://static.opentok.com/v2/js/opentok.js"></script>
     <script src="<?=base_url()?>assets/global/plugins/dropzone/dropzone.js"></script>
     <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/dropzone/css/dropzone.css">
+    <link href='<?=base_url()?>assets/global/plugins/fullcalendar/fullcalendar.css' rel='stylesheet' />
+    <link href='<?=base_url()?>assets/global/plugins/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script src='<?=base_url()?>assets/global/plugins/fullcalendar/lib/moment.min.js'></script>
+    <script src='<?=base_url()?>/assets/global/plugins/fullcalendar/fullcalendar.min.js'></script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
+
 </head>
 
 <body>
@@ -46,8 +53,11 @@
                         <div class="waitingroom-item" style="cursor: pointer;padding:5px;background-color: #ddd;width: 100%;"><?=$doctor['fname']?> <?=$doctor['lname']?> <?=$waitingroom["id"]?></div>
                     <?php endif;?>
                 </div>
-                <div class="mokup-border" style="width: 80%; margin: 5%">Upload</div>
-                <div class="mokup-border" style="width: 80%; margin: 5%">Schedule appointment</div>
+                <div class="mokup-border" style="width: 80%; margin: 5%">
+                    <a href="#upload-part">Upload</a>
+                </div>
+                <div class="mokup-border" style="width: 80%; margin: 5%">
+                    <a href="#calendar-part">Schedule appointment</a></div>
 
                 <a  href="<?=base_url()?>accounts_page" class="mokup-border" style="width: 80%; left: 5%; position: absolute; bottom: 5%;">Account Setting</a>
             </div>
@@ -83,15 +93,15 @@
     </div>
 </div>
 
-<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
+<!--<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">-->
+<!---->
+<!--</div>-->
+<!---->
+<!--<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">-->
+<!--    Your Document-->
+<!--</div>-->
 
-</div>
-
-<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
-    Your Document
-</div>
-
-<div class="row mokup-border" style="width:60%; margin: 5% 20%; text-align: center;">
+<div class="row mokup-border" style="width:60%; margin: 5% 20% 0 20%; text-align: center;" id="upload-part">
 
     <form action="<?=base_url()?>upload_patient_files" class="dropzone" id="my-dropzone">
         <input type="hidden" name="token" value="<?=$this->session->userdata('token')?>">
@@ -100,12 +110,74 @@
 
 </div>
 
-<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
+<div class="row mokup-border" style="width:60%;margin: 0 20% 0 20%;text-align: center;">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>NO</th>
+            <th>NAME</th>
 
+        </tr>
+        </thead>
+        <tbody id="uploads-list">
+
+        </tbody>
+    </table>
 </div>
 
-<div class="row mokup-border" style="width:60%;height: 30%; margin: 5% 20%; text-align: center;padding: 10%;">
-    <span class="mokup-border" style="padding: 40px 1%;">Calendar</span>
+<div class="row mokup-border" style="width:60%;margin: 5% 20%; text-align: center;padding: 5%;" id="calendar-part">
+    <div id='calendar'></div>
+</div>
+
+<div id="paymodal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Please Pay and Add Schedule</h4>
+            </div>
+            <div class="modal-body">
+                <form action="<?=base_url()?>b_check_out" method="POST">
+
+                    <div class="form-body">
+                        <form role="form" action="<?=base_url()?>set_schedule" method="post" id="patient-setschedule-form">
+                            <input type="hidden" name="token" value="<?=$this->session->userdata('token')?>">
+                            <div class="form-group has-success">
+                                <label class="control-label">Input Date</label>
+                                <input type="text" class="form-control" id="patient_schedule_date" name="date" placeholder="Schedule Date">
+                            </div>
+
+                            <div class="form-group has-success">
+                                <label class="control-label">Input Note</label>
+                                <textarea class="form-control" id="patient_schedule_note" name="note" placeholder="Schedule note"></textarea>
+                            </div>
+
+                            <div class="form-group has-success hide">
+                                <label class="control-label">Input History</label>
+                                <input type="hidden" class="form-control" id="patient_schedule_history" name="history" placeholder="Schedule History">
+                            </div>
+
+                    </div>
+                </form>
+                <form role="form" action="<?=base_url()?>upload_history_attach" method="post" id="patient-attach-form" enctype='multipart/form-data'>
+                    <div class="form-group has-success">
+                        <label class="control-label">Upload History File</label>
+                        <input type="hidden" name="token" value="<?=$this->session->userdata('token')?>">
+                        <input type="file" class="form-control" id="patient_schedule_file" name="img">
+                        <div id="file_preview"></div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="reset patient-schedule-reset-btn" class="btn default">Reset</button>
+                <button type="button" class="btn red patient-schedule-btn">Add New Schedule</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 
@@ -116,6 +188,8 @@
     var my_token = "<?=$this->session->userdata('token')?>";
     var msgTxt = $("#chat-message-input");
     var chat_msg_count = 0;
+    var upload_list = $("#uploads-list");
+    var pay_modal = $("#paymodal");
 
     $(".waitingroom-item").click(function () {
         var post_data = {
@@ -258,6 +332,7 @@
                         });
 
                         this.on("success", function(file,response, event) {
+                            getUploads();
 
                             var response = JSON.parse(response);
 
@@ -292,6 +367,238 @@
     }();
 
     FormDropzone.init();
+
+    function getUploads()
+    {
+        $.ajax({
+            url : baseURL+"getuploads",
+            type : "post",
+            dataType : 'json',
+            data : {token : my_token},
+            success : function (data)
+            {
+                upload_list.html("");
+                for(var i=0;i<data.length;i++)
+                {
+                    upload_list.append("\
+                        <tr>\
+                            <td>"+i+"</td>\
+                            <td><a href='"+data[i]+"'>Uploaded File "+i+"</a></td>\
+                        </tr>\
+                    ");
+                }
+            },
+            fail : function (err) {
+                alert(err);
+            }
+        });
+    }
+    getUploads();
+
+    var calendar = $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        //defaultDate: '2014-09-12',
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end) {
+//            var title = prompt('Event Title:');
+//            var eventData;
+//            if (title) {
+//                eventData = {
+//                    title: title,
+//                    start: start,
+//                    end: end
+//                };
+//                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+//            }
+//            $('#calendar').fullCalendar('unselect');
+
+            //pay_modal.modal('show');
+            var nowdate = new Date();
+            var before_date = new Date(nowdate);
+            before_date.setDate(nowdate.getDate()-1);
+
+            var curdate = new Date(start);
+
+          if(before_date.getTime()>curdate.getTime()) {
+              alert("Don't select before day.");
+              return;
+          }
+            handler.open({
+                name: 'Pay With Stripe',
+                description: 'You have to purcharse to set schedule',
+                amount: 2000
+            });
+        },
+        visibleRange : {
+          start : new Date()
+        },
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: {
+            url: baseURL+"getschedules",
+            type : 'post',
+            data : {token : my_token},
+            error: function() {
+                $('#script-warning').show();
+            }
+        },
+        loading: function(bool) {
+            $('#loading').toggle(bool);
+        }
+
+    });
+
+
+    var handler = StripeCheckout.configure({
+        key: 'pk_test_m24ptzwSZcm4cdtbNsbXsiF8',
+        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+        locale: 'auto',
+        email : "sky.dream2018@yandex.com",
+        token: function(token) {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+            $.ajax({
+                url : baseURL+"b_check_out",
+                type : "post",
+                dataType : 'json',
+                data : {token : my_token, stripeToken : token.id, amount : 2000},
+                success : function (data)
+                {
+                    if(data.success == 1)
+                    {
+                        getUploads();
+                        pay_modal.modal({
+                            backdrop : 'static',
+                            keyboard : false
+                        });
+
+                        $('#calendar').fullCalendar({
+                            events : {
+                                url: baseURL+"getschedules",
+                                type : 'post',
+                                data : {token : my_token},
+                                error: function() {
+                                    $('#script-warning').show();
+                                }
+                            }
+                        });
+                    }
+                    else if(data.success == 0)
+                    {
+                        alert(data.error)
+                    }
+                },
+                fail : function (err) {
+                    alert(err);
+                }
+            });
+
+        }
+    });
+
+
+
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+        handler.close();
+    });
+
+</script>
+
+<script>
+
+
+    $('.patient-schedule-btn').click(function(){
+
+        var date = $('#patient_schedule_date').val();
+        var note = $('#patient_schedule_note').val();
+        var history = $('#patient_schedule_history').val();
+
+        if(date == "" || note == "" || history == "")
+        {
+            alert('please input all data');
+            return;
+        }
+        var post_data = {
+            token : my_token,
+            date : date,
+            note : note,
+            history : history
+        };
+        $.ajax({
+            url: baseURL + "set_schedule",
+            type: 'post',
+            dataType: "json",
+            data : post_data,
+            success: function (data) {
+                if (data.success == 1) {
+                    alert(data.error);
+                    pay_modal.modal('hide');
+                }
+                else if (data.success == 0) {
+                    alert(data.error);
+                }
+            },
+            fail: function (err) {
+                alert();
+            }
+        });
+    });
+
+    $('#patient_schedule_date').datetimepicker({
+        format: "yyyy-mm-dd hh:ii:ss",
+        autoclose: true
+    });
+
+    $("#patient_schedule_file").change(function() {
+        var file = this.files[0];
+        if(file == undefined)
+        {
+            return;
+        }
+        var imagefile = file.type;
+        var reader = new FileReader();
+        reader.onload = function(e){
+            $.ajax({
+                url: baseURL+"upload_history_attach", // Url to which the request is send
+                type: "POST",             // Type of request to be send, called as method
+                data: new FormData(document.getElementById("patient-attach-form")), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+                contentType: false,       // The content type used when sending data to the server.
+                cache: false,             // To unable request pages to be cached
+                processData:false,        // To send DOMDocument or non processed data file it is set to false
+                dataType: "json",
+                success: function(data)   // A function to be called if request succeeds
+                {
+                    if(data.success == 1){
+                        $('#file_preview').append("<span>"+data.data.img+"</span><br>");
+                        var old_data = $('#patient_schedule_history').val();
+                        var new_data = '';
+                        if(old_data == "")
+                        {
+                            new_data = data.data.img;
+                        }
+                        else{
+                            new_data = old_data+","+data.data.img;
+                        }
+                        $('#patient_schedule_history').val(new_data);
+                    }
+                    else{
+                        alert(data.error);
+                    }
+                },
+                fail : function (err) {
+                    alert(err);
+                }
+            });
+        };
+        reader.readAsDataURL(this.files[0]);
+
+    });
 
 </script>
 

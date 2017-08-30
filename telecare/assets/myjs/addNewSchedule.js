@@ -25,6 +25,8 @@ $('#patient_schedule_date').datetimepicker({
     autoclose: true
 });
 
+var attact_history;
+
 $("#patient_schedule_file").change(function() {
     var file = this.files[0];
     if(file == undefined)
@@ -65,6 +67,8 @@ $("#patient_schedule_file").change(function() {
                 alert(err);
             }
         });
+
+        $("#patient-attach-form")[0].reset();
     };
     reader.readAsDataURL(this.files[0]);
 

@@ -65,6 +65,18 @@ class Schedule_model extends CI_Model
         return $result[0];
     }
 
+    public function getSchedules($data)
+    {
+        $this->db->where($data);
+        $query = $this->db->get($this->table_name);
+        $result = $query->result_array();
+        if(count($result) == 0)
+        {
+            return false;
+        }
+        return $result;
+    }
+
     public function updateSchedule($id,$data)
     {
         $this->db->where("id",$id);

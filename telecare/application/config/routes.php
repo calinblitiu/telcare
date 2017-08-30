@@ -139,6 +139,8 @@ $route['get_id_doctor'] = "backend/patient/PatientAfterLogin/getIdDoctor";
 $route['req_call'] = "backend/patient/PatientAfterLogin/reqCall";
 $route['b_check_out'] = "backend/patient/PatientAfterLogin/checkOut";
 $route['upload_patient_files'] = 'backend/patient/PatientAfterLogin/uploadFile';
+$route['getuploads'] = 'backend/patient/PatientAfterLogin/getUploads';
+$route['getschedules'] = 'backend/patient/PatientAfterLogin/getSchedules';
 
 /*
  * common
