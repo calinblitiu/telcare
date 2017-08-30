@@ -27,7 +27,7 @@
     Header
 </div>
 
-<div class="row mokup-border" style="height: 70%; margin: 50px 10%;text-align: center;">
+<div class="row mokup-border" style="height: 100%; margin: 50px 10%;text-align: center;">
     <div class="col-md-10" style="height: 100%;padding: 0;">
         <div class="row" style="height: 25%;">
             <div class="col-md-3" style="height:100%;">
