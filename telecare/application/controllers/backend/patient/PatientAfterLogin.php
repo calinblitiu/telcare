@@ -257,6 +257,16 @@ class PatientAfterLogin extends CI_Controller
             exit();
         }
 
+        if($current_schedule['opentok_session_id'] != "" && $current_schedule['opentok_token'] != "")
+        {
+            $opentok_val['opentok_session_id'] = $current_schedule['opentok_session_id'];
+            $opentok_val['opentok_token'] = $current_schedule['opentok_token'];
+            $data['success'] = 1;
+            $data['data'] = $opentok_val;
+            echo json_encode($data);
+            exit();
+        }
+
         //$this->load->helper('opentok');
         $opentok = $this->createNewOpentokSession();
 

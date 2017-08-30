@@ -50,9 +50,15 @@
                 <div class="mokup-border" style="width: 80%;margin: 5%;">
                     <a href="#new_patient_list" class="" style="width: 80%;">New Patient</a>
                 </div>
-                <div class="mokup-border" style="width: 80%; margin: 5%">eOPAT Patient</div>
-                <div class="mokup-border" style="width: 80%; margin: 5%">Discharged Patient</div>
-                <div class="mokup-border" style="width: 80%; margin: 5%">Prior Consults</div>
+                <div class="mokup-border" style="width: 80%; margin: 5%">
+                    <a href="#eopat_patient">eOPAT Patient</a>
+                </div>
+                <div class="mokup-border" style="width: 80%; margin: 5%">
+                    <a href="#discharged_patient">Discharged Patient</a>
+                </div>
+                <div class="mokup-border" style="width: 80%; margin: 5%">
+                    <a href="#prior_consults">Prior Consults</a>
+                </div>
                 <a href="<?=base_url()?>accounts_page" class="mokup-border" style="width: 80%;  position: absolute; bottom: 5%;left: 5%">Account Setting</a>
             </div>
             <div class="col-md-9" style="height: 100%; position: relative;padding: 0;">
@@ -68,10 +74,10 @@
 <!--            <img class="mokup-no-imag" src="--><?//=base_url()?><!--assets/mokup/noimage.png" style="">-->
 <!--            <span style="position: absolute;top: 50%;left: 20%" class="mokup-border">ID Doctor</span>-->
 <!--        </div>-->
-        <div style="height: 20%; padding: 0; " class="mokup-border">
-            Calender
+        <div style="height: 30%; padding: 0; " class="mokup-border">
+            <div id="calendar"></div>
         </div>
-        <div style="height: 80%; padding: 0;  position: relative;" class="mokup-border">
+        <div style="height: 70%; padding: 0;  position: relative;" class="mokup-border">
             <div style="height: calc(100% - 50px);width: 100%;overflow-y: scroll;padding: 15px;" class="mokup-border" id="chat-history">
 
             </div>
@@ -120,9 +126,58 @@
     </table>
 </div>
 
-<div class="row mokup-border" style="height: 30%; margin: 0 10% 50px 10%;text-align: center;">
-    Table Format<br><br>
-    Date Duration Attachment
+<div class="row" style="margin: 0 10% 50px 10%;text-align: center;">
+    <h1>eOPAT Patient</h1>
+</div>
+<div class="row mokup-border" style="margin: 0 10% 50px 10%;text-align: center;">
+    <table class="table table-hover">
+        <thead >
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody id="eopat_patient">
+
+        </tbody>
+    </table>
+</div>
+
+<div class="row" style="margin: 0 10% 50px 10%;text-align: center;">
+    <h1>Discharged Patient</h1>
+</div>
+<div class="row mokup-border" style="margin: 0 10% 50px 10%;text-align: center;">
+    <table class="table table-hover">
+        <thead >
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody id="discharged_patient">
+
+        </tbody>
+    </table>
+</div>
+
+<div class="row" style="margin: 0 10% 50px 10%;text-align: center;">
+    <h1>Prior Consults</h1>
+</div>
+<div class="row mokup-border" style="margin: 0 10% 50px 10%;text-align: center;">
+    <table class="table table-hover">
+        <thead >
+        <tr>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Attachment</th>
+        </tr>
+        </thead>
+        <tbody id="prior_consults">
+
+        </tbody>
+    </table>
 </div>
 
 <script>
@@ -337,6 +392,26 @@
         });
 
     }
+
+
+
+    function getPriorConsults(email) {
+        $.ajax({
+            url : baseURL+"get_prior_consults",
+            type : 'post',
+            dataType : 'json',
+            data : {token : my_token, email : email},
+            success : function (data) {
+
+            },
+            fail : function (err) {
+                alert(err)
+            }
+        })
+    }
+
+    $("#calendar").datepicker({});
+
 </script>
 
 </body>

@@ -124,6 +124,7 @@ $route['accept_patient'] = "backend/doctor/DoctorAfterLogin/acceptPatient/yes";
 $route['decline_patient'] = "backend/doctor/DoctorAfterLogin/acceptPatient/no";
 $route['get_today_schedule'] = "backend/doctor/DoctorAfterLogin/getTodaySchedule";
 $route['req_call_doctor'] = "backend/doctor/DoctorAfterLogin/reqCall";
+$route['get_prior_consults'] = "backend/doctor/DoctorAfterLogin/getPriorConsults";
 
 /*
  * Patient
