@@ -49,6 +49,18 @@
 
 <script>
     $('.login-btn').click(function(){
+        login_ajax();
+    });
+
+    $("#login-form").keypress(function (e) {
+       if(e.which == 13)
+        {
+            login_ajax()
+        }
+    });
+
+    function login_ajax()
+    {
         var email = $("#patient_signup_email").val();
         var pwd = $("#patient_signup_pwd").val();
 
@@ -64,10 +76,10 @@
             dataType: "json",
             success: function (data) {
                 if (data.success == 1) {
-                   location.href = baseURL+"patient_dashboard";
+                    location.href = baseURL+"patient_dashboard";
                 }
                 else if (data.success == 0) {
-                   // alert(data.error);
+                    // alert(data.error);
                     $("#login-form").ajaxSubmit({
                         url: baseURL + "login_doctor",
                         type: 'post',
@@ -90,7 +102,7 @@
                 alert(err);
             }
         });
-    });
+    }
 </script>
 
 

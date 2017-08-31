@@ -27,25 +27,27 @@
     Header
 </div>
 
-<div class="row mokup-border" style="height: 100%; margin: 50px 10%;text-align: center;">
-    <div class="col-md-10" style="height: 100%;padding: 0;">
-        <div class="row" style="height: 25%;">
-            <div class="col-md-3" style="height:100%;">
-                <div class="mokup-border" style=" margin: 5%;">
-                    <img src="<?=base_url()?>assets/uploads/patient/<?=$this->session->userdata("img")?>" style="width: 30%;float: left;"><br>
+<div class="row mokup-border" style="height: 150%; margin: 50px 10%;text-align: center;">
+    <div class="col-md-12" style="height: 100%;padding: 0;">
+        <div class="row" style="height: 15%;">
+            <div class="col-md-9" style="height:100%;">
+                <div class="mokup-border" style="height: 75%; margin: 3% 1%;">
+
                     <div style="">
-                    Welcome <?=$this->session->userdata("fname")." ".$this->session->userdata('lname')?> <br>
+                    Welcome <?php if($this->session->userdata("gender") == "0") {echo "Ms";}else{echo "Mr";} ?> <?=$this->session->userdata("fname")." ".$this->session->userdata('lname')?> <br>
+                    DOB : <?=$this->session->userdata('dob')?><br>
                     Email : <?=$this->session->userdata("email")?><br>
                     SSN : <?=$this->session->userdata("ssn")?><br>
                     Address : <?=$this->session->userdata("addr")?><br>
+                    Phone : <?=$this->session->userdata('phone')?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-9" style="height: 100%">
-                <span class="mokup-border" style="margin:30%;">Session Code</span>
+            <div class="col-md-3" style="height: 100%">
+                <img src="<?=base_url()?>assets/uploads/patient/<?=$this->session->userdata("img")?>" class="mokup-border" style="height: 90%;">
             </div>
         </div>
-        <div class="row" style="height: 75%; margin: 0;">
+        <div class="row" style="height: 85%; margin: 0;">
             <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center;position: relative;">
                 <div class="mokup-border" style="width: 80%; margin: 5%">Dashboard</div>
                 <div class="mokup-border" style="width: 80%; margin: 5%;text-align: center;">Waiting Room<br>
@@ -57,15 +59,45 @@
                     <a href="#upload-part">Upload</a>
                 </div>
                 <div class="mokup-border" style="width: 80%; margin: 5%">
-                    <a href="#calendar-part">Schedule appointment</a></div>
+                    <a href="#calendar-part">Schedule appointment</a>
+                </div>
+
+                <div class="mokup-border" style="width: 80%; margin: 5%">
+                    <a href="#prior_consult">Prior Consults</a>
+                </div>
+
+                <button class="btn btn-default logout-btn">Logout</button>
 
                 <a  href="<?=base_url()?>accounts_page" class="mokup-border" style="width: 80%; left: 5%; position: absolute; bottom: 5%;">Account Setting</a>
             </div>
             <div class="col-md-9" style="height: 100%;">
-                <div class="row " style="height: 100%;position: relative;">
-<!--                    <img class="mokup-no-imag" src="--><?//=base_url()?><!--assets/mokup/noimage.png" style="">-->
-                    <div id="publisher" style="width: 30%;height: 30%;position: absolute;bottom: 0;z-index: 1000;" class="mokup-border"></div>
-                    <div id="subscriber" style="width: 100%;height: 100%;position: absolute;" class="mokup-border"></div>
+                <div class="row mokup-border" style="height: 100%;position: relative;">
+                    <div class="row mokup-border" style="width:90%; margin: 5% 5% 0 5%; text-align: center;" id="upload-part">
+
+                        <form action="<?=base_url()?>upload_patient_files" class="dropzone" id="my-dropzone" style="min-height: 20%;">
+                            <input type="hidden" name="token" value="<?=$this->session->userdata('token')?>">
+                        </form>
+
+                    </div>
+
+                    <div class="row mokup-border" style="width:90%;margin: 0 50% 0 5%;text-align: center;height: 20%;overflow-y: scroll;">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>NAME</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="uploads-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row mokup-border" style="width:90%;margin: 5% 5%; text-align: center;padding: 5% 20%;" id="calendar-part">
+                        <div id='calendar'></div>
+                    </div>
+
                 </div>
 
             </div>
@@ -73,61 +105,27 @@
 
     </div>
 
-    <div class="col-md-2" style="height: 100%;padding: 0">
-        <div class="" style="height: 25%; padding: 0;position: relative;">
-            <?php if($doctor):?>
-                <img class="mokup-no-imag" src="<?=base_url()?>assets/uploads/doctor/<?=$doctor['img']?>" style="">
-            <?php else:?>
-                <img src="<?=base_url()?>assets/mokup/noimage.png" style="width: 100%;height: 100%;" class="mokup-border">
-            <?php endif;?>
-            <span style="position: absolute;top: 50%;left: 20%" class="mokup-border">ID Doctor</span>
-        </div>
-        <div style="height: 75%; padding: 0; position: relative;" class="mokup-border">
-            <div style="height: calc(100% - 50px);width: 100%;overflow-y: scroll;padding: 15px;" class="mokup-border" id="chat-history">
-
-            </div>
-
-            <input type="text" class="mokup-border" style="width: 100%;position: absolute;bottom: 0;left: 0;height: 50px;" placeholder="Messaging" id="chat-message-input">
-
-        </div>
-    </div>
 </div>
 
-<!--<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">-->
-<!---->
-<!--</div>-->
-<!---->
-<!--<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">-->
-<!--    Your Document-->
-<!--</div>-->
-
-<div class="row mokup-border" style="width:60%; margin: 5% 20% 0 20%; text-align: center;" id="upload-part">
-
-    <form action="<?=base_url()?>upload_patient_files" class="dropzone" id="my-dropzone">
-        <input type="hidden" name="token" value="<?=$this->session->userdata('token')?>">
-
-    </form>
-
+<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
+    Prior Consults
 </div>
 
-<div class="row mokup-border" style="width:60%;margin: 0 20% 0 20%;text-align: center;">
+<div class="row mokup-border" style="margin: 0 20% 50px 20%;text-align: center;" id="prior_consult">
     <table class="table table-hover">
-        <thead>
+        <thead >
         <tr>
-            <th>NO</th>
-            <th>NAME</th>
-
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
         </tr>
         </thead>
-        <tbody id="uploads-list">
+        <tbody id="prior_consults">
 
         </tbody>
     </table>
 </div>
 
-<div class="row mokup-border" style="width:60%;margin: 5% 20%; text-align: center;padding: 5%;" id="calendar-part">
-    <div id='calendar'></div>
-</div>
 
 <div id="paymodal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -599,6 +597,16 @@
         reader.readAsDataURL(this.files[0]);
 
     });
+
+    //logout
+    $(".logout-btn").click(function () {
+        $.ajax({
+            url : baseURL+"logout_patient",
+            type : "post",
+            data : {token: my_token}
+        });
+        location.href = baseURL+"login";
+    })
 
 </script>
 

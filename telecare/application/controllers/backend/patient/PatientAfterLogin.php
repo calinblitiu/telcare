@@ -11,6 +11,7 @@ use OpenTok\OpenTok;
 use OpenTok\MediaMode;
 use OpenTok\ArchiveMode;
 
+
 class PatientAfterLogin extends CI_Controller
 {
     public $token = "";
@@ -241,6 +242,7 @@ class PatientAfterLogin extends CI_Controller
 
     public function reqCall()
     {
+        $doctor = $this->doctor_model->getDoctorId($this->patient['did']);
         if($this->patient['did'] == "" || $this->patient['did'] == null)
         {
             $return_data['success'] = 0;
@@ -264,6 +266,7 @@ class PatientAfterLogin extends CI_Controller
             $data['success'] = 1;
             $data['data'] = $opentok_val;
             echo json_encode($data);
+            $this->sendNotification($doctor);
             exit();
         }
 
@@ -286,15 +289,12 @@ class PatientAfterLogin extends CI_Controller
             echo json_encode($return_data);
             exit();
         }
+
         $return_data['success'] = 1;
         $return_data['data'] = $opentok;
-        echo json_encode($return_data);
-
-        $doctor = $this->doctor_model->getDoctorId($this->patient['did']);
         $this->sendNotification($doctor);
-        exit();
-
-
+        echo json_encode($return_data);
+        //exit();
     }
 
    public function createNewOpentokSession()
@@ -330,18 +330,51 @@ class PatientAfterLogin extends CI_Controller
             ));
         }catch (Exception $e)
         {
-            //var_dump($e);\
-            echo json_encode($e);
-//            $return_data['success'] = 0;
-//            $return_data['error'] = "Payment happens error";
-//            echo json_encode($return_data);
+            $return_data['success'] = 0;
+            $return_data['error'] = "Payment happens error";
+            echo json_encode($return_data);
             exit();
         }
         $return_data['success'] = 1;
         $return_data['data'] = "payement successed";
         echo json_encode($return_data);
         exit();
+    }
 
+    public function getPriorConsults()
+    {
+        $where_data['pid'] = $this->patient['pid'];
+        $temp_schedules = $this->schedule_model->getSchedules($where_data);
+        $return_data = array();
+        if ($temp_schedules)
+        {
+            foreach ($temp_schedules as $temp_schedule)
+            {
+                $temp_history = $temp_schedule['history'];
+                $temp_history = explode(',',$temp_history);
+                $temp_history_arr = array();
+                foreach ($temp_history as $history_item)
+                {
+                    if($history_item)
+                    {
+                        $temp_history_arr[] = base_url().'assets/uploads/schedule'.$history_item;
+                        $temp_schedule['history'] = $temp_history_arr;
+                    }
+                }
+
+                $return_data[] = $temp_schedule;
+            }
+
+            $data['success'] = 1;
+            $data['schedules'] = $return_data;
+            echo json_encode($data);
+            exit();
+        }
+
+        $data['success'] = 0;
+        $data['error'] = "There is not any Schedules";
+        echo json_encode($data);
+        exit();
     }
 
     private function checkTokenSession(){
@@ -378,6 +411,7 @@ class PatientAfterLogin extends CI_Controller
             'cluster' => 'us2',
             'encrypted' => true
         );
+
         $pusher = new Pusher\Pusher(
             '4d19d5b3edbd8e1743b4',
             'e568f9f7c0b1af9ab21d',
@@ -385,9 +419,11 @@ class PatientAfterLogin extends CI_Controller
             $options
         );
 
+       // $data["msg"] = "aaa";
         $data['message'] = 'Hello! '.$doctor["fname"]." ".$doctor["lname"]." is requesting call!";
         $data['receiver'] = $doctor;
         $data['sender'] = $this->patient;
         $pusher->trigger('my-channel', 'my-event', $data);
+
     }
 }

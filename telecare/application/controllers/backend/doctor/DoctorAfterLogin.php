@@ -403,7 +403,7 @@ class DoctorAfterLogin extends CI_Controller
         if(!$today_schedule)
         {
             $return_data['success'] = 0;
-            $return_data['error'] = "There is not patient";
+            $return_data['error'] = "There is not schedule";
             echo json_encode($return_data);
             exit();
         }
@@ -415,13 +415,9 @@ class DoctorAfterLogin extends CI_Controller
             $temp['opentok_token'] = $today_schedule['opentok_token'];
             $return_data['data'] = $temp;
             echo json_encode($return_data);
+            $this->sendNotification($patient);
             exit();
         }
-
-//        $return_data['success'] = 0;
-//        $return_data['error'] = "This patient doesn't request call now";
-//        echo json_encode($return_data);
-//        exit();
 
         $opentok = $this->createNewOpentokSession();
 
@@ -444,8 +440,6 @@ class DoctorAfterLogin extends CI_Controller
         $return_data['success'] = 1;
         $return_data['data'] = $opentok;
         echo json_encode($return_data);
-
-
         $this->sendNotification($patient);
         exit();
     }

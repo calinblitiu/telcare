@@ -115,8 +115,8 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="youtube-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document" style="width: 80%;height: 90%;">
+    <div class="modal " id="youtube-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="" id="modal-video">
             <div class="modal-content">
                 <div class="modal-body" style="padding: 0;">
 
@@ -136,6 +136,19 @@
             video_frame[0].src = "";
         })
     });
+
+    var old_width = $(window).width();
+    var old_height = $(window).height();
+    var modal_video = $("#modal-video");
+
+    var width  = $(window).width();
+    var height = $(window).height();
+    modal_video.css({"width":width/2+"px","height":280/500*width/2+"px", "margin-top" : (height-280/500*width/2)/10+"px"});
+    $(window).on('resize',function () {
+        var width  = $(window).width();
+        var height = $(window).height();
+        modal_video.css({"width":width/2+"px","height":280/500*width/2+"px", "margin-top" : (height-280/500*width/2)/10+"px"});
+    })
 
 
 </script>
