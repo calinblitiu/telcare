@@ -389,6 +389,7 @@ class DoctorAfterLogin extends CI_Controller
     public function reqCall()
     {
         $patient_email = $this->input->post("email");
+        $is_call = $this->input->post("is_call");//0: calling, 1 : receive
         $patient = $this->patient_model->getPatientEmail($patient_email);
         if(!$patient)
         {
@@ -415,7 +416,9 @@ class DoctorAfterLogin extends CI_Controller
             $temp['opentok_token'] = $today_schedule['opentok_token'];
             $return_data['data'] = $temp;
             echo json_encode($return_data);
-            $this->sendNotification($patient);
+            if($is_call == "0") {
+                $this->sendNotification($patient);
+            }
             exit();
         }
 

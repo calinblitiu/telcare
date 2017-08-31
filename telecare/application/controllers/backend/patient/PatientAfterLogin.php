@@ -243,6 +243,7 @@ class PatientAfterLogin extends CI_Controller
     public function reqCall()
     {
         $doctor = $this->doctor_model->getDoctorId($this->patient['did']);
+        $is_call = $this->input->post("is_call");//0: calling, 1 : receive
         if($this->patient['did'] == "" || $this->patient['did'] == null)
         {
             $return_data['success'] = 0;
@@ -266,7 +267,9 @@ class PatientAfterLogin extends CI_Controller
             $data['success'] = 1;
             $data['data'] = $opentok_val;
             echo json_encode($data);
-            $this->sendNotification($doctor);
+            if($is_call == "0") {
+                $this->sendNotification($doctor);
+            }
             exit();
         }
 

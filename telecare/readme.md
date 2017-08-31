@@ -234,7 +234,7 @@
 
 ### url : http://your-domain/req_call_doctor
 
-### post : token , email (patient email)
+### post : token , email (patient email), is_call(0 : calling, 1 : receiver)
 
 ### result : 
 
@@ -463,7 +463,7 @@
 
 ### url : http://your-domain/req_call
 
-### post : token
+### post : token, is_call(0 : calling, 1 : receiver)
 
 ### result 
 
