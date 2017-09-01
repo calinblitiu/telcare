@@ -423,6 +423,7 @@ class PatientAfterLogin extends CI_Controller
         );
 
        // $data["msg"] = "aaa";
+        $data['type'] = 0;
         $data['message'] = 'Hello! '.$doctor["fname"]." ".$doctor["lname"]." is requesting call!";
         $data['receiver'] = $doctor;
         $data['sender'] = $this->patient;
