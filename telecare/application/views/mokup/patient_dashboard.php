@@ -12,11 +12,9 @@
     <script src="https://static.opentok.com/v2/js/opentok.js"></script>
     <script src="<?=base_url()?>assets/global/plugins/dropzone/dropzone.js"></script>
     <link rel="stylesheet" href="<?=base_url()?>assets/global/plugins/dropzone/css/dropzone.css">
-    <link href='<?=base_url()?>assets/global/plugins/fullcalendar/fullcalendar.css' rel='stylesheet' />
-    <link href='<?=base_url()?>assets/global/plugins/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
-    <script src='<?=base_url()?>assets/global/plugins/fullcalendar/lib/moment.min.js'></script>
-    <script src='<?=base_url()?>/assets/global/plugins/fullcalendar/fullcalendar.min.js'></script>
+
     <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
 
 
 </head>
@@ -52,7 +50,7 @@
                 <div class="mokup-border" style="width: 80%; margin: 5%">Dashboard</div>
                 <div class="mokup-border" style="width: 80%; margin: 5%;text-align: center;">Waiting Room<br>
                     <?php if($waitingroom):?>
-                        <div class="waitingroom-item" style="cursor: pointer;padding:5px;background-color: #ddd;width: 100%;"><?=$doctor['fname']?> <?=$doctor['lname']?> <?=$waitingroom["id"]?></div>
+                        <div  class="waitingroom-item" style="cursor: pointer;padding:5px;background-color: #ddd;width: 100%;"><a href="<?=base_url('video_call_patient')?>"><?=$doctor['fname']?> <?=$doctor['lname']?> <?=$waitingroom["id"]?></a></div>
                     <?php endif;?>
                 </div>
                 <div class="mokup-border" style="width: 80%; margin: 5%">
@@ -72,9 +70,9 @@
             </div>
             <div class="col-md-9" style="height: 100%;">
                 <div class="row mokup-border" style="height: 100%;position: relative;">
-                    <div class="row mokup-border" style="width:90%; margin: 5% 5% 0 5%; text-align: center;" id="upload-part">
+                    <div class="row mokup-border" style="height: 20%;width:90%; margin: 5% 5% 0 5%; text-align: center;" id="upload-part">
 
-                        <form action="<?=base_url()?>upload_patient_files" class="dropzone" id="my-dropzone" style="min-height: 20%;">
+                        <form action="<?=base_url()?>upload_patient_files" class="dropzone" id="my-dropzone" style="min-height: 100%;">
                             <input type="hidden" name="token" value="<?=$this->session->userdata('token')?>">
                         </form>
 
@@ -115,9 +113,9 @@
     <table class="table table-hover">
         <thead >
         <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
+            <th>Date</th>
+            <th>Note</th>
+            <th>Attaches</th>
         </tr>
         </thead>
         <tbody id="prior_consults">
@@ -179,6 +177,28 @@
 </div>
 
 
+<div id="message-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Message From <b id="message_doctor_name"></b></h4>
+            </div>
+            <div class="modal-body" id="message-body">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <script>
 
     var my_id = "<?=$this->session->userdata('patient_id')?>";
@@ -188,134 +208,13 @@
     var chat_msg_count = 0;
     var upload_list = $("#uploads-list");
     var pay_modal = $("#paymodal");
+    var prior_consults = $("#prior_consults");
 
-    $(".waitingroom-item").click(function () {
-        var post_data = {
-            token : my_token
-        }
-        $.ajax({
-            url : baseURL+'req_call',
-            data : post_data,
-            type : 'post',
-            dataType : "json",
-            success : function (data) {
-
-                if(data.success == 1)
-                {
-                    opentokInit(data.data.opentok_session_id,data.data.opentok_token);
-                }
-                else{
-                    alert(data.error);
-                }
-            },
-            fail : function (err) {
-                alert(err);
-            }
-        });
-    });
-
-    function opentokInit(ot_session_id,ot_token ) {
-
-        var apiKey = "45947752",
-            session,
-            sessionId = ot_session_id,
-            token  = ot_token,
-            response;
-        initializeSession();
-        function initializeSession() {
-            session = OT.initSession(apiKey, sessionId);
-
-            // Subscribe to a newly created stream
-            session.on('streamCreated', function(event) {
-                var subscriberOptions = {
-                    insertMode: 'append',
-                    width: '100%',
-                    height: '100%'
-                };
-                session.subscribe(event.stream, 'subscriber', subscriberOptions, function(error) {
-                    if (error) {
-                        console.log('There was an error publishing: ', error.name, error.message);
-                    }
-                });
-            });
-
-            session.on('sessionDisconnected', function(event) {
-                console.log('You were disconnected from the session.', event.reason);
-            });
-
-            // Connect to the session
-            session.connect(token, function(error) {
-                // If the connection is successful, initialize a publisher and publish to the session
-                if (!error) {
-                    var publisherOptions = {
-                        insertMode: 'append',
-                        width: '100%',
-                        height: '100%'
-                    };
-                    var publisher = OT.initPublisher('publisher', publisherOptions, function(error) {
-                        if (error) {
-                            console.log('There was an error initializing the publisher: ', error.name, error.message);
-                            return;
-                        }
-                        session.publish(publisher, function(error) {
-                            if (error) {
-                                console.log('There was an error publishing: ', error.name, error.message);
-                            }
-                        });
-                    });
-                } else {
-                    console.log('There was an error connecting to the session: ', error.name, error.message);
-                }
-            });
-
-            // Receive a message and append it to the history
-            var msgHistory = $("#chat-history");
-            session.on('signal:msg', function(event) {
-//                var msg = document.createElement('p');
-//                msg.textContent = event.data;
-//                msg.className = event.from.connectionId === session.connection.connectionId ? 'mine' : 'theirs';
-//                msgHistory.appendChild(msg);
-//                msg.scrollIntoView();
-                var append_msg = "";
-                if(event.data.sender == my_id && event.data.sender_type == my_type){
-                     append_msg = "<p style='text-align: right;'>\
-                        "+event.data.msg+"\
-                        </p>";
-                }
-                else{
-                    append_msg = "<p style='text-align: left;'>\
-                        "+event.data.msg+"\
-                        </p>";
-                }
-                msgHistory.append(append_msg);
-                chat_msg_count++;
-                msgHistory.animate({scrollTop:chat_msg_count*50 },1000);
-                msgTxt.val("");
-            });
-        }
-
-        // Text chat
+    var message_modal = $("#message-modal");
+    var message_body = $("#message-body");
+    var message_doctor_name = $("#message_doctor_name");
 
 
-
-        msgTxt.keypress(function (ev) {
-            var key = ev.which;
-            if(key == 13)
-            {
-                session.signal({
-                    type: 'msg',
-                    data: {msg : msgTxt.val(),sender : my_id,sender_type : my_type}
-                }, function(error) {
-                    if (error) {
-                        console.log('Error sending signal:', error.name, error.message);
-                    } else {
-                        msgTxt.value = '';
-                    }
-                });
-            }
-        });
-
-    }
 
 
     var FormDropzone = function () {
@@ -606,7 +505,65 @@
             data : {token: my_token}
         });
         location.href = baseURL+"login";
-    })
+    });
+
+    $.ajax({
+        url : baseURL+"get_prior_consults_patient",
+        type : "post",
+        data : {token : my_token},
+        dataType : 'json',
+        success : function (data)
+        {
+            var schedules  = data.schedules;
+            for(var i = 0; i<schedules.length; i++)
+            {
+                var temp_schedule = schedules[i];
+                var append_html = "<tr>" +
+                    "<td>"+temp_schedule['date']+"</td>"+
+                    "<td>"+temp_schedule['note']+"</td>";
+                var histories = temp_schedule['history'];
+                var histories_append = "";
+                for(var j = 0; j<histories.length; j++)
+                {
+                    histories_append += "<a href='"+histories[j]+"'>File "+j+"</a> ";
+                }
+                append_html+="<td>"+histories_append+"</td></tr>";
+                prior_consults.append(append_html);
+            }
+        }
+    });
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('4d19d5b3edbd8e1743b4', {
+        cluster: 'us2',
+        encrypted: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        //alert(data.message);
+        var type = data.type;
+        if(type == 0)
+        {
+            return;
+        }
+
+        var recievers = data.receiver;
+        for(var i = 0; i<recievers.length; i++)
+        {
+            if(recievers[i] == my_id)
+            {
+                message_body.html("");
+                message_body.append(data.message);
+                message_doctor_name.html(data.sender.fname+" "+data.sender.lname);
+                message_modal.modal('show');
+                return;
+            }
+        }
+
+    });
 
 </script>
 

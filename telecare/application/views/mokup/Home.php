@@ -148,7 +148,7 @@
         var width  = $(window).width();
         var height = $(window).height();
         modal_video.css({"width":width/2+"px","height":280/500*width/2+"px", "margin-top" : (height-280/500*width/2)/10+"px"});
-    })
+    });
 
 
 </script>

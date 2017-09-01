@@ -142,6 +142,10 @@ class Doctor extends CI_Controller
                     'email'             => $doctor['email'],
                     'fname'             => $doctor['fname'],
                     'lname'             => $doctor['lname'],
+                    'phone'             => $doctor['phone'],
+                    'state'             => $doctor['state'],
+                    'addr'              => $doctor['addr'],
+                    'spec'              => $doctor['spec']
                 );
                 $this->session->set_userdata($sess_data);
 
@@ -159,6 +163,7 @@ class Doctor extends CI_Controller
                 $temp['lang']  = $doctor['lang'];
                 $temp['dea']  = $doctor['dea'];
                 $temp['npi']  = $doctor['npi'];
+                $temp['phone'] = $doctor['phone'];
                 $temp['img']  = base_url()."assets/uploads/doctor/".$doctor['img'];
                 $return_data['data'] = $temp;
                 $return_data['error'] = 'Login success';

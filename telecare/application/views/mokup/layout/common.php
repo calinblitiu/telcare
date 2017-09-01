@@ -18,6 +18,11 @@
 
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/global/plugins/bootstrap-datepicker/css/datepicker3.css"/>
 <script type="text/javascript" src="<?=base_url()?>assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<link href='<?=base_url()?>assets/global/plugins/fullcalendar/fullcalendar.css' rel='stylesheet' />
+<link href='<?=base_url()?>assets/global/plugins/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='<?=base_url()?>assets/global/plugins/fullcalendar/lib/moment.min.js'></script>
+<script src='<?=base_url()?>/assets/global/plugins/fullcalendar/fullcalendar.min.js'></script>
 <script>
     var baseURL = "<?=base_url()?>";
 </script>

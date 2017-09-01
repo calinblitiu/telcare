@@ -360,7 +360,7 @@ class PatientAfterLogin extends CI_Controller
                 {
                     if($history_item)
                     {
-                        $temp_history_arr[] = base_url().'assets/uploads/schedule'.$history_item;
+                        $temp_history_arr[] = base_url().'assets/uploads/schedule/'.$history_item;
                         $temp_schedule['history'] = $temp_history_arr;
                     }
                 }

@@ -194,4 +194,24 @@ class Mokup extends CI_Controller {
         $pusher->trigger('my-channel', 'my-event', $data);
     }
 
+    public function videoCallPatient()
+    {
+        if(!$this->session->userdata('token'))
+        {
+            redirect();
+        }
+        $this->load->view("mokup/f-video-audio-message");
+    }
+
+    public function videoCallDoctor($pid)
+    {
+        if(!$this->session->userdata('token'))
+        {
+            redirect();
+        }
+        $patients = $this->patient_model->getPatients(array('pid'=>$pid));
+        $data['patient_email'] = $patients[0]['email'];
+        $this->load->view("mokup/d-video-audio-message",$data);
+    }
+
 }

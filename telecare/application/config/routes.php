@@ -101,8 +101,8 @@ $route['terms_and_condition'] = "mokup/termsAndCondition";
 $route['accounts_page'] = "mokup/accountsPage";
 $route['pusher_test'] = "mokup/pusherTest";
 $route['send_nodification'] = "mokup/sendNotification";
-
-
+$route['video_call_patient'] = "mokup/videoCallPatient";
+$route['video_call_doctor/(:any)'] = "mokup/videoCallDoctor/$1";
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -125,6 +125,8 @@ $route['decline_patient'] = "backend/doctor/DoctorAfterLogin/acceptPatient/no";
 $route['get_today_schedule'] = "backend/doctor/DoctorAfterLogin/getTodaySchedule";
 $route['req_call_doctor'] = "backend/doctor/DoctorAfterLogin/reqCall";
 $route['get_prior_consults'] = "backend/doctor/DoctorAfterLogin/getPriorConsults";
+$route['send_message'] = 'backend/doctor/DoctorAfterLogin/sendMessage';
+$route['getschedules_doctor'] = 'backend/doctor/DoctorAfterLogin/getSchedules';
 
 /*
  * Patient
@@ -142,6 +144,7 @@ $route['b_check_out'] = "backend/patient/PatientAfterLogin/checkOut";
 $route['upload_patient_files'] = 'backend/patient/PatientAfterLogin/uploadFile';
 $route['getuploads'] = 'backend/patient/PatientAfterLogin/getUploads';
 $route['getschedules'] = 'backend/patient/PatientAfterLogin/getSchedules';
+$route['get_prior_consults_patient'] = 'backend/patient/PatientAfterLogin/getPriorConsults';
 
 /*
  * common

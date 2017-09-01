@@ -10,6 +10,8 @@
     <title>Moke Up | Dashboard</title>
     <?php $this->load->view('mokup/layout/common')?>
     <script src="https://static.opentok.com/v2/js/opentok.js"></script>
+    <script src="<?=base_url()?>assets/global/plugins/ckeditor/ckeditor.js"></script>
+
 
 </head>
 
@@ -20,23 +22,25 @@
 </div>
 
 
-<div class="row mokup-border" style="height: 100%; margin: 50px 10%;text-align: center;">
-    <div class="col-md-10" style="height: 100%;padding: 0;">
+<div class="row mokup-border" style="height: 120%; margin: 50px 10%;text-align: center;">
+    <div class="col-md-12" style="height: 100%;padding: 0;">
         <div class="row" style="height: 20%;">
-            <div class="col-md-3" style="height:100%;">
+            <div class="col-md-9" style="height:100%;">
                 <div class="mokup-border" style=" margin: 5%;">
-                    <img src="<?=base_url()?>assets/uploads/doctor/<?=$this->session->userdata("img")?>" style="width: 30%;float: left;"><br>
+
                     <div style="">
-                        Welcome <?=$this->session->userdata("fname")." ".$this->session->userdata('lname')?> <br>
+                        Welcome Dr. <?=$this->session->userdata("fname")." ".$this->session->userdata('lname')?> <br>
                         Email : <?=$this->session->userdata("email")?><br>
-                        SSN : <?=$this->session->userdata("ssn")?><br>
                         Address : <?=$this->session->userdata("addr")?><br>
+                        State : <?=$this->session->userdata("state")?><br>
+                        Phone : <?=$this->session->userdata("phone")?><br>
                     </div>
                 </div>
             </div>
-            <div class="col-md-9" style="height: 100%">
-                <span class="mokup-border" style="margin:30%;">Session Code</span>
+            <div class="col-md-3" style="text-align: right">
+                <img src="<?=base_url()?>assets/uploads/doctor/<?=$this->session->userdata("img")?>" style="height: 100%;" class="mokup-border">
             </div>
+
         </div>
         <div class="row" style="height: 80%; margin: 0;">
             <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center; position: relative;">
@@ -59,33 +63,47 @@
                 <div class="mokup-border" style="width: 80%; margin: 5%">
                     <a href="#prior_consults">Prior Consults</a>
                 </div>
+                <div class="mokup-border" style="width: 80%; margin: 5%">
+                    <a href="#calendar">Schedule Availability</a>
+                </div>
+                <button class="btn btn-default logout-btn">Logout</button>
+
                 <a href="<?=base_url()?>accounts_page" class="mokup-border" style="width: 80%;  position: absolute; bottom: 5%;left: 5%">Account Setting</a>
             </div>
-            <div class="col-md-9" style="height: 100%; position: relative;padding: 0;">
-                <div id="publisher" style="width: 30%;height: 30%;position: absolute;bottom: 0; z-index: 1000;" class="mokup-border"></div>
-                <div id="subscriber" style="width: 100%;height: 100%;position: absolute;" class="mokup-border"></div>
+            <div class="col-md-9 mokup-border" style="height: 100%; position: relative;padding: 0;">
+                <div style="height: 5%; width: 90%;margin: 0 5%;"><h3>Upcoming Appointment</h3></div>
+                <div class="mokup-border" style="width: 90%; height: 40%; margin: 0% 5%;">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Thumb</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                        </tr>
+                        </thead>
+                        <tbody id="upcoming_appointment">
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="" style="width: 90%; height: 20%; margin: 5% 5%;">
+                    <textarea cols="100" id="editor1" name="editor1" style="height: calc(100% - 200px;);"></textarea>
+                    <div style="text-align: left">
+                        <select multiple id="receiver-patients" style="width: 30%;height: 30%;" class="mokup-border">
+                        </select>
+                        <button class="btn btn-default send-msg-btn" style="margin-top: -35px;">Send</button>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
     </div>
 
-    <div class="col-md-2" style="height: 100%;padding: 0">
-<!--        <div class="" style="height: 20%; padding: 0;position: relative;">-->
-<!--            <img class="mokup-no-imag" src="--><?//=base_url()?><!--assets/mokup/noimage.png" style="">-->
-<!--            <span style="position: absolute;top: 50%;left: 20%" class="mokup-border">ID Doctor</span>-->
-<!--        </div>-->
-        <div style="height: 30%; padding: 0; " class="mokup-border">
-            <div id="calendar"></div>
-        </div>
-        <div style="height: 70%; padding: 0;  position: relative;" class="mokup-border">
-            <div style="height: calc(100% - 50px);width: 100%;overflow-y: scroll;padding: 15px;" class="mokup-border" id="chat-history">
 
-            </div>
-
-            <input type="text" class="mokup-border" style="width: 100%;position: absolute;bottom: 0;left: 0;height: 50px;" placeholder="Messaging" id="chat-message-input">
-
-        </div>
-    </div>
 </div>
 
 <div class="row" style="margin: 0 10% 50px 10%;text-align: center;">
@@ -180,6 +198,38 @@
     </table>
 </div>
 
+<div class="row mokup-border" style="width:80%;margin: 5% 10%; text-align: center;padding: 5% 5%;" id="calendar-part">
+    <div id='calendar'></div>
+</div>
+
+<div id="event-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Schedule Details</h4>
+            </div>
+            <div class="modal-body" id="event-modal-boday" style="font-size: 20px;">
+
+                <span> Patient Name : </span> <span id="event_patient_name"></span><br>
+                <span> Patient Email : </span> <span id="event_patient_email"></span><br>
+                <span> Patient Phone : </span> <span id="event_patient_phone"></span><br>
+                <span> Patient Address : </span> <span id="event_patient_addr"></span><br>
+                <span> Date : </span> <span id="event_schedule_date"></span><br>
+                <span> Note : </span> <span id="event_schedule_note"></span><br>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script>
     var waitingroom = $("#waitingroom");
     var my_active_patient = $("#my_active_patient");
@@ -190,8 +240,9 @@
     var my_type  = "doctor";
     var my_token = "<?=$this->session->userdata('token')?>";
     var msgTxt = $("#chat-message-input");
-
+    var receiver_patients = $("#receiver-patients");
     var chat_msg_count = 0;
+    var event_modal = $("#event-modal");
     $.ajax({
         url : baseURL+"get_today_schedule",
         data : {token : "<?=$this->session->userdata('token')?>"},
@@ -203,7 +254,7 @@
                 var today_schedules = data.data;
                 for(var i=0;i<today_schedules.length;i++)
                 {
-                    waitingroom.append("<div class='waitingroom-item' data-email='"+today_schedules[i]['email']+"' style='cursor: pointer;padding:5px;background-color: #ddd;width: 100%;'>"+today_schedules[i]['fname']+" "+today_schedules[i]['lname']+"</div>");
+                    waitingroom.append("<div class='waitingroom-item' style='cursor: pointer;padding:5px;background-color: #ddd;width: 100%;'><a href='"+baseURL+"video_call_doctor/"+today_schedules[i]['pid']+"'>"+today_schedules[i]['fname']+" "+today_schedules[i]['lname']+"</div>");
                 }
             }
             else{
@@ -232,6 +283,11 @@
                             <td>"+my_active_patients[i]['email']+"</td>\
                         </tr>\
                     ");
+
+                    receiver_patients.append("\
+                        <option value='"+my_active_patients[i]['pid']+"'>"+my_active_patients[i]["fname"]+" "+my_active_patients[i]["lname"]+"</option>\
+                    ");
+
                 }
             }
             else{
@@ -272,129 +328,6 @@
         }
     });
 
-    $(document).on("click",".waitingroom-item",function () {
-        var email = $(this).data('email');
-        $.ajax({
-            url : baseURL+'req_call_doctor',
-            type: 'post',
-            data:{token : "<?=$this->session->userdata('token')?>",email : email},
-            dataType : "json",
-            success : function (data)
-            {
-                if(data.success ==  1)
-                {
-                    opentokInit(data.data.opentok_session_id,data.data.opentok_token);
-                }
-                else{
-                    alert(data.error);
-                }
-            },
-            fail : function(err)
-            {
-
-            }
-        });
-    });
-
-
-    function opentokInit(ot_session_id,ot_token ) {
-
-        var apiKey = "45947752",
-            session,
-            sessionId = ot_session_id,
-            token  = ot_token,
-            response;
-        initializeSession();
-        function initializeSession() {
-            session = OT.initSession(apiKey, sessionId);
-
-            // Subscribe to a newly created stream
-            session.on('streamCreated', function(event) {
-                var subscriberOptions = {
-                    insertMode: 'append',
-                    width: '100%',
-                    height: '100%'
-                };
-                session.subscribe(event.stream, 'subscriber', subscriberOptions, function(error) {
-                    if (error) {
-                        console.log('There was an error publishing: ', error.name, error.message);
-                    }
-                });
-            });
-
-            session.on('sessionDisconnected', function(event) {
-                console.log('You were disconnected from the session.', event.reason);
-            });
-
-            // Connect to the session
-            session.connect(token, function(error) {
-                // If the connection is successful, initialize a publisher and publish to the session
-                if (!error) {
-                    var publisherOptions = {
-                        insertMode: 'append',
-                        width: '100%',
-                        height: '100%'
-                    };
-                    var publisher = OT.initPublisher('publisher', publisherOptions, function(error) {
-                        if (error) {
-                            console.log('There was an error initializing the publisher: ', error.name, error.message);
-                            return;
-                        }
-                        session.publish(publisher, function(error) {
-                            if (error) {
-                                console.log('There was an error publishing: ', error.name, error.message);
-                            }
-                        });
-                    });
-                } else {
-                    console.log('There was an error connecting to the session: ', error.name, error.message);
-                }
-            });
-
-            // Receive a message and append it to the history
-
-            session.on('signal:msg', function(event) {
-
-                var append_msg = "";
-                if(event.data.sender == my_id && event.data.sender_type == my_type){
-                    append_msg = "<p style='text-align: right;'>\
-                        "+event.data.msg+"\
-                        </p>";
-                }
-                else{
-                    append_msg = "<p style='text-align: left;'>\
-                        "+event.data.msg+"\
-                        </p>";
-                }
-                msgHistory.append(append_msg);
-                chat_msg_count++;
-                msgHistory.animate({scrollTop:chat_msg_count*50 },1000);
-                msgTxt.val("");
-
-            });
-        }
-
-        msgTxt.keypress(function (ev) {
-            var key = ev.which;
-            if(key == 13)
-            {
-                session.signal({
-                    type: 'msg',
-                    data: {msg : msgTxt.val(),sender : my_id,sender_type : my_type}
-                }, function(error) {
-                    if (error) {
-                        console.log('Error sending signal:', error.name, error.message);
-                    } else {
-                        msgTxt.value = '';
-                    }
-                });
-            }
-        });
-
-    }
-
-
-
     function getPriorConsults(email) {
         $.ajax({
             url : baseURL+"get_prior_consults",
@@ -410,7 +343,119 @@
         })
     }
 
-    $("#calendar").datepicker({});
+
+
+    $(".logout-btn").click(function () {
+        $.ajax({
+            url : baseURL+"logout_doctor",
+            type : "post",
+            data : {token: my_token}
+        });
+        location.href = baseURL+"login";
+    });
+
+    // Replace the <textarea id="editor1"> with an CKEditor instance.
+    CKEDITOR.replace( 'editor1', {
+        on: {
+
+
+        }
+    });
+
+    $(".send-msg-btn").click(function () {
+        var editor = CKEDITOR.instances.editor1;
+
+        // Get editor contents
+        // http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-getData
+        //alert( editor.getData() );
+        var receiver_patients_ids = receiver_patients.val();
+        var msg = editor.getData();
+        if(receiver_patients_ids == null)
+        {
+            alert("Please Select Receiver Patients");
+            return;
+        }
+        if(msg == "")
+        {
+            alert("Please Input Message to send");
+            return;
+        }
+
+        $.ajax({
+            url : baseURL+"send_message",
+            type : "post",
+            dataType : "json",
+            data : {token : my_token, receivers : receiver_patients_ids,msg : msg},
+            success : function (data)
+            {
+                if(data.success == 1)
+                {
+                    alert("Message send success");
+                }
+                else{
+                    alert("Message send error!");
+                }
+            }
+        });
+
+    });
+
+    var calendar = $('#calendar').fullCalendar({
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        //defaultDate: '2014-09-12',
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end) {
+//            var title = prompt('Event Title:');
+//            var eventData;
+//            if (title) {
+//                eventData = {
+//                    title: title,
+//                    start: start,
+//                    end: end
+//                };
+//                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+//            }
+//            $('#calendar').fullCalendar('unselect');
+
+
+        },
+        visibleRange : {
+            start : new Date()
+        },
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: {
+            url: baseURL+"getschedules_doctor",
+            type : 'post',
+            data : {token : my_token},
+            error: function() {
+                alert("getting schedules error");
+            }
+        },
+        loading: function(bool) {
+            $('#loading').toggle(bool);
+        },
+        eventClick : function (calEvent,jsEvent, view) {
+//            alert(calEvent);
+
+            $("#event_patient_name").html(calEvent.patient.fname+" "+calEvent.patient.lname);
+            $("#event_patient_email").html(calEvent.patient.email);
+            $("#event_patient_phone").html(calEvent.patient.phone);
+            $("#event_patient_addr").html(calEvent.patient.addr);
+            $("#event_schedule_date").html(calEvent.schedule.date);
+            $("#event_schedule_note").html(calEvent.schedule.note);
+            event_modal.modal('show');
+
+        }
+
+    });
+
+
 
 </script>
 

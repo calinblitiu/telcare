@@ -465,6 +465,28 @@ class DoctorAfterLogin extends CI_Controller
         return $data;
     }
 
+    public function getSchedules()
+    {
+        $patients = $this->patient_model->getPatients(array('did'=>$this->doctor['did']));
+        $return_data = array();
+        if ($patients) {
+            foreach ($patients as $patient) {
+                $schedules = $this->schedule_model->getSchedules(array('pid' => $patient['pid']));
+                if ($schedules) {
+                    foreach ($schedules as $schedule) {
+                        $temp['id'] = $schedule['id'];
+                        $temp['title'] = $schedule['note'];
+                        $temp['start'] = $schedule['date'];
+                        $temp['schedule'] = $schedule;
+                        $temp['patient'] = $patient;
+                        $return_data[] = $temp;
+                    }
+                }
+            }
+        }
+        echo json_encode($return_data);
+    }
+
     private function checkTokenSession(){
         if($this->session->userdata('token')){
             $return_data['success'] = 0;
@@ -507,12 +529,36 @@ class DoctorAfterLogin extends CI_Controller
             $options
         );
 
+        $data['type'] = 0;
         $data['message'] = 'Hello! '.$patient["fname"]." ".$patient["lname"]." is requesting call!";
         $data['receiver'] = $patient;
         $data['sender'] = $this->doctor;
         $pusher->trigger('my-channel', 'my-event', $data);
     }
 
+    public function sendMessage()
+    {
+        $receivers = $this->input->post('receivers');
+        $msg = $this->input->post('msg');
+        $options = array(
+            'cluster' => 'us2',
+            'encrypted' => true
+        );
+        $pusher = new Pusher\Pusher(
+            '4d19d5b3edbd8e1743b4',
+            'e568f9f7c0b1af9ab21d',
+            '387748',
+            $options
+        );
+        $data['type'] = 1;// 0 req call notification, 1 : send message from doctor to patients
+        $data['receiver'] = $receivers;
+        $data['sender'] = $this->doctor;
+        $data['message'] = $msg;
+        $pusher->trigger('my-channel', 'my-event', $data);
+
+        $return_data['success'] = 1;
+        echo json_encode($return_data);
+    }
 
 }
 ?>

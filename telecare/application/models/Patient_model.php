@@ -68,7 +68,7 @@ class Patient_model extends CI_Model
 
     public function getPatients($data){
         $this->db->where($data);
-        $this->db->select("pid, fname, lname, gender, dob, ssn, addr, email,img");
+        //$this->db->select("pid, fname, lname, gender, dob, ssn, addr, email,img");
         $query = $this->db->get($this->table_name);
         $result = $query->result_array();
         if(count($result) == 0)
