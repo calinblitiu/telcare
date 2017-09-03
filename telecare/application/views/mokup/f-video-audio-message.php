@@ -168,7 +168,7 @@
                     url : baseURL+"savearchiveid",
                     type : "post",
                     dataType : 'json',
-                    data :{token : my_token, archiveId : archiveID, email : patient_email},
+                    data :{token : my_token, archiveId : archiveID},
                     success : function (data) {
                         if(data.success == 1)
                         {

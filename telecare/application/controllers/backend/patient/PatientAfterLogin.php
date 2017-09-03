@@ -533,6 +533,8 @@ class PatientAfterLogin extends CI_Controller
         }
     }
 
+
+
     public function sendNotification($doctor)
     {
         $options = array(
