@@ -431,7 +431,9 @@ class PatientAfterLogin extends CI_Controller
                 if(count($temp_videos)>0)
                 {
                     foreach ($temp_videos as $archiveId) {
-                        $videos[] = $this->config->item('heroku_url') . "archive/" . $archiveId."/view";
+                        if($archiveId != "") {
+                            $videos[] = $this->config->item('heroku_url') . "archive/" . $archiveId . "/view";
+                        }
                     }
                 }
             }
