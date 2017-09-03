@@ -10,6 +10,7 @@ use \Stripe\Stripe;
 use OpenTok\OpenTok;
 use OpenTok\MediaMode;
 use OpenTok\ArchiveMode;
+use OpenTok\Archive;
 
 
 class PatientAfterLogin extends CI_Controller
@@ -240,6 +241,66 @@ class PatientAfterLogin extends CI_Controller
        exit();
     }
 
+//    public function reqCall()
+//    {
+//        $doctor = $this->doctor_model->getDoctorId($this->patient['did']);
+//        $is_call = $this->input->post("is_call");//0: calling, 1 : receive
+//        if($this->patient['did'] == "" || $this->patient['did'] == null)
+//        {
+//            $return_data['success'] = 0;
+//            $return_data['error'] = "You are not alloced to any Doctor";
+//            echo json_encode($return_data);
+//            exit();
+//        }
+//
+//        $current_schedule = $this->schedule_model->getScheduleCurrent($this->patient['pid']);
+//        if(!$current_schedule){
+//            $return_data['success'] = 0;
+//            $return_data['error'] = "You have not schedule,please add new schedule";
+//            echo json_encode($return_data);
+//            exit();
+//        }
+//
+//        if($current_schedule['opentok_session_id'] != "" && $current_schedule['opentok_token'] != "")
+//        {
+//            $opentok_val['opentok_session_id'] = $current_schedule['opentok_session_id'];
+//            $opentok_val['opentok_token'] = $current_schedule['opentok_token'];
+//            $data['success'] = 1;
+//            $data['data'] = $opentok_val;
+//            echo json_encode($data);
+//            if($is_call == "0") {
+//                $this->sendNotification($doctor);
+//            }
+//            exit();
+//        }
+//
+//        //$this->load->helper('opentok');
+//        $opentok = $this->createNewOpentokSession();
+//
+//        if(!$opentok)
+//        {
+//            $data["success"] = 0;
+//            $data["error"] = "Opentok Session creation is failed!";
+//            $data['data'] = $opentok;
+//            echo json_encode($data);
+//            exit();
+//        }
+//
+//        if(!$this->schedule_model->updateSchedule($current_schedule['id'],$opentok))
+//        {
+//            $return_data['success'] = 0;
+//            $return_data['error'] = "Opentok session is not added to database";
+//            echo json_encode($return_data);
+//            exit();
+//        }
+//
+//        $return_data['success'] = 1;
+//        $return_data['data'] = $opentok;
+//        $this->sendNotification($doctor);
+//        echo json_encode($return_data);
+//        //exit();
+//    }
+
     public function reqCall()
     {
         $doctor = $this->doctor_model->getDoctorId($this->patient['did']);
@@ -253,51 +314,87 @@ class PatientAfterLogin extends CI_Controller
         }
 
         $current_schedule = $this->schedule_model->getScheduleCurrent($this->patient['pid']);
-        if(!$current_schedule){
-            $return_data['success'] = 0;
-            $return_data['error'] = "You have not schedule,please add new schedule";
-            echo json_encode($return_data);
-            exit();
+        $room_id = $current_schedule['room_id'];
+        if($current_schedule['room_id'] == "" || $current_schedule['room_id'] == null) {
+            $room_id = md5(uniqid(rand(), true));
         }
 
-        if($current_schedule['opentok_session_id'] != "" && $current_schedule['opentok_token'] != "")
+        $opentok = $this->getOpentokSessionAndToken($room_id);
+        if($opentok)
         {
-            $opentok_val['opentok_session_id'] = $current_schedule['opentok_session_id'];
-            $opentok_val['opentok_token'] = $current_schedule['opentok_token'];
-            $data['success'] = 1;
-            $data['data'] = $opentok_val;
-            echo json_encode($data);
+            $return_data['success'] = 1;
+            $temp_data['opentok_session_id'] = $opentok['sessionId'];
+            $temp_data['opentok_token'] = $opentok['token'];
+            $temp_data['room_id'] = $room_id;
+            $this->schedule_model->updateSchedule($current_schedule['id'],$temp_data);
+            $return_data['data'] = $temp_data;
+            echo json_encode($return_data);
             if($is_call == "0") {
-                $this->sendNotification($doctor);
+               // $this->sendNotification($doctor);
             }
             exit();
         }
-
-        //$this->load->helper('opentok');
-        $opentok = $this->createNewOpentokSession();
-
-        if(!$opentok)
-        {
-            $data["success"] = 0;
-            $data["error"] = "Opentok Session creation is failed!";
-            $data['data'] = $opentok;
-            echo json_encode($data);
-            exit();
+        else{
+            $return_data['success'] = 0;
+            $return_data['error'] = "Opentok session and token error";
         }
+    }
 
-        if(!$this->schedule_model->updateSchedule($current_schedule['id'],$opentok))
+    public function getOpentokSessionAndToken($room_id)
+    {
+        $url = $this->config->item('heroku_url')."room/".$room_id;
+        $ch = curl_init();
+        // Disable SSL verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Will return the response, if false it print the response
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Set the url
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // Execute
+        $result=curl_exec($ch);
+        // Closing
+        curl_close($ch);
+
+        // Will dump a beauty json :3
+        $result = json_decode($result, true);
+        if ($result == null)
+        {
+            return false;
+        }
+        //echo json_encode($result);
+        return $result;
+    }
+
+    public function saveArchiveId()
+    {
+        $archiveId = $this->input->post('archiveId');
+
+        $today_schedule = $this->schedule_model->getTodaySchedule($this->patient['pid']);
+
+        if(!$today_schedule)
         {
             $return_data['success'] = 0;
-            $return_data['error'] = "Opentok session is not added to database";
+            $return_data['error'] = "There is not schedule";
             echo json_encode($return_data);
             exit();
         }
 
+        $temp_recods = "";
+
+        if($today_schedule['rec_videos'] == "")
+        {
+            $temp_recods = $archiveId;
+        }
+        else{
+            $temp_recods = $today_schedule['rec_videos'].",".$archiveId;
+        }
+
+        $this->schedule_model->updateSchedule($today_schedule['id'],array('rec_videos'=>$temp_recods));
         $return_data['success'] = 1;
-        $return_data['data'] = $opentok;
-        $this->sendNotification($doctor);
+        $return_data['error'] = "save successfully";
         echo json_encode($return_data);
-        //exit();
+        exit();
+
     }
 
    public function createNewOpentokSession()
@@ -313,9 +410,37 @@ class PatientAfterLogin extends CI_Controller
            $data["error"] = "Opentok session create error";
           return $data;
        }
+
+       //$this->opentok->startArchive($sessionId);
        $data['opentok_session_id'] = $sessionId;
        $data['opentok_token'] = $token;
        return $data;
+    }
+
+    public function getRecordedVideos()
+    {
+        $data['pid'] = $this->patient['pid'];
+        $schedules = $this->schedule_model->getSchedules($data);
+        $return_data = array();
+        if ($schedules) {
+            $return_data['success'] = 1;
+            $videos = array();
+            foreach ($schedules as $schedule) {
+                $temp_videos = $schedule['rec_videos'];
+                $temp_videos = explode(',', $temp_videos);
+                if(count($temp_videos)>0)
+                {
+                    foreach ($temp_videos as $archiveId) {
+                        $videos[] = $this->config->item('heroku_url') . "archive/" . $archiveId."/view";
+                    }
+                }
+            }
+            $return_data['data'] = $videos;
+            echo json_encode($return_data);
+            exit();
+        }
+        $return_data['success'] = 0;
+        $return_data['error'] = "There are not schedules";
     }
 
     public function checkOut()

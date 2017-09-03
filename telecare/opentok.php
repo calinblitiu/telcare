@@ -44,7 +44,7 @@ Class MyOpentokApi
         }
         $data['opentok_session_id'] = $sessionId;
         $data['opentok_token'] = $token;
-        echo json_encode($data);
+        var_dump($this->opentok);
     }
 }
 

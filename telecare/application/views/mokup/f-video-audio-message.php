@@ -8,8 +8,9 @@
 <?php $this->load->view('mokup/layout/common');?>
 <script src="https://static.opentok.com/v2/js/opentok.js"></script>
 
-<div style="position: fixed;top: 0;left: 40%;z-index: 10000;">
+<div style="position: fixed;top: 10px;left: 40%;z-index: 10000; background-color: #000000;padding: 10px 30px;border-radius: 5px;opacity: 0.5;">
     <span style="font-size: 30px;color: #28ffaa;cursor: pointer;" id="toggle_video"><i class="glyphicon glyphicon-facetime-video"></i></span>
+    <span style="font-size: 30px;color: #ff1237;cursor: pointer;margin-left: 30px;" id="toggle_record"><i class="glyphicon glyphicon-record"></i></span>
 </div>
 <div class="row" style="height: 100%;margin: 0;padding: 0;">
     <div class="col-md-10 mokup-border" style="height: 100%;padding: 0;margin: 0;">
@@ -47,8 +48,9 @@
     var my_id = "<?=$this->session->userdata('patient_id')?>";
     var my_type  = "patient";
     var my_token = "<?=$this->session->userdata('token')?>";
-
     var connected_count = 0;
+    var herok_url = "https://recvideo.herokuapp.com/";
+    var is_recording = false;
 
     publisher_width = publisher_div.width();
     publisher_div.height(publisher_width);
@@ -68,10 +70,11 @@
 
 
         var post_data = {
-            token : my_token
+            token : my_token,
+            is_call : 0
         }
         $.ajax({
-            url : baseURL+'req_call',
+            url : baseURL+"req_call",//herok_url+'room/test',
             data : post_data,
             type : 'post',
             dataType : "json",
@@ -84,6 +87,7 @@
                 else{
                     alert(data.error);
                 }
+                //opentokInit(data.sessionId, data.token);
             },
             fail : function (err) {
                 alert(err);
@@ -148,6 +152,37 @@
 
             session.on("streamDestroyed",function () {
                 connected_count--;
+            });
+
+            session.on('archiveStarted',function (event) {
+                archiveID = event.id;
+                toggle_record.css("color","#28ffaa" );
+                is_recording  = true;
+            });
+
+            session.on('archiveStopped',function (event) {
+                archiveID = event.id;
+                toggle_record.css("color","#ff1237" );
+                is_recording = false;
+                $.ajax({
+                    url : baseURL+"savearchiveid",
+                    type : "post",
+                    dataType : 'json',
+                    data :{token : my_token, archiveId : archiveID, email : patient_email},
+                    success : function (data) {
+                        if(data.success == 1)
+                        {
+                            alert('Video is saved successfully');
+                        }
+                        else{
+                            alert(data.error);
+                        }
+                    }
+                });
+//                window.location = herok_url+"archive/"+archiveID+"/view";
+                //archiveID = null;
+
+
             });
 
             // Connect to the session
@@ -223,6 +258,39 @@
             }
         });
 
+    }
+
+    var toggle_record = $("#toggle_record").click(function () {
+        if(!is_recording) {
+
+            $.ajax({
+                url: herok_url + "archive/start",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify({"sessionId": sessionId}),
+                dataType: 'json',
+
+                success: function (data) {
+                    alert(data);
+                }
+            });
+        }
+        else{
+
+            $.ajax({
+                url : herok_url+"archive/"+archiveID+"/stop",
+                type : "post"
+            });
+        }
+        is_recording = !is_recording;
+    });
+
+    window.onbeforeunload = function () {
+        $.ajax({
+            url : herok_url+"archive/"+archiveID+"/stop",
+            type : "post"
+        });
+        return("Are you sure you want to leave?");
     }
 
 </script>

@@ -8,11 +8,17 @@
 use OpenTok\OpenTok;
 use OpenTok\MediaMode;
 use OpenTok\ArchiveMode;
+use OpenTok\Archive;
+use OpenTok\OutputMode;
+use OpenTok\Role;
 
 class DoctorAfterLogin extends CI_Controller
 {
     public $token = "";
     public $doctor;
+    private $opentok_apikey = "45947752";
+    private $opentok_secret = "a6663c33deec1bba20ed0ebc02a29c1460e7f0a1";
+    private $opentok;
 
     public function __construct()
     {
@@ -211,8 +217,7 @@ class DoctorAfterLogin extends CI_Controller
         $today = date('Y-m-d h:i:s');
         $today_string = date('Y-m-d');//$today->format('Y-m-d');
         $today_max = date($today_string." 23:59:59");
-       // var_dump($today_max);
-//        var_dump($today);
+
         foreach ($patients as $patient)
         {
             $temp_today_schedule = $this->schedule_model->getTodaySchedule($patient['pid']);
@@ -261,6 +266,63 @@ class DoctorAfterLogin extends CI_Controller
         exit();
     }
 
+    public function upComingAppointment()
+    {
+        $data = array(
+            "did" => $this->doctor['did']
+        );
+        $patients = $this->patient_model->getPatientsData($data);
+
+        if(!$patients)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "There is not patient";
+            echo json_encode($return_data);
+            exit();
+        }
+
+
+        $return_data['success'] = 0;
+        $return_data['error'] = "There is not today Schedule";
+        $temp_data = array();
+
+        $today = date('Y-m-d h:i:s');
+
+
+        foreach ($patients as $patient)
+        {
+            $temp_schedules = $this->schedule_model->getSchedules(array('pid'=>$patient['pid']));
+            if($temp_schedules)
+            {
+                $return_data = array();
+                foreach ($temp_schedules as $schedule)
+                {
+                    $schedule_time = date($schedule['date']);
+                    if($schedule_time >= $today )
+                    {
+                        $return_data['success']  = 1;
+                        $return_data['error'] = "There are some schedules";
+                        $temp_img = $patient['img'];
+                        if($temp_img == "" || $temp_img == null)
+                        {
+                            $patient["img"] = base_url()."assets/uploads/patient/no-img.png";
+                        }
+                        else{
+                            $patient["img"] = base_url()."assets/uploads/patient/".$temp_img;
+                        }
+                        $temp['patient'] = $patient;
+                        $temp['schedule'] = $schedule;
+                        $temp_data[] = $temp;
+                    }
+                }
+            }
+
+        }
+        $return_data['data'] = $temp_data;
+        echo json_encode($return_data);
+        exit();
+    }
+
     public function eOPATPatients()
     {
         $data = array(
@@ -293,7 +355,7 @@ class DoctorAfterLogin extends CI_Controller
             if ($temp_today_schedule)
             {
                 $schedule_time = date($temp_today_schedule['date']);
-                if($schedule_time >= $today and $schedule_time<=$today_max)
+                if($schedule_time >= $today && $schedule_time<=$today_max)
                 {
                     $return_data['success'] = 1;
                     $return_data['error'] = "There is some schedule";
@@ -386,6 +448,68 @@ class DoctorAfterLogin extends CI_Controller
         exit();
     }
 
+//    public function reqCall()
+//    {
+//        $patient_email = $this->input->post("email");
+//        $is_call = $this->input->post("is_call");//0: calling, 1 : receive
+//        $patient = $this->patient_model->getPatientEmail($patient_email);
+//        if(!$patient)
+//        {
+//            $return_data['success'] = 0;
+//            $return_data['error'] = "There is not patient";
+//            echo json_encode($return_data);
+//            exit();
+//        }
+//
+//        $today_schedule = $this->schedule_model->getTodaySchedule($patient['pid']);
+//        $current_schedule = $today_schedule;
+//        if(!$today_schedule)
+//        {
+//            $return_data['success'] = 0;
+//            $return_data['error'] = "There is not schedule";
+//            echo json_encode($return_data);
+//            exit();
+//        }
+//
+//        if($today_schedule['opentok_session_id'] !="" && $today_schedule['opentok_token'] != "")
+//        {
+//            $return_data['success'] = 1;
+//            $temp['opentok_session_id'] = $today_schedule['opentok_session_id'];
+//            $temp['opentok_token'] = $today_schedule['opentok_token'];
+//            $return_data['data'] = $temp;
+//            echo json_encode($return_data);
+//            if($is_call == "0") {
+//                $this->sendNotification($patient);
+//            }
+//            exit();
+//        }
+//
+//        $opentok = $this->createNewOpentokSession();
+//
+//        if(!$opentok)
+//        {
+//            $data["success"] = 0;
+//            $data["error"] = "Opentok Session creation is failed!";
+//            $data['data'] = $opentok;
+//            echo json_encode($data);
+//            exit();
+//        }
+//
+//        if(!$this->schedule_model->updateSchedule($current_schedule['id'],$opentok))
+//        {
+//            $return_data['success'] = 0;
+//            $return_data['error'] = "Opentok session is not added to database";
+//            echo json_encode($return_data);
+//            exit();
+//        }
+//        $return_data['success'] = 1;
+//        $return_data['data'] = $opentok;
+//        echo json_encode($return_data);
+//        $this->sendNotification($patient);
+//        exit();
+//    }
+
+
     public function reqCall()
     {
         $patient_email = $this->input->post("email");
@@ -400,7 +524,7 @@ class DoctorAfterLogin extends CI_Controller
         }
 
         $today_schedule = $this->schedule_model->getTodaySchedule($patient['pid']);
-        $current_schedule = $today_schedule;
+
         if(!$today_schedule)
         {
             $return_data['success'] = 0;
@@ -409,42 +533,97 @@ class DoctorAfterLogin extends CI_Controller
             exit();
         }
 
-        if($today_schedule['opentok_session_id'] !="" && $today_schedule['opentok_token'] != "")
+        $room_id = $today_schedule['room_id'];
+        if($today_schedule['room_id'] == "" || $today_schedule['room_id'] == null) {
+            $room_id = md5(uniqid(rand(), true));
+        }
+
+        $opentok = $this->getOpentokSessionAndToken($room_id);
+        if($opentok)
         {
             $return_data['success'] = 1;
-            $temp['opentok_session_id'] = $today_schedule['opentok_session_id'];
-            $temp['opentok_token'] = $today_schedule['opentok_token'];
-            $return_data['data'] = $temp;
+            $temp_data['opentok_session_id'] = $opentok['sessionId'];
+            $temp_data['opentok_token'] = $opentok['token'];
+            $temp_data['room_id'] = $room_id;
+            $this->schedule_model->updateSchedule($today_schedule['id'],$temp_data);
+            $return_data['data'] = $temp_data;
             echo json_encode($return_data);
             if($is_call == "0") {
                 $this->sendNotification($patient);
             }
             exit();
         }
-
-        $opentok = $this->createNewOpentokSession();
-
-        if(!$opentok)
-        {
-            $data["success"] = 0;
-            $data["error"] = "Opentok Session creation is failed!";
-            $data['data'] = $opentok;
-            echo json_encode($data);
-            exit();
+        else{
+            $return_data['success'] = 0;
+            $return_data['error'] = "Opentok session and token error";
         }
 
-        if(!$this->schedule_model->updateSchedule($current_schedule['id'],$opentok))
+    }
+
+    public function getOpentokSessionAndToken($room_id)
+    {
+        $url = $this->config->item('heroku_url')."room/".$room_id;
+        $ch = curl_init();
+        // Disable SSL verification
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // Will return the response, if false it print the response
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Set the url
+        curl_setopt($ch, CURLOPT_URL,$url);
+        // Execute
+        $result=curl_exec($ch);
+        // Closing
+        curl_close($ch);
+
+        // Will dump a beauty json :3
+        $result = json_decode($result, true);
+        if ($result == null)
+        {
+            return false;
+        }
+        //echo json_encode($result);
+        return $result;
+    }
+
+    public function saveArchiveId()
+    {
+        $patient_email = $this->input->post("email");
+        $archiveId = $this->input->post('archiveId');
+        $patient = $this->patient_model->getPatientEmail($patient_email);
+        if(!$patient)
         {
             $return_data['success'] = 0;
-            $return_data['error'] = "Opentok session is not added to database";
+            $return_data['error'] = "There is not patient";
             echo json_encode($return_data);
             exit();
         }
+
+        $today_schedule = $this->schedule_model->getTodaySchedule($patient['pid']);
+
+        if(!$today_schedule)
+        {
+            $return_data['success'] = 0;
+            $return_data['error'] = "There is not schedule";
+            echo json_encode($return_data);
+            exit();
+        }
+
+        $temp_recods = "";
+
+        if($today_schedule['rec_videos'] == "")
+        {
+            $temp_recods = $archiveId;
+        }
+        else{
+            $temp_recods = $today_schedule['rec_videos'].",".$archiveId;
+        }
+
+        $this->schedule_model->updateSchedule($today_schedule['id'],array('rec_videos'=>$temp_recods));
         $return_data['success'] = 1;
-        $return_data['data'] = $opentok;
+        $return_data['error'] = "save successfully";
         echo json_encode($return_data);
-        $this->sendNotification($patient);
         exit();
+
     }
 
     public function createNewOpentokSession()
@@ -453,7 +632,7 @@ class DoctorAfterLogin extends CI_Controller
         $session = $this->opentok->createSession();
         $sessionId = $session->getSessionId();
         $token = $session->generateToken();
-
+        //$this->opentok->startArchive($sessionId);
         if ($token == null || $sessionId == null)
         {
             $data["success"] = 0;

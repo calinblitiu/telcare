@@ -50,7 +50,7 @@
                 <div class="mokup-border" style="width: 80%; margin: 5%">Dashboard</div>
                 <div class="mokup-border" style="width: 80%; margin: 5%;text-align: center;">Waiting Room<br>
                     <?php if($waitingroom):?>
-                        <div  class="waitingroom-item" style="cursor: pointer;padding:5px;background-color: #ddd;width: 100%;"><a href="<?=base_url('video_call_patient')?>"><?=$doctor['fname']?> <?=$doctor['lname']?> <?=$waitingroom["id"]?></a></div>
+                        <div  class="waitingroom-item" style="cursor: pointer;padding:5px;background-color: #ddd;width: 100%;"><span href="<?=base_url('video_call_patient')?>"><?=$doctor['fname']?> <?=$doctor['lname']?> <?=$waitingroom["id"]?></span></div>
                     <?php endif;?>
                 </div>
                 <div class="mokup-border" style="width: 80%; margin: 5%">
@@ -69,7 +69,7 @@
                 <a  href="<?=base_url()?>accounts_page" class="mokup-border" style="width: 80%; left: 5%; position: absolute; bottom: 5%;">Account Setting</a>
             </div>
             <div class="col-md-9" style="height: 100%;">
-                <div class="row mokup-border" style="height: 100%;position: relative;">
+                <div class="row mokup-border" style="height: 100%;position: relative;overflow-y: scroll;">
                     <div class="row mokup-border" style="height: 20%;width:90%; margin: 5% 5% 0 5%; text-align: center;" id="upload-part">
 
                         <form action="<?=base_url()?>upload_patient_files" class="dropzone" id="my-dropzone" style="min-height: 100%;">
@@ -92,7 +92,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row mokup-border" style="width:90%;margin: 5% 5%; text-align: center;padding: 5% 20%;" id="calendar-part">
+                    <div class="row mokup-border" style="width:90%;margin: 5% 5%; text-align: center;padding: 5% 10%;" id="calendar-part">
                         <div id='calendar'></div>
                     </div>
 
@@ -119,6 +119,22 @@
         </tr>
         </thead>
         <tbody id="prior_consults">
+
+        </tbody>
+    </table>
+</div>
+<div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">
+    Recorded Videos
+</div>
+<div class="row mokup-border" style="margin: 0 20% 50px 20%;text-align: center;" id="prior_consult">
+    <table class="table table-hover">
+        <thead >
+        <tr>
+            <th>No</th>
+            <th>Rocord Videos</th>
+        </tr>
+        </thead>
+        <tbody id="recorded_videos">
 
         </tbody>
     </table>
@@ -188,9 +204,29 @@
             </div>
             <div class="modal-body" id="message-body">
 
-
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="incoming-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Incoming calling from <b id="incoming_doctor_name"></b></h4>
+            </div>
+            <div class="modal-body" id="message-body" style="text-align: center;">
+                <img src="<?=base_url()?>assets/mokup/call.gif">
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-default" href="<?=base_url()?>video_call_patient" id="incoming_call_accept_btn">Accept</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -213,6 +249,7 @@
     var message_modal = $("#message-modal");
     var message_body = $("#message-body");
     var message_doctor_name = $("#message_doctor_name");
+    var video_records = $('#recorded_videos');
 
 
 
@@ -346,6 +383,9 @@
         },
         loading: function(bool) {
             $('#loading').toggle(bool);
+        },
+        eventClick : function (calEvent,jsEvent, view) {
+            alert(calEvent.title);
         }
 
     });
@@ -547,22 +587,50 @@
         var type = data.type;
         if(type == 0)
         {
-            return;
+            $("#incoming-modal").modal({
+                backdrop : 'static',
+                keyboard : false
+            });
+            $('#incoming_doctor_name').html(data.sender.fname+" "+data.sender.lname);
+
         }
 
-        var recievers = data.receiver;
-        for(var i = 0; i<recievers.length; i++)
-        {
-            if(recievers[i] == my_id)
-            {
-                message_body.html("");
-                message_body.append(data.message);
-                message_doctor_name.html(data.sender.fname+" "+data.sender.lname);
-                message_modal.modal('show');
-                return;
+        if(type == 1) {
+            var recievers = data.receiver;
+            for (var i = 0; i < recievers.length; i++) {
+                if (recievers[i] == my_id) {
+                    message_body.html("");
+                    message_body.append(data.message);
+                    message_doctor_name.html(data.sender.fname + " " + data.sender.lname);
+                    message_modal.modal('show');
+                    return;
+                }
             }
         }
 
+    });
+
+    $.ajax({
+       url : baseURL+"get_video_records",
+        type : 'post',
+        data : {token : my_token},
+        dataType : 'json',
+        success : function (data) {
+            if(data.success == 1)
+            {
+                var videos = data.data;
+                for(var i = 0; i<videos.length; i++)
+                {
+                    video_records.append("\
+                        <tr>\
+                            <td>"+i+"</td>\
+                            <td><a href='"+videos[i]+"'>Record "+i+"</a></td>\
+                        </tr>\
+                    ");
+
+                }
+            }
+        }
     });
 
 </script>

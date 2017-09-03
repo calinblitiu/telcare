@@ -72,7 +72,7 @@
             </div>
             <div class="col-md-9 mokup-border" style="height: 100%; position: relative;padding: 0;">
                 <div style="height: 5%; width: 90%;margin: 0 5%;"><h3>Upcoming Appointment</h3></div>
-                <div class="mokup-border" style="width: 90%; height: 40%; margin: 0% 5%;">
+                <div class="mokup-border" style="width: 90%; height: 40%; margin: 0% 5%;overflow-y: scroll;">
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -234,6 +234,7 @@
     var waitingroom = $("#waitingroom");
     var my_active_patient = $("#my_active_patient");
     var new_patients = $("#new_patients");
+    var upcoming_appoints = $('#upcoming_appointment');
 
     var msgHistory = $("#chat-history");
     var my_id = "<?=$this->session->userdata('doctor_id')?>";
@@ -245,7 +246,7 @@
     var event_modal = $("#event-modal");
     $.ajax({
         url : baseURL+"get_today_schedule",
-        data : {token : "<?=$this->session->userdata('token')?>"},
+        data : {token : my_token},
         dataType : "json",
         type : 'post',
         success : function (data) {
@@ -262,6 +263,28 @@
             }
         },
         fail : function (err) {
+        }
+    });
+
+    $.ajax({
+        url : baseURL+"upcoming_appointment",
+        data : {token : my_token},
+        type : 'post',
+        dataType : 'json',
+        success : function (data) {
+            //alert(data);
+            var upcoming_schedules = data.data;
+            for(var i=0;i<upcoming_schedules.length;i++)
+            {
+                upcoming_appoints.append("\
+                        <tr>\
+                            <td><img src='"+upcoming_schedules[i]['patient']['img']+"' style='width: 100px;'></td>\
+                            <td>"+upcoming_schedules[i]['patient']['fname']+" "+upcoming_schedules[i]['patient']['lname']+"</td>\
+                            <td>"+upcoming_schedules[i]['patient']['email']+"</td>\
+                            <td>"+upcoming_schedules[i]['schedule']['date']+"</td>\
+                        </tr>\
+                    ");
+            }
         }
     });
 

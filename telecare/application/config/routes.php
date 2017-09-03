@@ -127,6 +127,12 @@ $route['req_call_doctor'] = "backend/doctor/DoctorAfterLogin/reqCall";
 $route['get_prior_consults'] = "backend/doctor/DoctorAfterLogin/getPriorConsults";
 $route['send_message'] = 'backend/doctor/DoctorAfterLogin/sendMessage';
 $route['getschedules_doctor'] = 'backend/doctor/DoctorAfterLogin/getSchedules';
+$route['record_doctor'] = 'backend/doctor/DoctorAfterLogin/starRecord';
+$route['upcoming_appointment'] = 'backend/doctor/DoctorAfterLogin/upComingAppointment';
+//heroku api
+$route['getopentoksessionidandtoken'] ="backend/doctor/DoctorAfterLogin/getOpentokSessionAndToken";
+$route['getarchiveurl'] = "backend/doctor/DoctorAfterLogin/getArchiveUrl";
+$route['savearchiveid'] = 'backend/doctor/DoctorAfterLogin/saveArchiveId';
 
 /*
  * Patient
@@ -145,6 +151,7 @@ $route['upload_patient_files'] = 'backend/patient/PatientAfterLogin/uploadFile';
 $route['getuploads'] = 'backend/patient/PatientAfterLogin/getUploads';
 $route['getschedules'] = 'backend/patient/PatientAfterLogin/getSchedules';
 $route['get_prior_consults_patient'] = 'backend/patient/PatientAfterLogin/getPriorConsults';
+$route['get_video_records'] = 'backend/patient/PatientAfterLogin/getRecordedVideos';
 
 /*
  * common

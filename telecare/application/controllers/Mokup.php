@@ -129,16 +129,25 @@ class Mokup extends CI_Controller {
         else{
             $data['doctor'] = false;
         }
-
+        $data['waitingroom'] = false;
         if(!$doctor)
         {
             $data['waitingroom'] = false;
         }
-        else{
+        else
+        {
+            $today = date('Y-m-d h:i:s');
+            $today_string = date('Y-m-d');//$today->format('Y-m-d');
+            $today_max = date($today_string." 23:59:59");
             $current_schedule = $this->schedule_model->getScheduleCurrent($this->session->userdata("patient_id"));
+            $schedule_time = date($current_schedule['date']);
+
             if($current_schedule)
             {
-                $data['waitingroom'] = $current_schedule;
+                if($schedule_time >= $today && $schedule_time<=$today_max)
+                {
+                    $data['waitingroom'] = $current_schedule;
+                }
             }
             else{
                 $data['waitingroom'] = false;

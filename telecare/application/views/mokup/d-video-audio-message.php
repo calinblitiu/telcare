@@ -8,8 +8,9 @@
 <?php $this->load->view('mokup/layout/common');?>
 <script src="https://static.opentok.com/v2/js/opentok.js"></script>
 
-<div style="position: fixed;top: 0;left: 40%;z-index: 10000;">
+<div style="position: fixed;top: 10px;left: 40%;z-index: 10000; background-color: #000000;padding: 10px 30px;border-radius: 5px;opacity: 0.5;">
     <span style="font-size: 30px;color: #28ffaa;cursor: pointer;" id="toggle_video"><i class="glyphicon glyphicon-facetime-video"></i></span>
+<!--    <span style="font-size: 30px;color: #ff1237;cursor: pointer;margin-left: 30px;" id="toggle_record"><i class="glyphicon glyphicon-record"></i></span>-->
 </div>
 <div class="row" style="height: 100%;margin: 0;padding: 0;">
     <div class="col-md-10 mokup-border" style="height: 100%;padding: 0;margin: 0;">
@@ -48,6 +49,8 @@
     var connected_count = 0;
     var is_video = true;
     var toggle_video = $("#toggle_video");
+    var herok_url = "https://recvideo.herokuapp.com/";
+    var is_recording = false;
 
     publisher_width = publisher_div.width();
     publisher_div.height(publisher_width);
@@ -67,9 +70,9 @@
 
 
         $.ajax({
-            url : baseURL+'req_call_doctor',
+            url : baseURL+"req_call_doctor",//herok_url+'room/test',
             type: 'post',
-            data:{token : my_token,email : patient_email},
+            data:{token : my_token,email : patient_email,is_call : 0},
             dataType : "json",
             success : function (data)
             {
@@ -80,12 +83,28 @@
                 else{
                     alert(data.error);
                 }
+//                opentokInit(data.sessionId, data.token);
             },
             fail : function(err)
             {
 
             }
         });
+
+//    $.ajax({
+//        url : herok_url+'room/test',
+//        type: 'get',
+//        //data:{token : my_token,email : patient_email,is_call : 0},
+//        dataType : "json",
+//        success : function (data)
+//        {
+//            opentokInit(data.sessionId, data.token);
+//        },
+//        fail : function(err)
+//        {
+//
+//        }
+//    });
 
     toggle_video.click(function () {
         is_video = !is_video;
@@ -102,8 +121,9 @@
         session,
         sessionId ,
         token  ,
-        response;
-    var publisher;
+        response,
+        archiveID,
+         publisher;
     function opentokInit(ot_session_id,ot_token ) {
 
         sessionId = ot_session_id;
@@ -142,6 +162,34 @@
                 connected_count--;
                 console.log('You were disconnected from the session.', event.reason);
             });
+
+//            session.on('archiveStarted',function (event) {
+//                archiveID = event.id;
+//                toggle_record.css("color","#28ffaa" );
+//            });
+//
+//            session.on('archiveStopped',function (event) {
+//                archiveID = event.id
+//                $.ajax({
+//                   url : baseURL+"savearchiveid",
+//                    type : "post",
+//                    dataType : 'json',
+//                    data :{token : my_token, archiveId : archiveID, email : patient_email},
+//                    success : function (data) {
+//                        if(data.success == 1)
+//                        {
+//                            alert('Video is saved successfully');
+//                        }
+//                        else{
+//                            alert(data.error);
+//                        }
+//                    }
+//                });
+////                window.location = herok_url+"archive/"+archiveID+"/view";
+//               //archiveID = null;
+//               toggle_record.css("color","#ff1237" );
+//
+//            });
 
             session.on("streamDestroyed",function () {
                 connected_count--;
@@ -212,6 +260,33 @@
         });
 
     }
+
+//
+//    var toggle_record = $("#toggle_record").click(function () {
+//        if(!is_recording) {
+//
+//            $.ajax({
+//                url: herok_url + "archive/start",
+//                type: "post",
+//                contentType: "application/json",
+//                data: JSON.stringify({"sessionId": sessionId}),
+//                dataType: 'json',
+//
+//                success: function (data) {
+//                    alert(data);
+//                }
+//            });
+//        }
+//        else{
+//
+//            $.ajax({
+//                url : herok_url+"archive/"+archiveID+"/stop",
+//                type : "post"
+//            });
+//        }
+//        is_recording = !is_recording;
+//    });
+
 
 </script>
 
