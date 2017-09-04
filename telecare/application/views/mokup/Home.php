@@ -118,10 +118,12 @@
     <div class="modal " id="youtube-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document" style="" id="modal-video">
             <div class="modal-content">
+
+                    <button type="button" class="close" data-dismiss="modal" style="position: absolute;top:-12px;right: -40px;color: white;font-size: 50px;font-weight: 100;opacity: 1;">&times;</button>
+
                 <div class="modal-body" style="padding: 0;">
 
                     <iframe id="iframeYoutube"  src="" frameborder="0" allowfullscreen style="width: 100%;height: 100%; "></iframe>
-
                 </div>
             </div>
         </div>
