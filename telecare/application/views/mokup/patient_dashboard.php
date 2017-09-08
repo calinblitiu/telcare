@@ -445,10 +445,6 @@
         handler.close();
     });
 
-</script>
-
-<script>
-
 
     $('.patient-schedule-btn').click(function(){
 

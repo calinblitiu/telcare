@@ -445,6 +445,40 @@ class PatientAfterLogin extends CI_Controller
         $return_data['error'] = "There are not schedules";
     }
 
+    function setDuration()
+    {
+        $duration = $this->input->post('duration');
+        $doctor = $this->doctor_model->getDoctorId($this->session->userdata('did'));
+
+        if(!$doctor)
+        {
+            exit();
+        }
+        else
+        {
+            $today = date('Y-m-d h:i:s');
+            $today_string = date('Y-m-d');//$today->format('Y-m-d');
+            $today_max = date($today_string." 23:59:59");
+            $current_schedule = $this->schedule_model->getScheduleCurrent($this->session->userdata("patient_id"));
+            $schedule_time = date($current_schedule['date']);
+
+            if($current_schedule)
+            {
+                if($schedule_time >= $today && $schedule_time<=$today_max)
+                {
+                    $data['duration'] = $duration+$current_schedule['duration'];
+                    $this->schedule_model->updateSchedule($current_schedule['id'],$data);
+                }
+                else{
+                    exit();
+                }
+            }
+            else{
+                exit();
+            }
+        }
+    }
+
     public function checkOut()
     {
         $stripe_token = $this->input->post('stripeToken');//$_POST['stripeToken'];

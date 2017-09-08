@@ -429,14 +429,12 @@ class DoctorAfterLogin extends CI_Controller
                 {
                     if($history_item)
                     {
-                        $temp_history_arr[] = base_url().'assets/uploads/schedule'.$history_item;
+                        $temp_history_arr[] = base_url().'assets/uploads/schedule/'.$history_item;
                         $temp_schedule['history'] = $temp_history_arr;
                     }
                 }
-
                 $return_schedules[] = $temp_schedule;
             }
-
             $return_data['success'] = 1;
             $return_data['data'] = $return_schedules;
             echo json_encode($return_data);
@@ -447,6 +445,7 @@ class DoctorAfterLogin extends CI_Controller
         echo json_encode($return_data);
         exit();
     }
+
 
 //    public function reqCall()
 //    {

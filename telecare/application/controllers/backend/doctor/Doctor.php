@@ -134,6 +134,7 @@ class Doctor extends CI_Controller
             if($hash_pwd == $doctor['password'])
             {
                 $token = md5(uniqid(rand(), true));
+
                 $sess_data = array(
                     'user_type'         => USER_TYPE_DOCTOR,
                     'token'             => $token,

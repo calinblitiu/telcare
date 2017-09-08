@@ -24,7 +24,7 @@
 
 <div class="row mokup-border" style="height: 120%; margin: 50px 10%;text-align: center;">
     <div class="col-md-12" style="height: 100%;padding: 0;">
-        <div class="row" style="height: 20%;">
+        <div class="row" style="height: 20%;overflow-y: scroll;">
             <div class="col-md-9" style="height:100%;">
                 <div class="mokup-border" style=" margin: 5%;">
 
@@ -43,7 +43,7 @@
 
         </div>
         <div class="row" style="height: 80%; margin: 0;">
-            <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center; position: relative;">
+            <div class="col-md-3 mokup-border" style="height: 100%;padding: 0;text-align: center; position: relative;overflow-y: scroll">
                 <div class="mokup-border" style="width: 80%; margin: 5%">Dashboard</div>
                 <div class="mokup-border" style="width: 80%; margin: 5%" id="waitingroom">Waiting Room<br>
 
@@ -70,9 +70,9 @@
 
                 <a href="<?=base_url()?>accounts_page" class="mokup-border" style="width: 80%;  position: absolute; bottom: 5%;left: 5%">Account Setting</a>
             </div>
-            <div class="col-md-9 mokup-border" style="height: 100%; position: relative;padding: 0;">
+            <div class="col-md-9 mokup-border" style="height: 100%; position: relative;padding: 0;overflow-y: scroll;">
                 <div style="height: 5%; width: 90%;margin: 0 5%;"><h3>Upcoming Appointment</h3></div>
-                <div class="mokup-border" style="width: 90%; height: 40%; margin: 0% 5%;overflow-y: scroll;">
+                <div class="mokup-border" style="width: 90%; height: 40%; margin: 0% 5%;;">
                     <table class="table table-hover">
                         <thead>
                         <tr>
@@ -103,8 +103,40 @@
 
     </div>
 
-
 </div>
+
+<div class="row" style="margin: 0 10% 50px 10%;text-align: center;">
+    <h1>Prior Consults</h1>
+</div>
+<div class="row mokup-border" style="margin: 0 10% 0 10%;text-align: center;">
+    <table class="table table-hover">
+        <thead >
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody id="prior_patients">
+
+        </tbody>
+    </table>
+</div>
+<div class="row mokup-border" style="margin: 0 10% 50px 10%;text-align: center;">
+    <table class="table table-hover">
+        <thead >
+        <tr>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Attachment</th>
+        </tr>
+        </thead>
+        <tbody id="prior_consults">
+
+        </tbody>
+    </table>
+</div>
+
 
 <div class="row" style="margin: 0 10% 50px 10%;text-align: center;">
     <h1>My Active Patient</h1>
@@ -112,14 +144,14 @@
 
 <div id="my_active_patient_table" class="row mokup-border" style="margin: 0 10% 50px 10%;text-align: center;">
     <table class="table table-hover">
-        <thead id="my_active_patient">
+        <thead >
         <tr>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
         </tr>
         </thead>
-        <tbody id="">
+        <tbody id="my_active_patient">
 
         </tbody>
     </table>
@@ -180,23 +212,6 @@
     </table>
 </div>
 
-<div class="row" style="margin: 0 10% 50px 10%;text-align: center;">
-    <h1>Prior Consults</h1>
-</div>
-<div class="row mokup-border" style="margin: 0 10% 50px 10%;text-align: center;">
-    <table class="table table-hover">
-        <thead >
-        <tr>
-            <th>Date</th>
-            <th>Duration</th>
-            <th>Attachment</th>
-        </tr>
-        </thead>
-        <tbody id="prior_consults">
-
-        </tbody>
-    </table>
-</div>
 
 <div class="row mokup-border" style="width:80%;margin: 5% 10%; text-align: center;padding: 5% 5%;" id="calendar-part">
     <div id='calendar'></div>
@@ -244,6 +259,9 @@
     var receiver_patients = $("#receiver-patients");
     var chat_msg_count = 0;
     var event_modal = $("#event-modal");
+    var prior_consults = $("#prior_consults");
+    var prior_patients = $("#prior_patients");
+
     $.ajax({
         url : baseURL+"get_today_schedule",
         data : {token : my_token},
@@ -311,6 +329,14 @@
                         <option value='"+my_active_patients[i]['pid']+"'>"+my_active_patients[i]["fname"]+" "+my_active_patients[i]["lname"]+"</option>\
                     ");
 
+                    prior_patients.append("\
+                        <tr class='prior-patient-item' style='cursor: pointer' data-email='"+my_active_patients[i]['email']+"'>\
+                            <td>"+my_active_patients[i]['fname']+"</td>\
+                            <td>"+my_active_patients[i]['lname']+"</td>\
+                            <td>"+my_active_patients[i]['email']+"</td>\
+                        </tr>\
+                    ");
+
                 }
             }
             else{
@@ -358,7 +384,44 @@
             dataType : 'json',
             data : {token : my_token, email : email},
             success : function (data) {
-
+                prior_consults.html("");
+                if(data.success == 0)
+                {
+                    prior_consults.append("<h2>"+data.error+"</h2>");
+                    return;
+                }
+                var consults = data.data;
+                if(data.data.length == 0)
+                {
+                    prior_consults.append("<h2>There is not any consults</h2>");
+                }
+                else{
+                    for(var i = 0; i<consults.length; i++)
+                    {
+                        var temp_history = ""
+                        if(consults[i]['history'].length == 0){
+                            temp_history = "No Uploads available to review";
+                        }
+                        else{
+                            for(var j = 0; j<consults[i]['history'].length;j++)
+                            {
+                                temp_history+=" <a href='"+consults[i]['history'][j]+"'>File "+j+"</a>";
+                            }
+                        }
+                        var temp_duration = "-";
+                        if(consults[i]['duration'] != null)
+                        {
+                            temp_duration = consults[i]['duration']+" seconds";
+                        }
+                        prior_consults.append("\
+                        <tr>\
+                            <td>"+consults[i]['date']+"</td>\
+                            <td>"+temp_duration+"</td>\
+                            <td>"+temp_history+"</td>\
+                        </tr>\
+                    ");
+                    }
+                }
             },
             fail : function (err) {
                 alert(err)
@@ -473,9 +536,12 @@
             $("#event_schedule_date").html(calEvent.schedule.date);
             $("#event_schedule_note").html(calEvent.schedule.note);
             event_modal.modal('show');
-
         }
+    });
 
+    $(document).on('click','.prior-patient-item',function () {
+        var patient_email = $(this).data('email');
+        getPriorConsults(patient_email);
     });
 
 

@@ -7,10 +7,13 @@
  */?>
 <?php $this->load->view('mokup/layout/common');?>
 <script src="https://static.opentok.com/v2/js/opentok.js"></script>
-
+<button href="<?=base_url()?>patient_dashboard" class="close" style="position: absolute;top:0px;left: 40px; color: #53c397;font-size: 50px;font-weight: 100;opacity: 1;z-index: 100;" id="close-btn">&times;</button>
 <div style="position: fixed;top: 10px;left: 40%;z-index: 10000; background-color: #000000;padding: 10px 30px;border-radius: 5px;opacity: 0.5;">
     <span style="font-size: 30px;color: #28ffaa;cursor: pointer;" id="toggle_video"><i class="glyphicon glyphicon-facetime-video"></i></span>
-    <span style="font-size: 30px;color: #ff1237;cursor: pointer;margin-left: 30px;" id="toggle_record"><i class="glyphicon glyphicon-record"></i></span>
+    <span style="font-size: 30px;color: #28ffaa;cursor: pointer;margin-left: 30px;" id="toggle_mic"><i class="glyphicon glyphicon-ice-lolly"></i></span>
+    <span style="font-size: 30px;color: #28ffaa;cursor: pointer;margin-left: 30px;" id="toggle_audio"><i class="glyphicon glyphicon-headphones"></i></span>
+<!--    <span style="font-size: 30px;color: #ff1237;cursor: pointer;margin-left: 30px;" id="toggle_record"><i class="glyphicon glyphicon-record"></i></span>-->
+    <span style="color: white;font-size: 30px; margin-left: 20px;" id="timer">00:00:00</span>
 </div>
 <div class="row" style="height: 100%;margin: 0;padding: 0;">
     <div class="col-md-10 mokup-border" style="height: 100%;padding: 0;margin: 0;">
@@ -43,29 +46,51 @@
     var chat_msg_count = 0;
     var message_contents = $("#message_contents");
     var is_video = true;
+    var is_mic = true;
+    var is_audio = true;
     var toggle_video = $("#toggle_video");
-
+    var toggle_mic = $("#toggle_mic");
+    var toggle_audio = $("#toggle_audio");
     var my_id = "<?=$this->session->userdata('patient_id')?>";
     var my_type  = "patient";
     var my_token = "<?=$this->session->userdata('token')?>";
     var connected_count = 0;
     var herok_url = "https://recvideo.herokuapp.com/";
     var is_recording = false;
+    var timer = $("#timer");
+    var timer_interval = null;
+    var chat_time = 0;
+    var close_btn = $("#close-btn");
+    var my_img = "<?php if($this->session->userdata['img'] == ''){echo base_url().'assets/uploads/patient/no-img.png';}else{echo base_url().'assets/uploads/patient/'.$this->session->userdata['img'];}?>";
 
     publisher_width = publisher_div.width();
     publisher_div.height(publisher_width);
 
     added_person_width = added_person.width();
-    added_person.height(added_person_width);
 
-    chat_box.height($(window).height()-publisher_width-added_person_width-8);
+    if(connected_count == 2)
+    {
+        added_person.height(added_person_width);
+        chat_box.height($(window).height()-publisher_width-added_person_width-8);
+    }
+    else {
+        added_person.height(0);
+        chat_box.height($(window).height()-publisher_width-8);
+    }
+
 
     $(window).on('resize',function () {
         publisher_width = publisher_div.width();
         publisher_div.height(publisher_width);
         added_person_width = added_person.width();
-        added_person.height(added_person_width);
-        chat_box.height($(window).height()-publisher_width-added_person_width-8);
+        if(connected_count == 2) {
+            added_person.height(added_person_width);
+            chat_box.height($(window).height() - publisher_width - added_person_width - 8);
+        }
+        else{
+            added_person.height(0);
+            chat_box.height($(window).height()-publisher_width-8);
+        }
     });
 
 
@@ -109,8 +134,10 @@
         session,
         sessionId ,
         token  ,
-        response;
-    var publisher;
+        response,
+        publisher,
+        subscriber,
+        other_person;
     function opentokInit(ot_session_id,ot_token ) {
 
         sessionId = ot_session_id;
@@ -125,19 +152,30 @@
                 var subscriberOptions = {
                     insertMode: 'append',
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    style : {buttonDisplayMode: 'off'}
                 };
 
                 if(connected_count == 1) {
-                    session.subscribe(event.stream, 'subscriber', subscriberOptions, function (error) {
+                    added_person.height(0);
+                    chat_box.height($(window).height()-publisher_width-8);
+
+                    subscriber = session.subscribe(event.stream, 'subscriber', subscriberOptions, function (error) {
                         if (error) {
                             console.log('There was an error publishing: ', error.name, error.message);
                         }
                     });
+
+                    timer_interval = setInterval(timerInterval,1000);
                 }
                 if(connected_count == 2)
                 {
-                    session.subscribe(event.stream, 'added_person', subscriberOptions, function (error) {
+                    publisher_width = publisher_div.width();
+                    added_person_width = added_person.width();
+                    added_person.height(added_person_width);
+                    chat_box.height($(window).height() - publisher_width - added_person_width - 8);
+
+                    other_person = session.subscribe(event.stream, 'added_person', subscriberOptions, function (error) {
                         if (error) {
                             console.log('There was an error publishing: ', error.name, error.message);
                         }
@@ -148,42 +186,50 @@
             session.on('sessionDisconnected', function(event) {
                 connected_count --;
                 console.log('You were disconnected from the session.', event.reason);
+                added_person.height(0);
+                chat_box.height($(window).height()-publisher_width-8);
+                clearInterval(timer_interval);
+                chat_time = 0;
+
             });
 
             session.on("streamDestroyed",function () {
                 connected_count--;
+                added_person.height(0);
+                chat_box.height($(window).height()-publisher_width-8);
+                clearInterval(timer_interval);
+                setDuration();
+                chat_time = 0;
             });
 
-            session.on('archiveStarted',function (event) {
-                archiveID = event.id;
-                toggle_record.css("color","#28ffaa" );
-                is_recording  = true;
-            });
-
-            session.on('archiveStopped',function (event) {
-                archiveID = event.id;
-                toggle_record.css("color","#ff1237" );
-                is_recording = false;
-                $.ajax({
-                    url : baseURL+"savearchiveid",
-                    type : "post",
-                    dataType : 'json',
-                    data :{token : my_token, archiveId : archiveID},
-                    success : function (data) {
-                        if(data.success == 1)
-                        {
-                            alert('Video is saved successfully');
-                        }
-                        else{
-                            alert(data.error);
-                        }
-                    }
-                });
-//                window.location = herok_url+"archive/"+archiveID+"/view";
-                //archiveID = null;
+//            session.on('archiveStarted',function (event) {
+//                archiveID = event.id;
+//                toggle_record.css("color","#28ffaa" );
+//                is_recording  = true;
+//            });
+//
+//            session.on('archiveStopped',function (event) {
+//                archiveID = event.id;
+//                toggle_record.css("color","#ff1237" );
+//                is_recording = false;
+//                $.ajax({
+//                    url : baseURL+"savearchiveid",
+//                    type : "post",
+//                    dataType : 'json',
+//                    data :{token : my_token, archiveId : archiveID},
+//                    success : function (data) {
+//                        if(data.success == 1)
+//                        {
+//                            alert('Video is saved successfully');
+//                        }
+//                        else{
+//                            alert(data.error);
+//                        }
+//                    }
+//                });
 
 
-            });
+//            });
 
             // Connect to the session
             session.connect(token, function(error) {
@@ -192,7 +238,9 @@
                     var publisherOptions = {
                         insertMode: 'append',
                         width: '100%',
-                        height: '100%'
+                        height: '100%',
+                        style : {buttonDisplayMode: 'off'}
+
                     };
                     publisher = OT.initPublisher('publisher', publisherOptions, function(error) {
                         if (error) {
@@ -205,7 +253,6 @@
                             }
                         });
                     });
-//                    publisher.publishVideo(false);
                 } else {
                     console.log('There was an error connecting to the session: ', error.name, error.message);
                 }
@@ -221,18 +268,23 @@
 //                msg.scrollIntoView();
                 var append_msg = "";
                 if(event.data.sender == my_id && event.data.sender_type == my_type){
-                    append_msg = "<p style='text-align: right;'>\
+                    append_msg = "\
+                    <img src='"+event.data.sender_img+"' style='width: 30px;height:30px;border-radius: 15px;border: solid 1px #31a37c;;float: right;'><br><br>\
+                     <p style='text-align: right;padding: 5px;background-color: #ccc;border-radius: 5px;color: white;word-wrap: break-word;'>\
                         "+event.data.msg+"\
-                        </p>";
+                    </p>";
+                    msg_input.val("");
                 }
                 else{
-                    append_msg = "<p style='text-align: left;'>\
+                    append_msg = "\
+                    <img src='"+event.data.sender_img+"' style='width: 30px;height:30px;border-radius: 15px;border: solid 1px #31a37c;margin-bottom: 5px;'>\
+                    <p style='text-align: left;padding: 5px;background-color: #58a8fc;color: white;border-radius: 5px;word-wrap: break-word;'>\
                         "+event.data.msg+"\
                         </p>";
                 }
                 message_contents.append(append_msg);
                 chat_msg_count++;
-                message_contents.animate({scrollTop:chat_msg_count*50 },1000);
+                message_contents.animate({scrollTop:chat_msg_count*1000 },1000);
 
             });
         }
@@ -245,9 +297,18 @@
             var key = ev.which;
             if(key == 13)
             {
+                if(msg_input.val()=="")
+                {
+                    return;
+                }
+                if(msg_input.val().length>=8192)
+                {
+                    alert("you can not send message longer than 8192 charactors");
+                    return;
+                }
                 session.signal({
                     type: 'msg',
-                    data: {msg : msg_input.val(),sender : my_id,sender_type : my_type}
+                    data: {msg : msg_input.val(),sender : my_id,sender_type : my_type, sender_img: my_img}
                 }, function(error) {
                     if (error) {
                         console.log('Error sending signal:', error.name, error.message);
@@ -255,6 +316,7 @@
                         msg_input.val();
                     }
                 });
+                msg_input.val("");
             }
         });
 
@@ -290,7 +352,61 @@
             url : herok_url+"archive/"+archiveID+"/stop",
             type : "post"
         });
+        setDuration();
         return("Are you sure you want to leave?");
     }
+
+    function timerInterval() {
+        chat_time ++;
+        var hours = Math.floor(chat_time/3600);
+        var mins = Math.floor((chat_time-hours*3600)/60);
+        var secs = chat_time - hours*3600 - mins*60;
+        timer.html(pad(hours)+":"+pad(mins)+":"+pad(secs));
+    }
+    function pad(d) {
+        return (d < 10) ? '0' + d.toString() : d.toString();
+    }
+
+    close_btn.click(function () {
+        //save record
+        //save duration
+        setDuration();
+        location.href = "<?=base_url()?>patient_dashboard";
+    });
+
+    function setDuration()
+    {
+        $.ajax({
+            url : baseURL+"set_duration",
+            data : {token : my_token,duration : chat_time},
+            type : 'post'
+        });
+    }
+
+    toggle_mic.click(function () {
+        if(is_mic)
+        {
+            toggle_mic.css("color","#ff1237" );
+
+        }
+        else{
+            toggle_mic.css("color","#28ffaa" );
+        }
+        is_mic = !is_mic;
+        publisher.publishAudio(is_mic);
+    });
+
+    toggle_audio.click(function () {
+        if(is_audio)
+        {
+            toggle_audio.css("color","#ff1237" );
+        }
+        else{
+            toggle_audio.css("color","#28ffaa" );
+        }
+        is_audio = !is_audio;
+        subscriber.subscribeToAudio(is_audio);
+        other_person.subscribeToAudio(is_audio);
+    });
 
 </script>
