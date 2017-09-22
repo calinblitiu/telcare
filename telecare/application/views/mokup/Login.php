@@ -26,7 +26,7 @@
 <div class="row" style="height: 300px; margin: 50px 10%; ">
 
   <div class="col-md-5" style="height: 100%; padding: 0;">
-      <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+      <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/21.jpeg">
   </div>
   <div class="col-md-5 col-md-offset-2 mokup-border" style="height: 100%;">
       <form role="form" action="<?=base_url()?>login_patient" method="post" id="login-form">

@@ -41,13 +41,13 @@
         <div class="col-md-3" style="height: 100%;border-left: solid 1px black;padding: 0">
             <div style="height: 20%; text-align: center;">
 
-                    <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
-                    <span class="mokup-border" style="position: absolute;top: 10%;left: 20%;">ID Doctor</span>
+                    <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/18.jpg">
+<!--                    <span class="mokup-border" style="position: absolute;top: 10%;left: 20%;">ID Doctor</span>-->
 
             </div>
             <div style="height: 20%; text-align: center;">
-                <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
-                <span class="mokup-border" style="position: absolute;top: 30%;left: 20%;">Added Person</span>
+                <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/19.jpeg">
+<!--                <span class="mokup-border" style="position: absolute;top: 30%;left: 20%;">Added Person</span>-->
             </div>
             <div style="border-bottom:solid 1px black;height: 50%; text-align: center;">
                 Patient/doctor chat<br>

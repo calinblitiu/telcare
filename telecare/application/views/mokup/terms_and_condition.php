@@ -21,8 +21,14 @@
 <div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;text-align: center;">
     Header
 </div>
-<div class="row" style="height: 600px; margin: 50px 10%;text-align: center;">
-    <span class="mokup-border" style="padding: 50px 20px;position: absolute;top: 50%;">Terms and Condition</span>
+
+<div class="row" style="height: 800px; margin: 50px 10%;">
+    <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/15.jpeg">
+
+</div>
+
+<div class="row" style="height: 300px; margin: 0px 10%;text-align: center;position: relative;">
+    <span class="mokup-border" style="padding: 50px 20px;position: absolute;top: 10%;">Terms and Condition</span>
 </div>
 
 <div class="row mokup-border" style="height: 100px; margin: 0 10% 50px 10%;text-align: center;">

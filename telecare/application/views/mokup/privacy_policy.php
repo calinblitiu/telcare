@@ -21,7 +21,13 @@
 <div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;text-align: center;">
     Header
 </div>
-<div class="row" style="height: 600px; margin: 50px 10%;text-align: center;">
+
+<div class="row" style="height: 800px; margin: 50px 10%;">
+    <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/16.jpeg">
+
+</div>
+
+<div class="row" style="height: 300px; margin-left:  10%;margin-right:10%;text-align: center;position: relative;">
     <span class="mokup-border" style="padding: 50px 20px;position: absolute;top: 50%;">Privacy Policy</span>
 </div>
 

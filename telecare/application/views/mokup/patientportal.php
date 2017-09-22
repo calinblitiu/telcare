@@ -20,14 +20,14 @@
 
 <div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;">
 </div>
-<div class="row" style="height: 300px; margin: 50px 10%;">
+<div class="row" style="height: 500px; margin: 50px 10%;">
 
-    <div class="col-md-10" style="height: 100%;padding: 0;position: relative;">
-        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+    <div class="col-md-8" style="height: 100%;padding: 0;position: relative;">
+        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/13.jpeg">
         <a class="mokup-border-round" style="position: absolute;top: 50%;left: 15%; padding: 5px 20px;" href="<?=base_url()?>login">Login</a>
     </div>
-    <div class="col-md-2" style="height: 100%;padding: 0;">
-        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+    <div class="col-md-4" style="height: 100%;padding: 0;">
+        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/12.jpeg">
         <span class="mokup-border" style="position: absolute;left:20%;top: 20%;">Tele-ID consult image</span>
     </div>
 

@@ -21,8 +21,8 @@
 <div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;text-align: center;">
     Header
 </div>
-<div class="row" style="height: 300px; margin: 50px 10%;">
-    <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+<div class="row" style="height: 800px; margin: 50px 10%;">
+    <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/1.jpeg">
 </div>
 
 <div class="row" style="height: 300px; margin: 50px 10%; padding: 0 5%;">

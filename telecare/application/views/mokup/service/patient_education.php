@@ -21,9 +21,9 @@
 <div class="row mokup-border" style="height: 100px; margin: 50px 10% 0 10%;text-align: center;">
     Header
 </div>
-<div class="row" style="height: 80%; margin: 50px 10%;">
+<div class="row" style="height: 300px; margin: 50px 10%;">
     <div class="col-md-8 mokup-border" style="height: 100%;text-align: center;">
-        <h3 style="margin-top: 30%">PATIENT EDUCATION</h3>
+        <h3 style="margin-top: 5%">PATIENT EDUCATION</h3>
 
         A Happier, Healthier You<br><br>
 
@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-md-4"  style="height: 100%;padding: 0">
-        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/24.jpeg">
     </div>
 </div>
 

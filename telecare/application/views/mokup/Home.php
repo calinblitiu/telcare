@@ -15,8 +15,8 @@
 
 <body>
 
-    <div class="row mokup-border" style="height: 600px; margin: 5% 10%; position: relative;text-align: center;">
-        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+    <div class="row mokup-border" style="height: 900px; margin: 5% 10%; position: relative;text-align: center;">
+        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/1.jpeg">
         <img src="<?=base_url()?>assets/mokup/logo.png" style="position: absolute;top: 10px;left: 10px;" class="mokup-border">
         <div style="position: absolute;top: 20px;right: 10%; ">
             <div class="mokup-menu-item"><a href="<?=base_url()?>patient_portal">Patient Portal</a></div>
@@ -25,7 +25,7 @@
             <div class="mokup-menu-item"><a href="<?=base_url()?>login">Login</a></div>
         </div>
 
-        <div style="position: absolute;top: 30%; text-align: center;text-align: center; width: 100%;padding: 5% 30%;background: white;">
+        <div style="position: absolute;top: 30%; text-align: center;text-align: center; width: 100%;padding: 5% 30%;background: rgba(255,255,255,0);">
             <h3>
                 WELCOME TO TELE-ID AND eOPAT CONSULTATION
             </h3>
@@ -42,7 +42,7 @@
 
     <div class="row" style="margin: 50px 10%; text-align: center;">
         <div class="col-md-5">
-            <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png" style="height: 200px;">
+            <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/6.jpeg" style="height: 300px;">
             <a href="<?=base_url()?>service_consultorsecondopinion" style="margin-top: 50px; padding: 5px;">
                 <h4>INFECTIOUS DISEASE CONSULTATION</h4>
                 <h6>Here For You</h6>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="col-md-offset-2 col-md-5">
-            <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png" style="height: 200px;">
+            <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/3.jpeg" style="height: 300px;">
             <a href="<?=base_url()?>service_eopat" style="margin-top: 50px; padding: 5px;">
                 <h4>eOPAT</h4>
                 <h6>Your Infusion Care</h6>
@@ -72,11 +72,11 @@
     <div class="row" style="margin: 50px 10%; text-align: center;">
         <a href="<?=base_url()?>contact_us" class="mokup-border-round" style="padding: 5px; font-size: 20px;"> REQUEST A CONSULTATION</a>
     </div>
-    <div class="row" style="margin: 50px 10%; text-align: center; height: 200px;">
+    <div class="row" style="margin: 50px 10%; text-align: center; height: 400px;">
         <div class="col-md-6" style="margin: 0;padding: 0!important;">
-            <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png">
+            <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/4.jpg">
         </div>
-        <div class="col-md-6 mokup-border" style="margin: 0;height: 200px;">
+        <div class="col-md-6 mokup-border" style="margin: 0;height: 400px;">
             <br><br><br>
             <h5>OPENING HOURS</h5>
             <h6>Mon - Fri : 9 am- 6 am</h6>
@@ -89,7 +89,7 @@
 
     <div class="row" style="margin: 50px 10%; text-align: center; padding: 0 10%;">
         <a href="<?=base_url()?>contact_us" class="mokup-border" style="font-size:20px;font-weight: 700; width: 20%;">CONTACT US</a>
-        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/noimage.png" style="height: 200px;margin-top: 50px;">
+        <img class="mokup-no-imag" src="<?=base_url()?>assets/mokup/images/17.jpeg" style="height: 200px;margin-top: 50px;border: 0;">
         <p style="margin-top: 50px;">
             <input type="text" value="NAME" style="width: 45%;float: left;" class="mokup-border">
             <input type="email" value="EMAIL" style="width: 45%; float: right;" class="mokup-border">
