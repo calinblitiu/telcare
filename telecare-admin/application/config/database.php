@@ -48,14 +48,14 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'telecare';
+// $db['default']['hostname'] = 'localhost';
+// $db['default']['username'] = 'root';
+// $db['default']['password'] = '';
+// $db['default']['database'] = 'telecare';
 
-//$db['default']['username'] = 'skr164_floridaid';
-//$db['default']['password'] = 'Hashtag@123';
-//$db['default']['database'] = 'skr164_telecare';
+$db['default']['username'] = 'skr164_floridaid';
+$db['default']['password'] = 'Hashtag@123';
+$db['default']['database'] = 'skr164_telecare';
 
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
