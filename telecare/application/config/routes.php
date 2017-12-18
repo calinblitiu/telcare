@@ -68,7 +68,7 @@ $route['f-login-doctor'] = "home/loginDoctor";
 /*
  * Patient
  */
-    $route['f-signup-patient'] = "home/signUpPatient";
+$route['f-signup-patient'] = "home/signUpPatient";
 $route['f-login-patient'] = "home/loginPatient";
 $route['f-set-schedule'] = "frontend/patient/patient/setSchedule";
 $route['f_check_out'] = "mokup/checkOut";
